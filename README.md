@@ -1,10 +1,9 @@
-# JavaSEPersistenceWithHibernateORM
-Basic and advanced persistence techniques
+# VoleiManager
 
-## Versão Alpha
-Simple resources and repeating yourself
-![UML class diagram](src/main/resources/JavaSEPersistenceWithHibernateORM_01.png)
+Trabalho de conclusaão disciplinar de POO, sistema de gerenciamento de 
+torneio de vôlei.
 
-## Versão Beta
-Generic modeling and DRY applied
-![UML class diagram](src/main/resources/JavaSEPersistenceWithHibernateORM_02.png)
+## Integrantes
+- [Filipe Lopes dos Santos](https://github.com/FilipeLSantos)
+- [Nome do integrante 2](link do GitHub)
+- [Nome do integrante 3](link do GitHub)
