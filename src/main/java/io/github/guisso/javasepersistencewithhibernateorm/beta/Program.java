@@ -35,8 +35,8 @@ public class Program {
 
     public static void betaTests() {
         
-       AlunoRepository alunoRepository = new AlunoRepository();
-       Long id;
+        AlunoRepository alunoRepository = new AlunoRepository();
+        Long id;
         
         Aluno a1 = new Aluno();
         a1.setNome("Ana Zaira");
@@ -60,10 +60,11 @@ public class Program {
         alunoRepository.saveOrUpdate(a2);
         System.out.println("> " + a2);
         
-        boolean excluded = alunoRepository.delete(id);
+        //boolean excluded = alunoRepository.delete(id);
         boolean excluded = alunoRepository.delete(a2);
 
         System.out.println("> " + (excluded ? "Excluded" : "Exclusion fails..."));
+        
 
 
     }
