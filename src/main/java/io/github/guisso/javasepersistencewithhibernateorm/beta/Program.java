@@ -18,10 +18,10 @@ package io.github.guisso.javasepersistencewithhibernateorm.beta;
 
 import io.github.guisso.javasepersistencewithhibernateorm.beta.aluno.Aluno;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.aluno.AlunoRepository;
-import io.github.guisso.javasepersistencewithhibernateorm.beta.credencial.Credencial;
-import io.github.guisso.javasepersistencewithhibernateorm.beta.credencial.CredencialRepository;
-import io.github.guisso.javasepersistencewithhibernateorm.beta.usuario.Usuario;
-import io.github.guisso.javasepersistencewithhibernateorm.beta.usuario.UsuarioRepository;
+//import io.github.guisso.javasepersistencewithhibernateorm.beta.credencial.Credencial;
+//import io.github.guisso.javasepersistencewithhibernateorm.beta.credencial.CredencialRepository;
+//import io.github.guisso.javasepersistencewithhibernateorm.beta.usuario.Usuario;
+//import io.github.guisso.javasepersistencewithhibernateorm.beta.usuario.UsuarioRepository;
 import java.time.LocalDate;
 
 /**
@@ -35,37 +35,37 @@ public class Program {
 
     public static void betaTests() {
         
-//        AlunoRepository alunoRepository = new AlunoRepository();
-//        Long id;
-//
-//        Aluno a1 = new Aluno();
-//        a1.setNome("Ana Zaira");
-//        a1.setMatricula(123456789);
-//        a1.setNascimento(LocalDate.of(1999, 7, 1));
-//        
-//        alunoRepository.saveOrUpdate(a1);
-//        System.out.println("> " + a1);
-//        
-//        a1.setNome("Beariz Yana");
-//        
-//        id = alunoRepository.saveOrUpdate(a1);
-//        System.out.println("> " + a1);
-//        
-//        Aluno a2 = alunoRepository.findById(id);
-//        System.out.println("> " + a2);
-//        
-//        a2.setId(null);
-//        a2.setNome("Cecília Xerxes");
-//        
-//        alunoRepository.saveOrUpdate(a2);
-//        System.out.println("> " + a2);
+       AlunoRepository alunoRepository = new AlunoRepository();
+       Long id;
+        
+        Aluno a1 = new Aluno();
+        a1.setNome("Ana Zaira");
+        a1.setMatricula(123456789);
+        a1.setNascimento(LocalDate.of(1999, 7, 1));
+        
+        alunoRepository.saveOrUpdate(a1);
+        System.out.println("> " + a1);
+        
+        a1.setNome("Beariz Yana");
+        
+        id = alunoRepository.saveOrUpdate(a1);
+        System.out.println("> " + a1);
+        
+        Aluno a2 = alunoRepository.findById(id);
+        System.out.println("> " + a2);
+        
+        a2.setId(null);
+        a2.setNome("Cecília Xerxes");
+        
+        alunoRepository.saveOrUpdate(a2);
+        System.out.println("> " + a2);
 //        
 ////        boolean excluded = alunoRepository.delete(id);
 //        boolean excluded = alunoRepository.delete(a2);
 //
 //        System.out.println("> " + (excluded ? "Excluded" : "Exclusion fails..."));
 
-        CredencialRepository credencialRepository = new CredencialRepository();
+/*        CredencialRepository credencialRepository = new CredencialRepository();
         
         Credencial c1 = new Credencial();
         c1.setEmail("y@mail.com");
@@ -87,5 +87,7 @@ public class Program {
         Usuario u2 = usuarioRepository.findById(1L);
         
         System.out.println("> " + u2.getCredencial().getEmail());
+    */
+        System.out.println("hello");
     }
 }
