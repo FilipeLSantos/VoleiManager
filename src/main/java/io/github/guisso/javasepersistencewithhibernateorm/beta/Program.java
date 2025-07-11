@@ -59,35 +59,12 @@ public class Program {
         
         alunoRepository.saveOrUpdate(a2);
         System.out.println("> " + a2);
-//        
-////        boolean excluded = alunoRepository.delete(id);
-//        boolean excluded = alunoRepository.delete(a2);
-//
-//        System.out.println("> " + (excluded ? "Excluded" : "Exclusion fails..."));
+        
+        boolean excluded = alunoRepository.delete(id);
+        boolean excluded = alunoRepository.delete(a2);
 
-/*        CredencialRepository credencialRepository = new CredencialRepository();
-        
-        Credencial c1 = new Credencial();
-        c1.setEmail("y@mail.com");
-        c1.setSenha("123456");
-        
-//        credencialRepository.saveOrUpdate(c1);
-//        if(true) return;
-        
-        UsuarioRepository usuarioRepository = new UsuarioRepository();
-        
-        Usuario u1 = new Usuario();
-        u1.setNome("Ana Zaira");
-        
-        u1.setCredencial(c1); // <---------------------------------------------
-        c1.setUsuario(u1); // <---------------------------------------------
-        
-        usuarioRepository.saveOrUpdate(u1);
-        
-        Usuario u2 = usuarioRepository.findById(1L);
-        
-        System.out.println("> " + u2.getCredencial().getEmail());
-    */
-        System.out.println("hello");
+        System.out.println("> " + (excluded ? "Excluded" : "Exclusion fails..."));
+
+
     }
 }
