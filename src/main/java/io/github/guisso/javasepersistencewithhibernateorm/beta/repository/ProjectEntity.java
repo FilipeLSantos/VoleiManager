@@ -28,6 +28,7 @@ import jakarta.persistence.MappedSuperclass;
  * @version 0.1
  * @since 0.1, Jul 7, 2025
  */
+
 @MappedSuperclass
 public class ProjectEntity {
 

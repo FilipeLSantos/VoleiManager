@@ -16,14 +16,18 @@
  */
 package io.github.guisso.javasepersistencewithhibernateorm.beta;
 
+import io.github.guisso.javasepersistencewithhibernateorm.beta.EventoEsportivo.EventoEsportivoRepository;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.aluno.Aluno;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.aluno.AlunoRepository;
+<<<<<<< HEAD
 import io.github.guisso.javasepersistencewithhibernateorm.beta.equipe.Equipe;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.equipe.EquipeRepository;
 //import io.github.guisso.javasepersistencewithhibernateorm.beta.credencial.Credencial;
 //import io.github.guisso.javasepersistencewithhibernateorm.beta.credencial.CredencialRepository;
 //import io.github.guisso.javasepersistencewithhibernateorm.beta.usuario.Usuario;
 //import io.github.guisso.javasepersistencewithhibernateorm.beta.usuario.UsuarioRepository;
+=======
+>>>>>>> feb3b51550e35555ea14935a1d3aba8cba88d21c
 import java.time.LocalDate;
 import java.util.Set;
 
@@ -87,6 +91,8 @@ public class Program {
         //boolean excluded = alunoRepository.delete(a2);
 
        // System.out.println("> " + (excluded ? "Excluded" : "Exclusion fails..."));
+        
+        EventoEsportivoRepository eventoEsportivoRepository = new EventoRepository();
         
 
 
