@@ -28,24 +28,25 @@ import java.time.LocalDate;
  * @author rdpp
  */
 @Entity
-public class Pessoa extends ProjectEntity
-        implements Serializable {
+public class Pessoa     
+        extends ProjectEntity
+        implements Serializable{
     
-      private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
       
-     @Column(nullable = false)
-     private String nome;
+    @Column(nullable = false)
+    private String nome;
+
+    @Column(nullable = false, length = 50)
+    private Long cpf;
+
+    @Column (nullable = false)
+    private LocalDate data;
+
+    @Transient
+    private Integer idade;
      
-     @Column(nullable = false, length = 50)
-     private Long cpf;
-     
-     @Column (nullable = false)
-     private LocalDate data;
-     
-     @Transient
-     private Integer idade;
-     
-     //<editor-fold defaultstate="collapsed" desc="Getters/Setters">
+    //<editor-fold defaultstate="collapsed" desc="Getters/Setters">
      
     public String getNome() {
         return nome;
@@ -63,8 +64,6 @@ public class Pessoa extends ProjectEntity
         return idade;
     }
     
-    
-
     public void setNome(String nome) {
         this.nome = nome;
     }
@@ -80,7 +79,7 @@ public class Pessoa extends ProjectEntity
     public void setIdade(Integer idade) {
         this.idade = idade;
     }
-//</editor-fold>
+    //</editor-fold>
 
     @Override
     public String toString() {
@@ -91,6 +90,6 @@ public class Pessoa extends ProjectEntity
     
  
     
-    }
+}
     
 

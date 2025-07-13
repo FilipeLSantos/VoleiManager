@@ -16,16 +16,14 @@
  */
 package io.github.guisso.javasepersistencewithhibernateorm.beta.pessoa;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.repository.Repository;
-//teste
-//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-//VAI DA CERTOOOOOOOOOOOOOOOOO!!!!!!!!!
+
 /**
  *
  * @author rdpp
  */
-public class PessoaRepository extends Repository<Pessoa>{
+public class PessoaRepository 
+        extends Repository<Pessoa>{
     
-
     @Override
     public String getJpqlFindAll() {
         return "SELECT a FROM Pessoa a";
