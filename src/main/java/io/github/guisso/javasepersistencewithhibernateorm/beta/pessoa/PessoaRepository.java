@@ -16,7 +16,8 @@
  */
 package io.github.guisso.javasepersistencewithhibernateorm.beta.pessoa;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.repository.Repository;
-
+//teste
+//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
 /**
  *
  * @author rdpp
