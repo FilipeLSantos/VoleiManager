@@ -20,6 +20,8 @@ import io.github.guisso.javasepersistencewithhibernateorm.beta.eventoesportivo.E
 import io.github.guisso.javasepersistencewithhibernateorm.beta.eventoesportivo.EventoEsportivo;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.aluno.Aluno;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.aluno.AlunoRepository;
+import io.github.guisso.javasepersistencewithhibernateorm.beta.equipe.Equipe;
+import io.github.guisso.javasepersistencewithhibernateorm.beta.equipe.EquipeRepository;
 import java.time.LocalDate;
 import java.time.Month;
 
@@ -59,10 +61,29 @@ public class Program {
         alunoRepository.saveOrUpdate(a2);
         System.out.println("> " + a2);
         
+        EquipeRepository equipeRepository = new EquipeRepository(); 
+        
+        Equipe e1 = new Equipe();
+        e1.setNome("Angicos");
+        e1.setPago(true);
+        
+        /*Equipe e2 = new Equipe();
+        e1.setNome("Retiro");
+        e1.setPago(false);*/
+        
+        equipeRepository.saveOrUpdate(e1);
+        System.out.println("> " + e1);
+         
+        a2.setId(null);
+        a2.setNome("Cecília Xerxes");
+        
+        alunoRepository.saveOrUpdate(a2);
+        System.out.println("> " + a2);
+        
         //boolean excluded = alunoRepository.delete(id);
-        boolean excluded = alunoRepository.delete(a2);
+        //boolean excluded = alunoRepository.delete(a2);
 
-        System.out.println("> " + (excluded ? "Excluded" : "Exclusion fails..."));
+       // System.out.println("> " + (excluded ? "Excluded" : "Exclusion fails..."));
         
         EventoEsportivoRepository eventoEsportivoRepository = new EventoEsportivoRepository();
         
