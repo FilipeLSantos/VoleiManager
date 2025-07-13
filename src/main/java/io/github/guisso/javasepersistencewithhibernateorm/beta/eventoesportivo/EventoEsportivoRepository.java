@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 Luis Guisso &lt;luis dot guisso at ifnmg dot edu dot br&gt;
+ * Copyright (C) 2025 Filipe
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,34 +14,34 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package io.github.guisso.javasepersistencewithhibernateorm.beta.aluno;
+package io.github.guisso.javasepersistencewithhibernateorm.beta.eventoesportivo;
 
 import io.github.guisso.javasepersistencewithhibernateorm.beta.repository.Repository;
+import java.io.Serializable;
 
 /**
- * Repository for Aluno operations
  *
- * @author Luis Guisso &lt;luis dot guisso at ifnmg dot edu dot br&gt;
- * @version 0.1
- * @since 0.1, Jul 7, 2025
+ * @author Filipe
  */
-
-public class AlunoRepository
-        extends Repository<Aluno> {
+public class EventoEsportivoRepository 
+        extends Repository<EventoEsportivo>
+        implements Serializable{
+    
+    private static final long serialVersionUID = 1L;
 
     @Override
     public String getJpqlFindAll() {
-        return "SELECT a FROM Aluno a";
+        return "SELECT ee FROM EventoEsportivo ee";
     }
 
     @Override
     public String getJpqlFindById() {
-        return "SELECT a FROM Aluno a WHERE a.id = :id";
+        return "SELECT ee FROM EventoEsportivo ee ee.id = :id";
     }
 
     @Override
     public String getJpqlDeleteById() {
-        return "DELETE FROM Aluno a WHERE a.id = :id";
+        return "DELETE FROM EventoEsportivo ee WHERE ee.id = :id";
     }
-
+    
 }
