@@ -45,7 +45,7 @@ public class Pessoa extends ProjectEntity
      @Transient
      private Integer idade;
      
-     //<editor-fold defaultstate="collapsed" desc="Getters">
+     //<editor-fold defaultstate="collapsed" desc="Getters/Setters">
      
     public String getNome() {
         return nome;
@@ -62,8 +62,33 @@ public class Pessoa extends ProjectEntity
     public Integer getIdade() {
         return idade;
     }
+    
+    
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setCpf(Long cpf) {
+        this.cpf = cpf;
+    }
+
+    public void setData(LocalDate data) {
+        this.data = data;
+    }
+
+    public void setIdade(Integer idade) {
+        this.idade = idade;
+    }
 //</editor-fold>
+
+    @Override
+    public String toString() {
+        return "Pessoa{" + "nome=" + nome + ", cpf=" + cpf + ", data=" + data + ", idade=" + idade + '}';
+    }
    
+    
+    
  
     
     }

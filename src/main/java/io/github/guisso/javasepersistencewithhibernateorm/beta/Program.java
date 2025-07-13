@@ -22,6 +22,8 @@ import io.github.guisso.javasepersistencewithhibernateorm.beta.aluno.Aluno;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.aluno.AlunoRepository;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.equipe.Equipe;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.equipe.EquipeRepository;
+import io.github.guisso.javasepersistencewithhibernateorm.beta.pessoa.Pessoa;
+import io.github.guisso.javasepersistencewithhibernateorm.beta.pessoa.PessoaRepository;
 import java.time.LocalDate;
 import java.time.Month;
 
@@ -95,6 +97,16 @@ public class Program {
         
         eventoEsportivoRepository.saveOrUpdate(ee1);
         System.out.println(">> " + ee1);
+        
+        PessoaRepository pessoaRepository = new PessoaRepository();
+                 
+        Pessoa p1 = new Pessoa();
+        p1.setNome("Chico Moedas");
+        p1.setCpf(1L);
+        p1.setData(LocalDate.of(2005, Month.MARCH, 12));
+        
+        pessoaRepository.saveOrUpdate(p1);
+        System.out.println(">>" + p1);
 
     }
 }

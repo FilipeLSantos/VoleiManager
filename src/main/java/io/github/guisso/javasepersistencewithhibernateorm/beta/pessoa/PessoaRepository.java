@@ -24,6 +24,7 @@ import io.github.guisso.javasepersistencewithhibernateorm.beta.repository.Reposi
  * @author rdpp
  */
 public class PessoaRepository extends Repository<Pessoa>{
+    
 
     @Override
     public String getJpqlFindAll() {
