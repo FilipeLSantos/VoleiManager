@@ -16,10 +16,12 @@
  */
 package io.github.guisso.javasepersistencewithhibernateorm.beta;
 
-import io.github.guisso.javasepersistencewithhibernateorm.beta.EventoEsportivo.EventoEsportivoRepository;
+import io.github.guisso.javasepersistencewithhibernateorm.beta.eventoesportivo.EventoEsportivoRepository;
+import io.github.guisso.javasepersistencewithhibernateorm.beta.eventoesportivo.EventoEsportivo;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.aluno.Aluno;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.aluno.AlunoRepository;
 import java.time.LocalDate;
+import java.time.Month;
 
 /**
  * Runs tests of the "Beta" version
@@ -62,9 +64,16 @@ public class Program {
 
         System.out.println("> " + (excluded ? "Excluded" : "Exclusion fails..."));
         
-        EventoEsportivoRepository eventoEsportivoRepository = new EventoRepository();
+        EventoEsportivoRepository eventoEsportivoRepository = new EventoEsportivoRepository();
         
-
+        EventoEsportivo ee1 = new EventoEsportivo();
+        ee1.setNome("Futebol volei");
+        ee1.setData(LocalDate.of(2005, Month.APRIL, 7));
+        ee1.setLocal("Moc");
+        ee1.setIngressoTime(50.0);
+        
+        eventoEsportivoRepository.saveOrUpdate(ee1);
+        System.out.println(">> " + ee1);
 
     }
 }
