@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 Filipe
+ * Copyright (C) 2025 robert
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -17,29 +17,36 @@
 package io.github.guisso.javasepersistencewithhibernateorm.beta.partida;
 
 import io.github.guisso.javasepersistencewithhibernateorm.beta.repository.Repository;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import java.io.Serializable;
 
 /**
  *
- * @author Filipe
+ * @author robert
  */
+
+@Entity
 public class PartidaRepository 
         extends Repository<Partida>
-        implements Serializable{
+        implements Serializable {
 
-    @Override
+    private static final long serialVersionUID = 1L;
+   
+     @Override
     public String getJpqlFindAll() {
-        return "SELECT p FROM Partida p";
+        return "SELECT part FROM Partida";
     }
 
     @Override
     public String getJpqlFindById() {
-        return "SELECT p FROM Partida p p.id = :id";
+        return "SELECT part FROM Equipe part part.id = :id";
     }
 
     @Override
     public String getJpqlDeleteById() {
-        return "DELETE FROM Partida p WHERE p.id = :id";
+        return "DELETE FROM Partida part WHERE part.id = :id";
     }
-    
 }

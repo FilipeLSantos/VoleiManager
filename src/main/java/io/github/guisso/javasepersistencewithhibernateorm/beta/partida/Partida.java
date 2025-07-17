@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 Filipe
+ * Copyright (C) 2025 robert
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,23 +19,29 @@ package io.github.guisso.javasepersistencewithhibernateorm.beta.partida;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.repository.ProjectEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import java.io.Serializable;
 
 /**
  *
- * @author Filipe
+ * @author robert
  */
-
 @Entity
 public class Partida 
         extends ProjectEntity
-        implements Serializable{
-    
+        implements Serializable {
+
     private static final long serialVersionUID = 1L;
+    
     
     @Column (nullable = false)
     private int quantidadeSets;
-
+    
+    @Column(nullable = false)
+    private boolean lixo;
+    
     //<editor-fold defaultstate="collapsed" desc="Getters/Setters">
     public int getQuantidadeSets() {
         return quantidadeSets;
@@ -44,8 +50,12 @@ public class Partida
     public void setQuantidadeSets(int quantidadeSets) {
         this.quantidadeSets = quantidadeSets;
     }
-    //</editor-fold>
-
+    
+    public void setLixo(boolean lixo) {
+        this.lixo = lixo;
+    }
+    //</editor-fold> 
+    
     //<editor-fold defaultstate="collapsed" desc="HashCode/Equals">
     @Override
     public int hashCode() {
@@ -68,6 +78,11 @@ public class Partida
         final Partida other = (Partida) obj;
         return this.quantidadeSets == other.quantidadeSets;
     }
+    
+    public boolean isLixo() {
+        return lixo;
+    }
     //</editor-fold>
+       
     
 }

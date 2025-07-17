@@ -82,6 +82,15 @@ public class EventoEsportivo
     public void setIngressoTime(double ingressoTime) {
         this.ingressoTime = ingressoTime;
     }
+
+    public boolean isLixo() {
+        return lixo;
+    }
+
+    public void setLixo(boolean lixo) {
+        this.lixo = lixo;
+    }
+    
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="HashCode/Equals/toString">
