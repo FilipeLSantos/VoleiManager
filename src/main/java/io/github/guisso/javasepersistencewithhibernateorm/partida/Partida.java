@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 Filipe
+ * Copyright (C) 2025 robert
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -19,24 +19,28 @@ package io.github.guisso.javasepersistencewithhibernateorm.partida;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.repository.ProjectEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import java.io.Serializable;
 
 /**
  *
- * @author Filipe
+ * @author robert
  */
-
 @Entity
 public class Partida 
         extends ProjectEntity
-        implements Serializable{
-    
+        implements Serializable {
+
     private static final long serialVersionUID = 1L;
     
     @Column (nullable = false)
     private int quantidadeSets;
+    
+    //<editor-fold defaultstate="collapsed" desc="Gettets And Setters">
+    
 
-    //<editor-fold defaultstate="collapsed" desc="Getters/Setters">
     public int getQuantidadeSets() {
         return quantidadeSets;
     }
@@ -44,30 +48,6 @@ public class Partida
     public void setQuantidadeSets(int quantidadeSets) {
         this.quantidadeSets = quantidadeSets;
     }
-    //</editor-fold>
-
-    //<editor-fold defaultstate="collapsed" desc="HashCode/Equals">
-    @Override
-    public int hashCode() {
-        int hash = 7;
-        hash = 83 * hash + this.quantidadeSets;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Partida other = (Partida) obj;
-        return this.quantidadeSets == other.quantidadeSets;
-    }
-    //</editor-fold>
-
+//</editor-fold>
+    
 }

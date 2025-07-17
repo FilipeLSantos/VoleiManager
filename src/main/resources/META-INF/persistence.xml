@@ -9,7 +9,7 @@
         <class>io.github.guisso.javasepersistencewithhibernateorm.beta.equipe.Equipe</class>
         <class>io.github.guisso.javasepersistencewithhibernateorm.beta.pessoa.Pessoa</class>
         <class>io.github.guisso.javasepersistencewithhibernateorm.beta.atleta.Atleta</class>
-        <class>io.github.guisso.javasepersistencewithhibernateorm.beta.partida.Partida</class>
+        <class>io.github.guisso.javasepersistencewithhibernateorm.partida.Partida</class>
         <class>io.github.guisso.javasepersistencewithhibernateorm.beta.setvolei.SetVolei</class>
 
         <!--<class>io.github.guisso.javasepersistencewithhibernateorm.alpha.veiculo.Veiculo</class>-->
@@ -35,7 +35,7 @@
         <class>io.github.guisso.javasepersistencewithhibernateorm.beta.equipe.Equipe</class>
         <class>io.github.guisso.javasepersistencewithhibernateorm.beta.pessoa.Pessoa</class>
         <class>io.github.guisso.javasepersistencewithhibernateorm.beta.atleta.Atleta</class>
-        <class>io.github.guisso.javasepersistencewithhibernateorm.beta.partida.Partida</class>
+        <class>io.github.guisso.javasepersistencewithhibernateorm.partida.Partida</class>
         <class>io.github.guisso.javasepersistencewithhibernateorm.beta.setvolei.SetVolei</class>
         
         <properties>
