@@ -51,6 +51,9 @@ public class Aluno
 
     @Transient
     private Integer idade;
+    
+    @Column(nullable = true)
+    private boolean lixo;
 
     //<editor-fold defaultstate="collapsed" desc="Getters/Setters">
     public Integer getMatricula() {
@@ -99,6 +102,15 @@ public class Aluno
     public Integer getIdade() {
         return idade;
     }
+
+    public boolean isLixo() {
+        return lixo;
+    }
+
+    public void setLixo(boolean lixo) {
+        this.lixo = lixo;
+    }
+    
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="hashCode/equals/toString">

@@ -46,7 +46,7 @@ public class Pessoa
     @Transient
     private Integer idade;
     
-    @Column(nullable = true)
+    @Column(nullable = false)
     private boolean lixo;
      
     //<editor-fold defaultstate="collapsed" desc="Getters/Setters">
