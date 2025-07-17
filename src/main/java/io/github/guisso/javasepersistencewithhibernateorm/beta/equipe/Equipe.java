@@ -41,7 +41,10 @@ public class Equipe
     
     @Column(nullable = true)
     private boolean pago;
-
+    
+    @Column(nullable = false)
+    private boolean lixo;
+    
     //<editor-fold defaultstate="collapsed" desc="Getters And Setters">
     public String getNome() {
         return nome;
@@ -57,6 +60,14 @@ public class Equipe
     
     public void setPago(boolean pago) {
         this.pago = pago;
+    }
+
+    public boolean isLixo() {
+        return lixo;
+    }
+
+    public void setLixo(boolean lixo) {
+        this.lixo = lixo;
     }
     
     //</editor-fold>

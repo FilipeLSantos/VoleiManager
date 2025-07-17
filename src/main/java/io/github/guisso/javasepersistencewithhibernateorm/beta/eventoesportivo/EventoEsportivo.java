@@ -47,6 +47,9 @@ public class EventoEsportivo
     @Column(nullable = true)
     private double ingressoTime;
     
+    @Column(nullable = false)
+    private boolean lixo;
+    
     //<editor-fold defaultstate="collapsed" desc="Getters/Setters">
     public String getNome() {
         return nome;

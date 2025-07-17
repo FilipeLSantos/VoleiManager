@@ -35,7 +35,10 @@ public class Atleta
 
     private static final long serialVersionUID = 1L;
     @Column(nullable = false)
-    int numeroCamisa;
+    private int numeroCamisa;
+    
+    @Column(nullable = true)
+    private boolean lixo;
     
     //<editor-fold defaultstate="collapsed" desc="Getters And Setters">
     
@@ -46,7 +49,14 @@ public class Atleta
     public void setNumeroCamisa(int numeroCamisa) {
         this.numeroCamisa = numeroCamisa;
     }
+
+    public boolean isLixo() {
+        return lixo;
+    }
+
+    public void setLixo(boolean lixo) {
+        this.lixo = lixo;
+    }
     
 //</editor-fold>
-    
 }
