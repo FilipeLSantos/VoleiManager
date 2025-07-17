@@ -38,6 +38,9 @@ public class Partida
     @Column (nullable = false)
     private int quantidadeSets;
     
+    @Column(nullable = false)
+    private boolean lixo;
+    
     //<editor-fold defaultstate="collapsed" desc="Gettets And Setters">
     
 
@@ -48,6 +51,15 @@ public class Partida
     public void setQuantidadeSets(int quantidadeSets) {
         this.quantidadeSets = quantidadeSets;
     }
-//</editor-fold>
+    
+
+    public boolean isLixo() {
+        return lixo;
+    }
+
+    public void setLixo(boolean lixo) {
+        this.lixo = lixo;
+    }
+    //</editor-fold>    
     
 }
