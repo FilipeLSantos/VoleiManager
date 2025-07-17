@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package io.github.guisso.javasepersistencewithhibernateorm.partida;
+package io.github.guisso.javasepersistencewithhibernateorm.beta.partida;
 
 import io.github.guisso.javasepersistencewithhibernateorm.beta.repository.ProjectEntity;
 import jakarta.persistence.Column;
@@ -50,7 +50,7 @@ public class Partida
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 83 * hash + this.quantidadeSets;
+        hash = 79 * hash + this.quantidadeSets;
         return hash;
     }
 
@@ -69,5 +69,5 @@ public class Partida
         return this.quantidadeSets == other.quantidadeSets;
     }
     //</editor-fold>
-
+    
 }

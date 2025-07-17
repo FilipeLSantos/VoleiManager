@@ -18,18 +18,25 @@ package io.github.guisso.javasepersistencewithhibernateorm.beta;
 
 import io.github.guisso.javasepersistencewithhibernateorm.beta.eventoesportivo.EventoEsportivoRepository;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.eventoesportivo.EventoEsportivo;
+
 import io.github.guisso.javasepersistencewithhibernateorm.beta.aluno.Aluno;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.aluno.AlunoRepository;
+
 import io.github.guisso.javasepersistencewithhibernateorm.beta.atleta.Atleta;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.atleta.AtletaRepository;
+
 import io.github.guisso.javasepersistencewithhibernateorm.beta.equipe.Equipe;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.equipe.EquipeRepository;
+
+import io.github.guisso.javasepersistencewithhibernateorm.beta.partida.Partida;
+import io.github.guisso.javasepersistencewithhibernateorm.beta.partida.PartidaRepository;
+
 import io.github.guisso.javasepersistencewithhibernateorm.beta.pessoa.Pessoa;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.pessoa.PessoaRepository;
+
 import io.github.guisso.javasepersistencewithhibernateorm.beta.setvolei.SetVolei;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.setvolei.SetVoleiRepository;
-import io.github.guisso.javasepersistencewithhibernateorm.partida.Partida;
-import io.github.guisso.javasepersistencewithhibernateorm.partida.PartidaRepository;
+
 import java.time.LocalDate;
 import java.time.Month;
 

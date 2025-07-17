@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package io.github.guisso.javasepersistencewithhibernateorm.partida;
+package io.github.guisso.javasepersistencewithhibernateorm.beta.partida;
 
 import io.github.guisso.javasepersistencewithhibernateorm.beta.repository.Repository;
 import java.io.Serializable;
@@ -23,9 +23,8 @@ import java.io.Serializable;
  *
  * @author Filipe
  */
-
 public class PartidaRepository 
-        extends Repository <Partida>
+        extends Repository<Partida>
         implements Serializable{
 
     @Override
