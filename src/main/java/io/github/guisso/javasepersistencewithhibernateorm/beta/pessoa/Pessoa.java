@@ -45,6 +45,9 @@ public class Pessoa
 
     @Transient
     private Integer idade;
+    
+    @Column(nullable = true)
+    private boolean lixo;
      
     //<editor-fold defaultstate="collapsed" desc="Getters/Setters">
      
@@ -79,6 +82,15 @@ public class Pessoa
     public void setIdade(Integer idade) {
         this.idade = idade;
     }
+
+    public boolean isLixo() {
+        return lixo;
+    }
+
+    public void setLixo(boolean lixo) {
+        this.lixo = lixo;
+    }
+    
     //</editor-fold>
 
     @Override
