@@ -26,6 +26,9 @@ import io.github.guisso.javasepersistencewithhibernateorm.beta.equipe.Equipe;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.equipe.EquipeRepository;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.pessoa.Pessoa;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.pessoa.PessoaRepository;
+import io.github.guisso.javasepersistencewithhibernateorm.beta.setvolei.SetVolei;
+import io.github.guisso.javasepersistencewithhibernateorm.beta.setvolei.SetVoleiRepository;
+import io.github.guisso.javasepersistencewithhibernateorm.partida.Partida;
 import io.github.guisso.javasepersistencewithhibernateorm.partida.PartidaRepository;
 import java.time.LocalDate;
 import java.time.Month;
@@ -117,8 +120,22 @@ public class Program {
         AtletaRepository atletaRepository = new AtletaRepository();
         atletaRepository.saveOrUpdate(at1);
         
+        // Partida
         PartidaRepository partidaRepository = new PartidaRepository();
         
-
+        Partida part1 = new Partida();
+        part1.setQuantidadeSets(5);
+        
+        partidaRepository.saveOrUpdate(part1);
+        
+        // SetVolei
+        SetVoleiRepository setVoleiRepository = new SetVoleiRepository();
+        
+        SetVolei sv = new SetVolei(); 
+        sv.setNumeroSet(3);
+        sv.setPontuacao1(22);
+        sv.setPontuacao2(19);
+        
+        setVoleiRepository.saveOrUpdate(sv);
     }
 }

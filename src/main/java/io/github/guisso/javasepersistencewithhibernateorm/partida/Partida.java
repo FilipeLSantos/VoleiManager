@@ -35,5 +35,39 @@ public class Partida
     
     @Column (nullable = false)
     private int quantidadeSets;
-    
+
+    //<editor-fold defaultstate="collapsed" desc="Getters/Setters">
+    public int getQuantidadeSets() {
+        return quantidadeSets;
+    }
+
+    public void setQuantidadeSets(int quantidadeSets) {
+        this.quantidadeSets = quantidadeSets;
+    }
+    //</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="HashCode/Equals">
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 83 * hash + this.quantidadeSets;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Partida other = (Partida) obj;
+        return this.quantidadeSets == other.quantidadeSets;
+    }
+    //</editor-fold>
+
 }
