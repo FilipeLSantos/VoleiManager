@@ -26,6 +26,7 @@ import io.github.guisso.javasepersistencewithhibernateorm.beta.equipe.Equipe;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.equipe.EquipeRepository;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.pessoa.Pessoa;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.pessoa.PessoaRepository;
+import io.github.guisso.javasepersistencewithhibernateorm.partida.PartidaRepository;
 import java.time.LocalDate;
 import java.time.Month;
 
@@ -115,6 +116,8 @@ public class Program {
         
         AtletaRepository atletaRepository = new AtletaRepository();
         atletaRepository.saveOrUpdate(at1);
+        
+        PartidaRepository partidaRepository = new PartidaRepository();
         
 
     }

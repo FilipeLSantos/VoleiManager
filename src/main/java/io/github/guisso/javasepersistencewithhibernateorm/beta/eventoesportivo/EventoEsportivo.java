@@ -27,6 +27,7 @@ import java.util.Objects;
  *
  * @author Filipe
  */
+
 @Entity
 public class EventoEsportivo 
         extends ProjectEntity
