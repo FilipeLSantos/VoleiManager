@@ -83,7 +83,7 @@ public class Pessoa
 
     @Override
     public String toString() {
-        return "Pessoa{" + "nome=" + nome + ", cpf=" + cpf + ", data=" + data + ", idade=" + idade + '}';
+        return "Pessoa{" + "nome = " + nome + ", cpf=" + cpf + ", data=" + data + ", idade=" + idade + '}';
     }
    
     

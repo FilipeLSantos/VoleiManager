@@ -20,6 +20,8 @@ import io.github.guisso.javasepersistencewithhibernateorm.beta.eventoesportivo.E
 import io.github.guisso.javasepersistencewithhibernateorm.beta.eventoesportivo.EventoEsportivo;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.aluno.Aluno;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.aluno.AlunoRepository;
+import io.github.guisso.javasepersistencewithhibernateorm.beta.atleta.Atleta;
+import io.github.guisso.javasepersistencewithhibernateorm.beta.atleta.AtletaRepository;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.equipe.Equipe;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.equipe.EquipeRepository;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.pessoa.Pessoa;
@@ -73,7 +75,7 @@ public class Program {
         e1.setNome("Retiro");
         e1.setPago(false);*/
         
-        equipeRepository.saveOrUpdate(e1);
+       equipeRepository.saveOrUpdate(e1);
         System.out.println("> " + e1);
          
         a2.setId(null);
@@ -107,6 +109,13 @@ public class Program {
         
         pessoaRepository.saveOrUpdate(p1);
         System.out.println(">>" + p1);
+        
+        Atleta at1 = new Atleta();
+        at1.setNumeroCamisa(10);
+        
+        AtletaRepository atletaRepository = new AtletaRepository();
+        atletaRepository.saveOrUpdate(at1);
+        
 
     }
 }
