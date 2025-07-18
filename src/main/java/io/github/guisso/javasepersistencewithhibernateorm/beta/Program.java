@@ -146,6 +146,12 @@ public class Program {
         
         tecnicoRepository.saveOrUpdate(t1);
         
+        Tecnico t2 = new Tecnico();
+        t2.setCpf(12345678L);
+        t2.setDate(LocalDate.of(1988, Month.JANUARY, 17));
+        t2.setNome("Joao Melao");
         
+        tecnicoRepository.saveOrUpdate(t2);
+   
     }
 }

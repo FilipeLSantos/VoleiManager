@@ -33,6 +33,9 @@ public class Tecnico
         extends Pessoa
         implements Serializable {
     
-    //Nao implementamos esta entidade para o CRUD
-    //private Equipe equipe; 
+    private static final long serialVersionUID = 1L;
+    
+    //Nao implementamos esta entidade para o 
+    //private Equipe equipe;
+    
 }

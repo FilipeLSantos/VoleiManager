@@ -22,8 +22,6 @@ import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.Transient;
 import java.time.LocalDate;
 
-
-
 /**
  *
  * @author Samuel Paranhos

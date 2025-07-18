@@ -37,7 +37,7 @@ import java.util.Objects;
 public class Aluno
         extends ProjectEntity
         implements Serializable {
-
+    
     private static final long serialVersionUID = 1L;
 
     @Column(nullable = false)

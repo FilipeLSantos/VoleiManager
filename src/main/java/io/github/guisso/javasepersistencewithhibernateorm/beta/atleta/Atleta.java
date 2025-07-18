@@ -36,6 +36,8 @@ public class Atleta
         extends Pessoa
         implements Serializable {
     
+    private static final long serialVersionUID = 1L;
+    
     @Column(nullable = false)
     private int numeroCamisa;
     @Column(nullable = false)
