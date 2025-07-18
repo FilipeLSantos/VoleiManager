@@ -18,7 +18,6 @@ package io.github.guisso.javasepersistencewithhibernateorm.beta.equipe;
 
 import io.github.guisso.javasepersistencewithhibernateorm.beta.repository.Repository;
 import jakarta.persistence.Entity;
-import java.io.Serializable;
 
 /**
  *
@@ -26,8 +25,7 @@ import java.io.Serializable;
  */
 @Entity
 public class EquipeRepository 
-        extends Repository<Equipe>
-        implements Serializable{
+        extends Repository<Equipe>{
 
     @Override
     public String getJpqlFindAll() {

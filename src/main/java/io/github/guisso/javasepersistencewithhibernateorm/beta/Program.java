@@ -33,6 +33,8 @@ import io.github.guisso.javasepersistencewithhibernateorm.beta.partida.PartidaRe
 
 import io.github.guisso.javasepersistencewithhibernateorm.beta.setvolei.SetVolei;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.setvolei.SetVoleiRepository;
+import io.github.guisso.javasepersistencewithhibernateorm.beta.tecnico.Tecnico;
+import io.github.guisso.javasepersistencewithhibernateorm.beta.tecnico.TecnicoRepository;
 
 import java.time.LocalDate;
 import java.time.Month;
@@ -109,14 +111,15 @@ public class Program {
         System.out.println(">> " + ee1);
         
 
-        
         Atleta at1 = new Atleta();
         at1.setNumeroCamisa(10);
+        at1.setCpf(1234587456L);
+        at1.setDate(LocalDate.of(2000, Month.AUGUST, 5));
+        at1.setNome("Robert Carlos Nascimento Carvalho");
         
         AtletaRepository atletaRepository = new AtletaRepository();
         atletaRepository.saveOrUpdate(at1);
         
-        // Partida
         PartidaRepository partidaRepository = new PartidaRepository();
         
         Partida part1 = new Partida();
@@ -133,5 +136,16 @@ public class Program {
         sv.setPontuacao2(19);
         
         setVoleiRepository.saveOrUpdate(sv);
+        
+        Tecnico t1 = new Tecnico();
+        t1.setCpf(123456L);
+        t1.setDate(LocalDate.of(1980, Month.JANUARY, 15));
+        t1.setNome("Joao da Silva Josefa");
+   
+        TecnicoRepository tecnicoRepository = new TecnicoRepository();
+        
+        tecnicoRepository.saveOrUpdate(t1);
+        
+        
     }
 }

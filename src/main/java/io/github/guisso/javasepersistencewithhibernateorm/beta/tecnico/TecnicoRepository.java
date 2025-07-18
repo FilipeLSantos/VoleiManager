@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 Filipe
+ * Copyright (C) 2025 robert
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,30 +14,31 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package io.github.guisso.javasepersistencewithhibernateorm.beta.setvolei;
+package io.github.guisso.javasepersistencewithhibernateorm.beta.tecnico;
 
 import io.github.guisso.javasepersistencewithhibernateorm.beta.repository.Repository;
 
 /**
  *
- * @author Filipe
+ * @author robert
  */
-public class SetVoleiRepository 
-        extends Repository<SetVolei>{
+public class TecnicoRepository 
+        extends Repository<Tecnico>{
 
-    @Override
+  @Override
     public String getJpqlFindAll() {
-        return "SELECT sv FROM SetVolei sv";
+        return "SELECT t FROM Tecnico t";
     }
 
     @Override
     public String getJpqlFindById() {
-        return "SELECT sv FROM SetVolei sv sv.id = :id";
+        return "SELECT t FROM Tecnico t t.id = :id";
     }
 
     @Override
     public String getJpqlDeleteById() {
-        return "DELETE FROM SetVolei sv WHERE sv.id = :id";
+        return "DELETE FROM Tecnico t WHERE t.id = :id";
     }
+    
     
 }

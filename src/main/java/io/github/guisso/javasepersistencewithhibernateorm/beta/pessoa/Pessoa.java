@@ -16,6 +16,7 @@
  */
 package io.github.guisso.javasepersistencewithhibernateorm.beta.pessoa;
 
+import io.github.guisso.javasepersistencewithhibernateorm.beta.repository.ProjectEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.Transient;
@@ -29,7 +30,9 @@ import java.time.LocalDate;
  */
 
 @MappedSuperclass
-public class Pessoa{
+public class Pessoa
+    extends ProjectEntity
+{
     
     @Column (nullable = false)
     private String nome;

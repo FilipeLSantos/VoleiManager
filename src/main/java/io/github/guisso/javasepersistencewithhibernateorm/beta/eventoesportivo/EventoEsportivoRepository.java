@@ -17,15 +17,13 @@
 package io.github.guisso.javasepersistencewithhibernateorm.beta.eventoesportivo;
 
 import io.github.guisso.javasepersistencewithhibernateorm.beta.repository.Repository;
-import java.io.Serializable;
 
 /**
  *
  * @author Filipe
  */
 public class EventoEsportivoRepository 
-        extends Repository<EventoEsportivo>
-        implements Serializable{
+        extends Repository<EventoEsportivo>{
     
     private static final long serialVersionUID = 1L;
 

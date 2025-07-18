@@ -21,7 +21,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import java.io.Serializable;
 
 /**
  *
@@ -30,8 +29,7 @@ import java.io.Serializable;
 
 @Entity
 public class PartidaRepository 
-        extends Repository<Partida>
-        implements Serializable {
+        extends Repository<Partida>{
 
     private static final long serialVersionUID = 1L;
    

@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 Filipe
+ * Copyright (C) 2025 robert
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,30 +14,25 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-package io.github.guisso.javasepersistencewithhibernateorm.beta.setvolei;
+package io.github.guisso.javasepersistencewithhibernateorm.beta.tecnico;
 
-import io.github.guisso.javasepersistencewithhibernateorm.beta.repository.Repository;
+import io.github.guisso.javasepersistencewithhibernateorm.beta.equipe.Equipe;
+import io.github.guisso.javasepersistencewithhibernateorm.beta.pessoa.Pessoa;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import java.io.Serializable;
 
 /**
  *
- * @author Filipe
+ * @author robert
  */
-public class SetVoleiRepository 
-        extends Repository<SetVolei>{
-
-    @Override
-    public String getJpqlFindAll() {
-        return "SELECT sv FROM SetVolei sv";
-    }
-
-    @Override
-    public String getJpqlFindById() {
-        return "SELECT sv FROM SetVolei sv sv.id = :id";
-    }
-
-    @Override
-    public String getJpqlDeleteById() {
-        return "DELETE FROM SetVolei sv WHERE sv.id = :id";
-    }
+@Entity
+public class Tecnico 
+        extends Pessoa
+        implements Serializable {
     
+    //Nao implementamos esta entidade para o CRUD
+    //private Equipe equipe; 
 }

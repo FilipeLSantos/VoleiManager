@@ -16,13 +16,16 @@
  */
 package io.github.guisso.javasepersistencewithhibernateorm.beta.atleta;
 
+import io.github.guisso.javasepersistencewithhibernateorm.beta.pessoa.Pessoa;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.repository.ProjectEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Transient;
 import java.io.Serializable;
+import java.time.LocalDate;
 
 /**
  *
@@ -30,13 +33,11 @@ import java.io.Serializable;
  */
 @Entity
 public class Atleta 
-        extends ProjectEntity
+        extends Pessoa
         implements Serializable {
-
-    private static final long serialVersionUID = 1L;
+    
     @Column(nullable = false)
     private int numeroCamisa;
-    
     @Column(nullable = false)
     private boolean lixo;
     
@@ -57,6 +58,6 @@ public class Atleta
     public void setLixo(boolean lixo) {
         this.lixo = lixo;
     }
-    
+   
 //</editor-fold>
 }
