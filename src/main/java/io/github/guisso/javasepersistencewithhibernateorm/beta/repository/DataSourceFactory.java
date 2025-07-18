@@ -33,7 +33,7 @@ import jakarta.persistence.Persistence;
 public class DataSourceFactory {
 
     private static EntityManagerFactory emf;
-    private static final String PU_NAME = "gestaoEscolarBetaPU";
+    private static final String PU_NAME = "voleimanagerPU";
 
     // EntityManagerFactory can have a persistent lifecycle
     private static EntityManagerFactory getEMFactory() {
