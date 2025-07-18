@@ -75,6 +75,7 @@ public class Program {
         alunoRepository.saveOrUpdate(a2);
         System.out.println("> " + a2);
         
+        // Equipe
         EquipeRepository equipeRepository = new EquipeRepository(); 
         
         Equipe e1 = new Equipe();
@@ -85,7 +86,7 @@ public class Program {
         e1.setNome("Retiro");
         e1.setPago(false);*/
         
-       equipeRepository.saveOrUpdate(e1);
+        equipeRepository.saveOrUpdate(e1);
         System.out.println("> " + e1);
          
         a2.setId(null);
@@ -97,8 +98,9 @@ public class Program {
         //boolean excluded = alunoRepository.delete(id);
         //boolean excluded = alunoRepository.delete(a2);
 
-       // System.out.println("> " + (excluded ? "Excluded" : "Exclusion fails..."));
+        // System.out.println("> " + (excluded ? "Excluded" : "Exclusion fails..."));
         
+        // Evento esportivo 
         EventoEsportivoRepository eventoEsportivoRepository = new EventoEsportivoRepository();
         
         EventoEsportivo ee1 = new EventoEsportivo();
@@ -110,7 +112,7 @@ public class Program {
         eventoEsportivoRepository.saveOrUpdate(ee1);
         System.out.println(">> " + ee1);
         
-
+        // Atleta
         Atleta at1 = new Atleta();
         at1.setNumeroCamisa(10);
         at1.setCpf(1234587456L);
@@ -120,6 +122,7 @@ public class Program {
         AtletaRepository atletaRepository = new AtletaRepository();
         atletaRepository.saveOrUpdate(at1);
         
+        // Partida
         PartidaRepository partidaRepository = new PartidaRepository();
         
         Partida part1 = new Partida();
@@ -137,6 +140,7 @@ public class Program {
         
         setVoleiRepository.saveOrUpdate(sv);
         
+        // Tecnico
         Tecnico t1 = new Tecnico();
         t1.setCpf(123456L);
         t1.setDate(LocalDate.of(1980, Month.JANUARY, 15));
