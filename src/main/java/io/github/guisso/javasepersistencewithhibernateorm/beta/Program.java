@@ -31,9 +31,6 @@ import io.github.guisso.javasepersistencewithhibernateorm.beta.equipe.EquipeRepo
 import io.github.guisso.javasepersistencewithhibernateorm.beta.partida.Partida;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.partida.PartidaRepository;
 
-import io.github.guisso.javasepersistencewithhibernateorm.beta.pessoa.Pessoa;
-import io.github.guisso.javasepersistencewithhibernateorm.beta.pessoa.PessoaRepository;
-
 import io.github.guisso.javasepersistencewithhibernateorm.beta.setvolei.SetVolei;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.setvolei.SetVoleiRepository;
 
@@ -111,15 +108,7 @@ public class Program {
         eventoEsportivoRepository.saveOrUpdate(ee1);
         System.out.println(">> " + ee1);
         
-        PessoaRepository pessoaRepository = new PessoaRepository();
-                 
-        Pessoa p1 = new Pessoa();
-        p1.setNome("Chico Moedas");
-        p1.setCpf(1L);
-        p1.setData(LocalDate.of(2005, Month.MARCH, 12));
-        
-        pessoaRepository.saveOrUpdate(p1);
-        System.out.println(">>" + p1);
+
         
         Atleta at1 = new Atleta();
         at1.setNumeroCamisa(10);

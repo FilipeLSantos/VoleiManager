@@ -16,92 +16,64 @@
  */
 package io.github.guisso.javasepersistencewithhibernateorm.beta.pessoa;
 
-import io.github.guisso.javasepersistencewithhibernateorm.beta.repository.ProjectEntity;
 import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
+import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.Transient;
-import java.io.Serializable;
 import java.time.LocalDate;
+
+
 
 /**
  *
- * @author rdpp
+ * @author Samuel Paranhos
  */
-@Entity
-public class Pessoa     
-        extends ProjectEntity
-        implements Serializable{
+
+@MappedSuperclass
+public class Pessoa{
     
-    private static final long serialVersionUID = 1L;
-      
-    @Column(nullable = false)
-    private String nome;
-
-    @Column(nullable = false, length = 50)
-    private Long cpf;
-
     @Column (nullable = false)
-    private LocalDate data;
-
+    private String nome;
+    @Column (nullable = false)
+    private Long cpf;
+    @Column (nullable = false)
+    private LocalDate date;
     @Transient
     private Integer idade;
+
+    //<editor-fold defaultstate="collapsed" desc="comment">
     
-    @Column(nullable = false)
-    private boolean lixo;
-     
-    //<editor-fold defaultstate="collapsed" desc="Getters/Setters">
-     
     public String getNome() {
         return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public Long getCpf() {
         return cpf;
     }
 
-    public LocalDate getData() {
-        return data;
+    public void setCpf(Long cpf) {
+        this.cpf = cpf;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
     }
 
     public Integer getIdade() {
         return idade;
     }
-    
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public void setCpf(Long cpf) {
-        this.cpf = cpf;
-    }
-
-    public void setData(LocalDate data) {
-        this.data = data;
-    }
 
     public void setIdade(Integer idade) {
         this.idade = idade;
     }
-
-    public boolean isLixo() {
-        return lixo;
-    }
-
-    public void setLixo(boolean lixo) {
-        this.lixo = lixo;
-    }
+//</editor-fold>
     
-    //</editor-fold>
-
-    @Override
-    public String toString() {
-        return "Pessoa{" + "nome = " + nome + ", cpf=" + cpf + ", data=" + data + ", idade=" + idade + '}';
-    }
-   
-    
-    
- 
     
 }
-    
-
