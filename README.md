@@ -5,7 +5,7 @@ torneio de vôlei.
 
 ## Integrantes
 - [Filipe Lopes dos Santos](https://github.com/FilipeLSantos)
-- [Nome do integrante 2](link do GitHub)
+- [Robert Afonso Aquino](https://github.com/RobertAquino)
 - [Nome do integrante 3](link do GitHub)
 
 ## Diagrama UML
