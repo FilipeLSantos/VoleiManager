@@ -16,11 +16,11 @@
  */
 package io.github.guisso.javasepersistencewithhibernateorm.beta.pessoa;
 
-import io.github.guisso.javasepersistencewithhibernateorm.beta.repository.ProjectEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.MappedSuperclass;
 import jakarta.persistence.Transient;
 import java.time.LocalDate;
+import java.time.Period;
 
 /**
  *
@@ -28,20 +28,22 @@ import java.time.LocalDate;
  */
 
 @MappedSuperclass
-public class Pessoa
-    extends ProjectEntity
-{
+public class Pessoa{
     
-    @Column (nullable = false)
+    @Column (nullable = false, length = 50)
     private String nome;
-    @Column (nullable = false)
+    @Column (nullable = false, unique = true, length = 11)
     private Long cpf;
     @Column (nullable = false)
     private LocalDate date;
-    @Transient
-    private Integer idade;
 
-    //<editor-fold defaultstate="collapsed" desc="comment">
+
+    @Transient
+    public Integer getIdade(){
+           return Period.between(this.date, LocalDate.now()).getYears();
+    };
+
+    //<editor-fold defaultstate="collapsed" desc="Getters/Setters">
     
     public String getNome() {
         return nome;
@@ -65,14 +67,6 @@ public class Pessoa
 
     public void setDate(LocalDate date) {
         this.date = date;
-    }
-
-    public Integer getIdade() {
-        return idade;
-    }
-
-    public void setIdade(Integer idade) {
-        this.idade = idade;
     }
 //</editor-fold>
     
