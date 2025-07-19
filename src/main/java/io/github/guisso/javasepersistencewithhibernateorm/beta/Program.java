@@ -114,7 +114,7 @@ public class Program {
         excluded = atletaRepository.delete(at2);
         System.out.println("> " + (excluded ? "Excluded" : "Exclusion fails..."));
         
-                     
+        atletaRepository.findAll();
         
         // Partida
         PartidaRepository partidaRepository = new PartidaRepository();
@@ -157,6 +157,7 @@ public class Program {
         
         setVoleiRepository.delete(sv2);
         
+        setVoleiRepository.findAll();
         // Tecnico
         Tecnico t1 = new Tecnico();
         t1.setCpf(123456L);
