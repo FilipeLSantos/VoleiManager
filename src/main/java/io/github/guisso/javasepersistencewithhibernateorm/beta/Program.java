@@ -132,6 +132,18 @@ public class Program {
         
         setVoleiRepository.saveOrUpdate(sv);
         
+        SetVolei sv2 = new SetVolei();
+        sv2.setNumeroSet(5);
+        sv2.setPontuacao1(5);
+        sv2.setPontuacao2(10);
+        
+        setVoleiRepository.saveOrUpdate(sv2);
+        
+        sv2.setPontuacao1(21);
+        setVoleiRepository.saveOrUpdate(sv2);
+        
+        setVoleiRepository.delete(sv2);
+        
         // Tecnico
         Tecnico t1 = new Tecnico();
         t1.setCpf(123456L);
