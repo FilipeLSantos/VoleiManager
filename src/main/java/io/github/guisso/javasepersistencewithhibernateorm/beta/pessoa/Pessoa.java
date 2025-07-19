@@ -39,7 +39,7 @@ public class Pessoa
     @Column (nullable = false)
     private LocalDate date;
 
-
+    
     @Transient
     public Integer getIdade(){
            return Period.between(this.date, LocalDate.now()).getYears();
