@@ -19,9 +19,6 @@ package io.github.guisso.javasepersistencewithhibernateorm.beta;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.eventoesportivo.EventoEsportivoRepository;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.eventoesportivo.EventoEsportivo;
 
-import io.github.guisso.javasepersistencewithhibernateorm.beta.aluno.Aluno;
-import io.github.guisso.javasepersistencewithhibernateorm.beta.aluno.AlunoRepository;
-
 import io.github.guisso.javasepersistencewithhibernateorm.beta.atleta.Atleta;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.atleta.AtletaRepository;
 
@@ -50,31 +47,6 @@ public class Program {
 
     public static void betaTests() {
         
-        AlunoRepository alunoRepository = new AlunoRepository();
-        Long id;
-        
-        Aluno a1 = new Aluno();
-        a1.setNome("Ana Zaira");
-        a1.setMatricula(123456789);
-        a1.setNascimento(LocalDate.of(1999, 7, 1));
-        
-        alunoRepository.saveOrUpdate(a1);
-        System.out.println("> " + a1);
-        
-        a1.setNome("Beariz Yana");
-        
-        id = alunoRepository.saveOrUpdate(a1);
-        System.out.println("> " + a1);
-        
-        Aluno a2 = alunoRepository.findById(id);
-        System.out.println("> " + a2);
-        
-        a2.setId(null);
-        a2.setNome("Cecília Xerxes");
-        
-        alunoRepository.saveOrUpdate(a2);
-        System.out.println("> " + a2);
-        
         // Equipe
         EquipeRepository equipeRepository = new EquipeRepository(); 
         
@@ -82,18 +54,12 @@ public class Program {
         e1.setNome("Angicos");
         e1.setPago(true);
         
-        /*Equipe e2 = new Equipe();
-        e1.setNome("Retiro");
-        e1.setPago(false);*/
+        Equipe e2 = new Equipe();
+        e2.setNome("Retiro");
+        e2.setPago(false);
         
         equipeRepository.saveOrUpdate(e1);
         System.out.println("> " + e1);
-         
-        a2.setId(null);
-        a2.setNome("Cecília Xerxes");
-        
-        alunoRepository.saveOrUpdate(a2);
-        System.out.println("> " + a2);
         
         //boolean excluded = alunoRepository.delete(id);
         //boolean excluded = alunoRepository.delete(a2);
