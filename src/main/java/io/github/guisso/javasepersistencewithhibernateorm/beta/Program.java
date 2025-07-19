@@ -148,6 +148,10 @@ public class Program {
         t2.setNome("Joao Melao");
         
         tecnicoRepository.saveOrUpdate(t2);
-   
+        
+        tecnicoRepository.findAll();
+        
+        tecnicoRepository.delete(t2);
+        
     }
 }
