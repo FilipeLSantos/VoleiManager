@@ -60,11 +60,11 @@ public class Program {
         
         equipeRepository.saveOrUpdate(e1);
         System.out.println("> " + e1);
+        equipeRepository.saveOrUpdate(e2);
+        System.out.println("> " + e2);
         
-        //boolean excluded = alunoRepository.delete(id);
-        //boolean excluded = alunoRepository.delete(a2);
-
-        // System.out.println("> " + (excluded ? "Excluded" : "Exclusion fails..."));
+        boolean excluded = equipeRepository.delete(e2);
+        System.out.println("> " + (excluded ? "Excluded" : "Exclusion fails..."));
         
         // Evento esportivo 
         EventoEsportivoRepository eventoEsportivoRepository = new EventoEsportivoRepository();
@@ -77,6 +77,21 @@ public class Program {
         
         eventoEsportivoRepository.saveOrUpdate(ee1);
         System.out.println(">> " + ee1);
+        
+        ee1.setLocal("Ginasio Montes Claros");
+        eventoEsportivoRepository.saveOrUpdate(ee1);
+        
+        EventoEsportivo ee2 = new EventoEsportivo();
+        ee2.setNome("Quintou Soccer");
+        ee2.setData(LocalDate.of(2025, Month.NOVEMBER, 15));
+        ee2.setLocal("Cristalia - MG");
+        ee2.setIngressoTime(25.0);
+        
+        eventoEsportivoRepository.saveOrUpdate(ee2);
+        System.out.println(">> " + ee2);
+        
+        excluded = eventoEsportivoRepository.delete(ee2);
+        System.out.println("> " + (excluded ? "Excluded" : "Exclusion fails..."));
         
         // Atleta
         Atleta at1 = new Atleta();
@@ -95,6 +110,17 @@ public class Program {
         part1.setQuantidadeSets(5);
         
         partidaRepository.saveOrUpdate(part1);
+        
+        Partida part2 = new Partida();
+        part2.setQuantidadeSets(3);
+        
+        partidaRepository.saveOrUpdate(part2);
+        
+        excluded = partidaRepository.delete(part1);
+        System.out.println("> " + (excluded ? "Excluded" : "Exclusion fails..."));
+        
+        part2.setQuantidadeSets(8);
+        partidaRepository.saveOrUpdate(part2);
         
         // SetVolei
         SetVoleiRepository setVoleiRepository = new SetVoleiRepository();
