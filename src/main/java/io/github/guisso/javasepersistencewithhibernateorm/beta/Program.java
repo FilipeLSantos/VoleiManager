@@ -103,6 +103,19 @@ public class Program {
         AtletaRepository atletaRepository = new AtletaRepository();
         atletaRepository.saveOrUpdate(at1);
         
+        Atleta at2 = new Atleta();
+        at2.setNumeroCamisa(29);
+        at2.setCpf(293234042L);
+        at2.setDate(LocalDate.of(2001, Month.MARCH, 30));
+        at2.setNome("Ronaldinho Gaucho");
+        
+        atletaRepository.saveOrUpdate(at2);
+        
+        excluded = atletaRepository.delete(at2);
+        System.out.println("> " + (excluded ? "Excluded" : "Exclusion fails..."));
+        
+                     
+        
         // Partida
         PartidaRepository partidaRepository = new PartidaRepository();
         
