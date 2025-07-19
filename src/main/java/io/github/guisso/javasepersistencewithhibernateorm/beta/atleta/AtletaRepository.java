@@ -33,17 +33,17 @@ public class AtletaRepository
 
     @Override
     public String getJpqlFindAll() {
-        return "SELECT a FROM Equipe a";
+        return "SELECT a FROM Atleta a";
     }
 
     @Override
     public String getJpqlFindById() {
-        return "SELECT a FROM Equipe a a.id = :id";
+        return "SELECT a FROM Atleta a a.id = :id";
     }
 
     @Override
     public String getJpqlDeleteById() {
-        return "DELETE FROM Equipe a WHERE a.id = :id";
+        return "DELETE FROM Atleta a WHERE a.id = :id";
     }
     
 }

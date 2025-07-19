@@ -96,7 +96,7 @@ public class Program {
         // Atleta
         Atleta at1 = new Atleta();
         at1.setNumeroCamisa(10);
-        at1.setCpf(1234587456L);
+        at1.setCpf(12345874562L);
         at1.setDate(LocalDate.of(2000, Month.AUGUST, 5));
         at1.setNome("Robert Carlos Nascimento Carvalho");
         
