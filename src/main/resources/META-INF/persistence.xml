@@ -1,25 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<persistence version="3.2" xmlns="https://jakarta.ee/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_2.xsd"> 
-    <persistence-unit name="voleimanagerPU" transaction-type="RESOURCE_LOCAL">
-        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
-        
-        <class>io.github.guisso.javasepersistencewithhibernateorm.beta.eventoesportivo.EventoEsportivo</class>
-        <class>io.github.guisso.javasepersistencewithhibernateorm.beta.equipe.Equipe</class>
-        <class>io.github.guisso.javasepersistencewithhibernateorm.beta.pessoa.Pessoa</class>
-        <class>io.github.guisso.javasepersistencewithhibernateorm.beta.atleta.Atleta</class>
-        <class>io.github.guisso.javasepersistencewithhibernateorm.beta.partida.Partida</class>
-        <class>io.github.guisso.javasepersistencewithhibernateorm.beta.setvolei.SetVolei</class>
-        <class>io.github.guisso.javasepersistencewithhibernateorm.beta.tecnico.Tecnico</class>
-        
-        <properties>
-          <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:3306/voleimanager?zeroDateTimeBehavior=CONVERT_TO_NULL&amp;connectTimeout=5000&amp;socketTimeout=10000&amp;useSSL=false&amp;serverTimezone=America/Fortaleza&amp;useUnicode=true&amp;characterEncoding=UTF-8"/>
-          <property name="jakarta.persistence.jdbc.user" value="root"/>
-          <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
-          <property name="jakarta.persistence.jdbc.password" value=""/>
-          <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
-          <property name="hibernate.show_sql" value="true"/>
-          <property name="hibernate.format_sql" value="true"/>
-          <property name="jakarta.persistence.schema-generation.database.action" value="create"/>
-        </properties>
+<persistence version="3.2" xmlns="https://jakarta.ee/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_2.xsd">
+  <persistence-unit name="voleimanagerPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+    <class>io.github.guisso.javasepersistencewithhibernateorm.beta.eventoesportivo.EventoEsportivo</class>
+    <class>io.github.guisso.javasepersistencewithhibernateorm.beta.equipe.Equipe</class>
+    <class>io.github.guisso.javasepersistencewithhibernateorm.beta.pessoa.Pessoa</class>
+    <class>io.github.guisso.javasepersistencewithhibernateorm.beta.atleta.Atleta</class>
+    <class>io.github.guisso.javasepersistencewithhibernateorm.beta.partida.Partida</class>
+    <class>io.github.guisso.javasepersistencewithhibernateorm.beta.setvolei.SetVolei</class>
+    <class>io.github.guisso.javasepersistencewithhibernateorm.beta.tecnico.Tecnico</class>
+    <properties>
+      <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:3306/voleimanager?zeroDateTimeBehavior=CONVERT_TO_NULL&amp;connectTimeout=5000&amp;socketTimeout=10000&amp;useSSL=false&amp;serverTimezone=America/Fortaleza&amp;useUnicode=true&amp;characterEncoding=UTF-8"/>
+      <property name="jakarta.persistence.jdbc.user" value="root"/>
+      <property name="jakarta.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver"/>
+      <property name="jakarta.persistence.jdbc.password" value=""/>
+      <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
+      <property name="hibernate.show_sql" value="true"/>
+      <property name="hibernate.format_sql" value="true"/>
+      <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create"/>
+    </properties>
   </persistence-unit>
 </persistence>
