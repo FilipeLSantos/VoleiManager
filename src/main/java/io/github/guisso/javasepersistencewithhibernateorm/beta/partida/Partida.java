@@ -16,13 +16,16 @@
  */
 package io.github.guisso.javasepersistencewithhibernateorm.beta.partida;
 
+import io.github.guisso.javasepersistencewithhibernateorm.beta.equipe.Equipe;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.repository.ProjectEntity;
+import io.github.guisso.javasepersistencewithhibernateorm.beta.setvolei.SetVolei;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import java.io.Serializable;
+import java.util.ArrayList;
 /*
 /**
  *
@@ -42,6 +45,12 @@ public class Partida
     @Column(nullable = false)
     private boolean lixo;
     
+    Equipe equipe1;
+    Equipe equipe2;
+    
+    String vencedor;
+    ArrayList<SetVolei> sets;
+    
     //<editor-fold defaultstate="collapsed" desc="Getters/Setters">
     public int getQuantidadeSets() {
         return quantidadeSets;
@@ -54,6 +63,24 @@ public class Partida
     public void setLixo(boolean lixo) {
         this.lixo = lixo;
     }
+
+    public Equipe getEquipe1() {
+        return equipe1;
+    }
+
+    public void setEquipe1(Equipe equipe1) {
+        this.equipe1 = equipe1;
+    }
+
+    public Equipe getEquipe2() {
+        return equipe2;
+    }
+
+    public void setEquipe2(Equipe equipe2) {
+        this.equipe2 = equipe2;
+    }
+    
+    
     //</editor-fold> 
     
     //<editor-fold defaultstate="collapsed" desc="HashCode/Equals">

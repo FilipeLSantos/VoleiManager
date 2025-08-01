@@ -38,6 +38,8 @@ public class Pessoa
     private Long cpf;
     @Column (nullable = false)
     private LocalDate date;
+    
+    int idade;
 
     
     @Transient

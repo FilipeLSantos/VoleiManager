@@ -16,13 +16,16 @@
  */
 package io.github.guisso.javasepersistencewithhibernateorm.beta.equipe;
 
+import io.github.guisso.javasepersistencewithhibernateorm.beta.atleta.Atleta;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.repository.ProjectEntity;
+import io.github.guisso.javasepersistencewithhibernateorm.beta.tecnico.Tecnico;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Objects;
 
 /**
@@ -44,6 +47,10 @@ public class Equipe
     
     @Column(nullable = false)
     private boolean lixo;
+    
+    Tecnico tecnico;
+    ArrayList<Atleta> atleta;
+    
     
     //<editor-fold defaultstate="collapsed" desc="Getters And Setters">
     public String getNome() {
@@ -68,6 +75,15 @@ public class Equipe
 
     public void setLixo(boolean lixo) {
         this.lixo = lixo;
+        
+    }
+
+    public Tecnico getTecnico() {
+        return tecnico;
+    }
+
+    public void setTecnico(Tecnico tecnico) {
+        this.tecnico = tecnico;
     }
     
     //</editor-fold>

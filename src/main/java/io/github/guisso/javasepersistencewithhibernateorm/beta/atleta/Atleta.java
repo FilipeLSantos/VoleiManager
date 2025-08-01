@@ -16,6 +16,7 @@
  */
 package io.github.guisso.javasepersistencewithhibernateorm.beta.atleta;
 
+import io.github.guisso.javasepersistencewithhibernateorm.beta.equipe.Equipe;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.pessoa.Pessoa;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.repository.ProjectEntity;
 import jakarta.persistence.Column;
@@ -42,6 +43,7 @@ public class Atleta
     private int numeroCamisa;
     @Column(nullable = false)
     private boolean lixo;
+    Equipe equipe;
     
     //<editor-fold defaultstate="collapsed" desc="Getters And Setters">
     
@@ -60,6 +62,13 @@ public class Atleta
     public void setLixo(boolean lixo) {
         this.lixo = lixo;
     }
-   
+    
+    public Equipe getEquipe() {
+        return equipe;
+    }
+
+    public void setEquipe(Equipe equipe) {
+        this.equipe = equipe;
+    }
 //</editor-fold>
 }

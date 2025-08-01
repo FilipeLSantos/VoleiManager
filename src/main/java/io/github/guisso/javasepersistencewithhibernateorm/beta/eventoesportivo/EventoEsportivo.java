@@ -16,11 +16,13 @@
  */
 package io.github.guisso.javasepersistencewithhibernateorm.beta.eventoesportivo;
 
+import io.github.guisso.javasepersistencewithhibernateorm.beta.equipe.Equipe;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.repository.ProjectEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Objects;
 
 /**
@@ -49,6 +51,8 @@ public class EventoEsportivo
     
     @Column(nullable = false)
     private boolean lixo;
+    
+    ArrayList<Equipe> equipes;
     
     //<editor-fold defaultstate="collapsed" desc="Getters/Setters">
     public String getNome() {
