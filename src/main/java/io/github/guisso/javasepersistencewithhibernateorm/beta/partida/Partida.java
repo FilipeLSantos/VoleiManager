@@ -45,12 +45,21 @@ public class Partida
     @Column(nullable = false)
     private boolean lixo;
     
-    Equipe equipe1;
-    Equipe equipe2;
+    private Equipe equipe1;
+    private Equipe equipe2;
     
-    String vencedor;
-    ArrayList<SetVolei> sets;
+    private String vencedor;
+    private ArrayList<SetVolei> sets;
     
+    public Partida()
+    {
+        ArrayList<SetVolei> sets = new ArrayList<>();
+    }
+    
+    public void adicionarSet(SetVolei set)
+    {
+        sets.add(set);
+    }
     //<editor-fold defaultstate="collapsed" desc="Getters/Setters">
     public int getQuantidadeSets() {
         return quantidadeSets;
@@ -69,7 +78,11 @@ public class Partida
     }
 
     public void setEquipe1(Equipe equipe1) {
-        this.equipe1 = equipe1;
+        if(equipe1 != null){
+            this.equipe1 = equipe1;
+            return;
+        }
+        System.out.println("A equipe nao pode ser nula");
     }
 
     public Equipe getEquipe2() {
@@ -77,7 +90,11 @@ public class Partida
     }
 
     public void setEquipe2(Equipe equipe2) {
-        this.equipe2 = equipe2;
+        if(equipe2 != null){
+            this.equipe2 = equipe2;
+            return;
+        }
+        System.out.println("A equipe nao pode ser nula");
     }
     
     

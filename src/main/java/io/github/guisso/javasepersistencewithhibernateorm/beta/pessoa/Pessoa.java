@@ -39,7 +39,7 @@ public class Pessoa
     @Column (nullable = false)
     private LocalDate date;
     
-    int idade;
+    private int idade;
 
     
     @Transient

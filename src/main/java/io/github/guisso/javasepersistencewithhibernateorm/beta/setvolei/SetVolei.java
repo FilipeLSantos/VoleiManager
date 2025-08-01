@@ -16,6 +16,7 @@
  */
 package io.github.guisso.javasepersistencewithhibernateorm.beta.setvolei;
 
+import io.github.guisso.javasepersistencewithhibernateorm.beta.equipe.Equipe;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.repository.ProjectEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -41,6 +42,10 @@ public class SetVolei
 
     @Column(nullable = false)
     private int numeroSet;
+    
+    private int vencedor;
+    private Equipe equipe1;
+    private Equipe equipe2;
 
     //<editor-fold defaultstate="collapsed" desc="Getters/Setters">
     public int getPontuacao1() {
@@ -66,6 +71,39 @@ public class SetVolei
     public void setNumeroSet(int numeroSet) {
         this.numeroSet = numeroSet;
     }
+
+    public int getVencedor() {
+        return vencedor;
+    }
+
+    public void setVencedor(int vencedor) {
+        this.vencedor = vencedor;
+    }
+
+    public Equipe getEquipe1() {
+        return equipe1;
+    }
+
+    public void setEquipe1(Equipe equipe1) {
+        if(equipe1 != null){
+            this.equipe1 = equipe1;
+            return;
+        }
+        System.out.println("A equipe nao pode ser nula");
+    }
+
+    public Equipe getEquipe2() {
+        return equipe2;
+    }
+
+    public void setEquipe2(Equipe equipe2) {
+    if(equipe2 != null){
+            this.equipe2 = equipe2;
+            return;
+        }
+        System.out.println("A equipe nao pode ser nula");
+    }
+    
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="HashCode/Equals/toString">

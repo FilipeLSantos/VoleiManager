@@ -52,8 +52,16 @@ public class EventoEsportivo
     @Column(nullable = false)
     private boolean lixo;
     
-    ArrayList<Equipe> equipes;
+    private ArrayList<Equipe> equipes;
     
+    public EventoEsportivo()
+    {
+        ArrayList<Equipe> equipes = new ArrayList<>();
+    }
+    public void adicionarEquipe(Equipe equipe)
+    {
+        equipes.add(equipe);
+    }
     //<editor-fold defaultstate="collapsed" desc="Getters/Setters">
     public String getNome() {
         return nome;
@@ -131,4 +139,3 @@ public class EventoEsportivo
     //</editor-fold>
     
 }
-

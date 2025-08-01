@@ -43,7 +43,7 @@ public class Atleta
     private int numeroCamisa;
     @Column(nullable = false)
     private boolean lixo;
-    Equipe equipe;
+    private Equipe equipe;
     
     //<editor-fold defaultstate="collapsed" desc="Getters And Setters">
     

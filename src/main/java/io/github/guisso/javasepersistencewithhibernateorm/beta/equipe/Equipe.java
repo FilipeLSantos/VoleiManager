@@ -48,9 +48,18 @@ public class Equipe
     @Column(nullable = false)
     private boolean lixo;
     
-    Tecnico tecnico;
-    ArrayList<Atleta> atleta;
+    private Tecnico tecnico;
+    private ArrayList<Atleta> atletas;
     
+    public Equipe()
+    {
+        ArrayList<Atleta> atleta = new ArrayList<>();
+    }
+    
+    public void adicionarAtleta(Atleta atleta)
+    {
+        atletas.add(atleta);
+    }
     
     //<editor-fold defaultstate="collapsed" desc="Getters And Setters">
     public String getNome() {
@@ -85,14 +94,10 @@ public class Equipe
     public void setTecnico(Tecnico tecnico) {
         this.tecnico = tecnico;
     }
-    
     //</editor-fold>
 
-    @Override
-    public String toString() {
-        return "Equipe{" + "nome=" + nome + ", pago=" + pago + '}';
-    }
-
+    //<editor-fold defaultstate="collapsed" desc="HashCodes/Equals/ToString">
+    
     @Override
     public int hashCode() {
         int hash = 7;
@@ -100,7 +105,7 @@ public class Equipe
         hash = 89 * hash + (this.pago ? 1 : 0);
         return hash;
     }
-
+    
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -118,5 +123,10 @@ public class Equipe
         }
         return Objects.equals(this.nome, other.nome);
     }
+    @Override
+    public String toString() {
+        return "Equipe{" + "nome=" + nome + ", pago=" + pago + '}';
+    }
+//</editor-fold>
     
 }
