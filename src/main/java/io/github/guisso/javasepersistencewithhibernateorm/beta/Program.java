@@ -179,7 +179,6 @@ public class Program {
         
         boolean excludedTecnico = tecnicoRepository.delete(t2);
         System.out.println("> " + (excludedTecnico ? "Excluded" : "Exclusion fails..."));
-        
-        
+            
     }
 }
