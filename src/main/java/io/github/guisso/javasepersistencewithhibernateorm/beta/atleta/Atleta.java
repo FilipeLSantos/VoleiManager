@@ -70,5 +70,6 @@ public class Atleta
     public void setEquipe(Equipe equipe) {
         this.equipe = equipe;
     }
+    
 //</editor-fold>
 }

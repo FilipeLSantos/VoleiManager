@@ -72,6 +72,7 @@ public class Pessoa
     public void setDate(LocalDate date) {
         this.date = date;
     }
+    
 //</editor-fold>
     
     
