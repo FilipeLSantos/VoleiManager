@@ -15,7 +15,10 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package io.github.guisso.javasepersistencewithhibernateorm.beta.gui;
-
+import io.github.guisso.javasepersistencewithhibernateorm.beta.setvolei.SetVoleiRepository;
+import io.github.guisso.javasepersistencewithhibernateorm.beta.setvolei.SetVolei;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 /**
  *
  * @author robert
@@ -23,12 +26,47 @@ package io.github.guisso.javasepersistencewithhibernateorm.beta.gui;
 public class CadastroSetVolei extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(CadastroSetVolei.class.getName());
-
+    private final SetVoleiRepository setVoleiRepository;
+    private DefaultListModel<SetVolei> modelSetVolei;
     /**
      * Creates new form CadastroSetVolei
      */
     public CadastroSetVolei() {
+        
+        setVoleiRepository = new SetVoleiRepository();
+        modelSetVolei = new DefaultListModel<>();
+        
         initComponents();
+    }
+    public void cadastrarSetVolei()
+    {
+        SetVolei setVolei = new SetVolei();
+        
+        int pontuacao1 = Integer.parseInt(txtPontuacao1.getText());
+        int pontuacao2 = Integer.parseInt(txtPontuacao2.getText());
+        int numeroSet = Integer.parseInt(txtNumeroSet.getText());
+        String equipe1 = txtEquipe1.getText();
+        String equipe2 = txtEquipe2.getText();
+        String timeVencedor = txtTimeVencedor.getText(); 
+        
+        setVolei.setPontuacao1(pontuacao1);
+        setVolei.setPontuacao2(pontuacao2);
+        setVolei.setNumeroSet(numeroSet);
+        setVolei.setEquipe1(equipe1);
+        setVolei.setEquipe2(equipe2);
+        setVolei.setVencedor(timeVencedor);
+        
+        setVoleiRepository.saveOrUpdate(setVolei);
+    }
+    
+    public void clear()
+    {
+        txtPontuacao1.setText("");
+        txtPontuacao2.setText("");
+        txtNumeroSet.setText("");
+        txtEquipe1.setText("");
+        txtEquipe2.setText("");
+        txtTimeVencedor.setText("");
     }
 
     /**
@@ -41,75 +79,128 @@ public class CadastroSetVolei extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jPanel2 = new javax.swing.JPanel();
+        lblPontuacaoTime1 = new javax.swing.JLabel();
+        lblEquipe1 = new javax.swing.JLabel();
+        lblEquipe2 = new javax.swing.JLabel();
+        txtEquipe1 = new javax.swing.JTextField();
         lblPontuacao2 = new javax.swing.JLabel();
+        txtEquipe2 = new javax.swing.JTextField();
         lblNumeroSet = new javax.swing.JLabel();
+        lblTimeVencedor = new javax.swing.JLabel();
         txtPontuacao1 = new javax.swing.JTextField();
+        txtTimeVencedor = new javax.swing.JTextField();
         txtPontuacao2 = new javax.swing.JTextField();
         txtNumeroSet = new javax.swing.JTextField();
-        lblPontuacaoTime1 = new javax.swing.JLabel();
-        btnCadastrar = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
+        jPanel3 = new javax.swing.JPanel();
 
         jButton1.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        lblPontuacaoTime1.setText("Pontuacao do 1° time");
+
+        lblEquipe1.setText("1° Equipe:");
+
+        lblEquipe2.setText("2° Equipe:");
+
         lblPontuacao2.setText("Pontuacao do 2° time");
 
         lblNumeroSet.setText("Numero do set");
 
-        txtNumeroSet.addActionListener(new java.awt.event.ActionListener() {
+        lblTimeVencedor.setText("Time vencedor:");
+
+        jButton2.setText("Cadastrar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtNumeroSetActionPerformed(evt);
+                jButton2ActionPerformed(evt);
             }
         });
 
-        lblPontuacaoTime1.setText("Pontuacao do 1° time");
-
-        btnCadastrar.setText("Cadastrar");
-        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCadastrarActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblPontuacao2)
-                    .addComponent(lblNumeroSet)
-                    .addComponent(lblPontuacaoTime1))
-                .addGap(55, 55, 55)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(txtPontuacao2)
-                    .addComponent(txtNumeroSet, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnCadastrar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtPontuacao1))
-                .addContainerGap(29, Short.MAX_VALUE))
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lblTimeVencedor)
+                        .addGap(106, 106, 106)
+                        .addComponent(txtTimeVencedor, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblNumeroSet)
+                                    .addComponent(lblPontuacaoTime1))
+                                .addGap(61, 61, 61)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtPontuacao1)
+                                    .addComponent(txtNumeroSet)))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(jButton2))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblEquipe2)
+                                    .addComponent(lblEquipe1)
+                                    .addComponent(lblPontuacao2))
+                                .addGap(61, 61, 61)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtPontuacao2)
+                                    .addComponent(txtEquipe2)
+                                    .addComponent(txtEquipe1))))))
+                .addGap(15, 15, 15))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtPontuacao1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblPontuacaoTime1))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblPontuacao2)
-                    .addComponent(txtPontuacao2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(12, 12, 12)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblNumeroSet)
                     .addComponent(txtNumeroSet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(btnCadastrar)
-                .addGap(42, 42, 42))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblPontuacaoTime1)
+                    .addComponent(txtPontuacao1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPontuacao2)
+                    .addComponent(txtPontuacao2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblEquipe1)
+                    .addComponent(txtEquipe1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblEquipe2)
+                    .addComponent(txtEquipe2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblTimeVencedor)
+                    .addComponent(txtTimeVencedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addComponent(jButton2)
+                .addGap(19, 19, 19))
         );
+
+        jTabbedPane1.addTab("tab1", jPanel2);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 432, Short.MAX_VALUE)
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 325, Short.MAX_VALUE)
+        );
+
+        jTabbedPane1.addTab("tab2", jPanel3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -117,27 +208,22 @@ public class CadastroSetVolei extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jTabbedPane1)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jTabbedPane1)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtNumeroSetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNumeroSetActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtNumeroSetActionPerformed
-
-    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnCadastrarActionPerformed
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        JOptionPane.showMessageDialog(this, "Set cadastrado com sucesso!");
+        cadastrarSetVolei();
+        clear();
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -165,14 +251,22 @@ public class CadastroSetVolei extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCadastrar;
     private javax.swing.JButton jButton1;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JLabel lblEquipe1;
+    private javax.swing.JLabel lblEquipe2;
     private javax.swing.JLabel lblNumeroSet;
     private javax.swing.JLabel lblPontuacao2;
     private javax.swing.JLabel lblPontuacaoTime1;
+    private javax.swing.JLabel lblTimeVencedor;
+    private javax.swing.JTextField txtEquipe1;
+    private javax.swing.JTextField txtEquipe2;
     private javax.swing.JTextField txtNumeroSet;
     private javax.swing.JTextField txtPontuacao1;
     private javax.swing.JTextField txtPontuacao2;
+    private javax.swing.JTextField txtTimeVencedor;
     // End of variables declaration//GEN-END:variables
 }

@@ -50,7 +50,7 @@ public class SetVolei
     private String equipe2;
     
     @Column(nullable = false)
-    private int vencedor;
+    private String vencedor;
 
     //<editor-fold defaultstate="collapsed" desc="Getters/Setters">
     public int getPontuacao1() {
@@ -77,11 +77,11 @@ public class SetVolei
         this.numeroSet = numeroSet;
     }
 
-    public int getVencedor() {
+    public String getVencedor() {
         return vencedor;
     }
 
-    public void setVencedor(int vencedor) {
+    public void setVencedor(String vencedor) {
         this.vencedor = vencedor;
     }
 
