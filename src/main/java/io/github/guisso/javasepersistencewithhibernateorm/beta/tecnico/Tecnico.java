@@ -35,24 +35,17 @@ public class Tecnico
     
     private static final long serialVersionUID = 1L;
     
-    private Equipe equipe;
+    private String equipe;
     
     //<editor-fold defaultstate="collapsed" desc="GettersAndSetters">
-    
-    public Equipe getEquipe() {
+     
+    public String getEquipe() {
         return equipe;
     }
 
-    public void setEquipe(Equipe equipe) {
-        if(equipe != null)
-        {
-            this.equipe = equipe;
-            equipe.setTecnico(this);
-            return;
-        }
-        System.out.println("Erro! A equipe nao pode ser nula");
+    public void setEquipe(String equipe) {
+        this.equipe = equipe;
     }
     
 //</editor-fold>
-    
 }

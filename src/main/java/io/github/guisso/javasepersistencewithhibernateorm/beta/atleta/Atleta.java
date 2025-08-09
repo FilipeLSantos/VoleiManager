@@ -43,7 +43,9 @@ public class Atleta
     private int numeroCamisa;
     @Column(nullable = false)
     private boolean lixo;
-    private Equipe equipe;
+    
+    @Column(nullable = false)
+    private String equipe;
     
     //<editor-fold defaultstate="collapsed" desc="Getters And Setters">
     
@@ -63,13 +65,12 @@ public class Atleta
         this.lixo = lixo;
     }
     
-    public Equipe getEquipe() {
+    public String getEquipe() {
         return equipe;
     }
 
-    public void setEquipe(Equipe equipe) {
+    public void setEquipe(String equipe) {
         this.equipe = equipe;
     }
-    
 //</editor-fold>
 }

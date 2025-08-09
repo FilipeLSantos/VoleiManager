@@ -45,21 +45,15 @@ public class Partida
     @Column(nullable = false)
     private boolean lixo;
     
-    private Equipe equipe1;
-    private Equipe equipe2;
+    @Column(nullable = false)
+    private String equipe1;
     
+    @Column(nullable = false)
+    private String equipe2;
+    
+    @Column(nullable = false)
     private String vencedor;
-    private ArrayList<SetVolei> sets;
-    
-    public Partida()
-    {
-        ArrayList<SetVolei> sets = new ArrayList<>();
-    }
-    
-    public void adicionarSet(SetVolei set)
-    {
-        sets.add(set);
-    }
+
     //<editor-fold defaultstate="collapsed" desc="Getters/Setters">
     public int getQuantidadeSets() {
         return quantidadeSets;
@@ -73,28 +67,28 @@ public class Partida
         this.lixo = lixo;
     }
 
-    public Equipe getEquipe1() {
+    public String getEquipe1() {
         return equipe1;
     }
 
-    public void setEquipe1(Equipe equipe1) {
-        if(equipe1 != null){
-            this.equipe1 = equipe1;
-            return;
-        }
-        System.out.println("A equipe nao pode ser nula");
+    public void setEquipe1(String equipe1) {
+        this.equipe1 = equipe1;
     }
 
-    public Equipe getEquipe2() {
+    public String getEquipe2() {
         return equipe2;
     }
 
-    public void setEquipe2(Equipe equipe2) {
-        if(equipe2 != null){
-            this.equipe2 = equipe2;
-            return;
-        }
-        System.out.println("A equipe nao pode ser nula");
+    public void setEquipe2(String equipe2) {
+        this.equipe2 = equipe2;
+    }
+
+    public String getVencedor() {
+        return vencedor;
+    }
+
+    public void setVencedor(String vencedor) {
+        this.vencedor = vencedor;
     }
     
     

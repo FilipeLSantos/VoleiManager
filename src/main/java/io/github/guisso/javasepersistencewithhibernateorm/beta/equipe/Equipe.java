@@ -48,18 +48,8 @@ public class Equipe
     @Column(nullable = false)
     private boolean lixo;
     
-    private Tecnico tecnico;
-    private ArrayList<Atleta> atletas;
-    
-    public Equipe()
-    {
-        ArrayList<Atleta> atleta = new ArrayList<>();
-    }
-    
-    public void adicionarAtleta(Atleta atleta)
-    {
-        atletas.add(atleta);
-    }
+    @Column(nullable = false)
+    private String tecnico;
     
     //<editor-fold defaultstate="collapsed" desc="Getters And Setters">
     public String getNome() {
@@ -87,13 +77,15 @@ public class Equipe
         
     }
 
-    public Tecnico getTecnico() {
+    public String getTecnico() {
         return tecnico;
     }
 
-    public void setTecnico(Tecnico tecnico) {
+    public void setTecnico(String tecnico) {
         this.tecnico = tecnico;
     }
+    
+
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="HashCodes/Equals/ToString">
