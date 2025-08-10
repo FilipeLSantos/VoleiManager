@@ -35,7 +35,8 @@ public class AtletaRepository
 
     @Override
     public String getJpqlFindAll() {
-        return "SELECT a FROM Atleta a WHERE e.lixo = false";
+        return "SELECT a FROM Atleta a";
+        //WHERE a.lixo = false
     }
 
     @Override
@@ -76,6 +77,20 @@ public class AtletaRepository
         return excluidos; 
     }
     
+    public List<Atleta> loadFromDataBase()
+    {
+        List<Atleta> aux = new ArrayList<>();
+        aux = this.findAll();
+        List<Atleta> incluidos = new ArrayList<>();
+        for(Atleta temp : aux)
+        {
+            if(temp.isLixo() == false)
+            {
+                incluidos.add(temp);
+            }      
+        }
+        return incluidos; 
+    }
     
     
 }

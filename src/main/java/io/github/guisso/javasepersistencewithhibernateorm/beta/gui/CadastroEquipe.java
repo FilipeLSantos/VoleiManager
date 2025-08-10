@@ -381,7 +381,7 @@ public class CadastroEquipe extends javax.swing.JFrame {
         }
 
         modelEquipe.clear();
-        modelEquipe.addAll(equipeRepository.findAll());
+        modelEquipe.addAll(equipeRepository.loadFromDataBase());
 
 
     }//GEN-LAST:event_radNaoExcluidosItemStateChanged

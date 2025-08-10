@@ -35,7 +35,7 @@ public class EquipeRepository
 
     @Override
     public String getJpqlFindAll() {
-        return "SELECT e FROM Equipe e WHERE e.lixo = false";
+        return "SELECT e FROM Equipe e ";
     }
 
     @Override
@@ -62,25 +62,32 @@ public class EquipeRepository
 
     public List<Equipe> loadFromTrash() {
 
-        try (EntityManager em = DataSourceFactory.getEntityManager()) {
-
-            // 1. A consulta JPQL para buscar apenas itens da lixeira
-            String jpql = "FROM Equipe e WHERE e.lixo = true";
-
-            // 2. Cria uma TypedQuery para executar a consulta
-            TypedQuery<Equipe> query = em.createQuery(jpql, Equipe.class);
-
-            // 3. Executa a consulta e retorna a lista de resultados
-            return query.getResultList();
-
-        } catch (Exception e) {
-            // É uma boa prática logar o erro caso algo dê errado
-            System.out.println("ERRO ao carregar da lixeira: " + e.getMessage());
-
-            // Retorna uma lista vazia em caso de erro para não quebrar a aplicação.
-            return new ArrayList<>();
+       List<Equipe> aux = new ArrayList<>();
+        aux = this.findAll();
+        List<Equipe> excluidos = new ArrayList<>();
+        for(Equipe temp : aux)
+        {
+            if(temp.isLixo() == true)
+            {
+                excluidos.add(temp);
+            }      
         }
+        return excluidos; 
+    }
+    
+    public List<Equipe> loadFromDataBase() {
 
+       List<Equipe> aux = new ArrayList<>();
+        aux = this.findAll();
+        List<Equipe> excluidos = new ArrayList<>();
+        for(Equipe temp : aux)
+        {
+            if(temp.isLixo() == false)
+            {
+                excluidos.add(temp);
+            }      
+        }
+        return excluidos; 
     }
 
     public void restoreFromTrash(Equipe equipe) {
@@ -91,7 +98,7 @@ public class EquipeRepository
     public void restoreFromTrash(List<Equipe> equipes) {
         for (Equipe aux : equipes) {
             aux.setLixo(false);
-            this.saveOrUpdate(aux);
+            this.saveOrUpdate(aux); 
         }
     }
 

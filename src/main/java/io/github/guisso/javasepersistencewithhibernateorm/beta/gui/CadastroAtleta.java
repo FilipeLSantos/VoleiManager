@@ -399,7 +399,7 @@ public class CadastroAtleta extends javax.swing.JFrame {
         enableTrash(false);
 
         modelAtleta.clear();
-        modelAtleta.addAll(atletaRepository.findAll());
+        modelAtleta.addAll(atletaRepository.loadFromDataBase());
 
     }//GEN-LAST:event_radNaoExcluidosItemStateChanged
     
