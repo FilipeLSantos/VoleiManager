@@ -28,10 +28,11 @@ import javax.swing.JOptionPane;
  * @author rdpp
  */
 public class CadastroEquipe extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(CadastroEquipe.class.getName());
     private final EquipeRepository equipeRepository;
-    private final DefaultListModel <Equipe> modelEquipe;
+    private final DefaultListModel<Equipe> modelEquipe;
+
     /**
      * Creates new form CadastroEquipe
      */
@@ -39,24 +40,21 @@ public class CadastroEquipe extends javax.swing.JFrame {
         equipeRepository = new EquipeRepository();
         modelEquipe = new DefaultListModel<>();
         modelEquipe.addAll(equipeRepository.findAll());
-        
+
         initComponents();
         javax.swing.ButtonGroup radioGroup = new javax.swing.ButtonGroup();
         radioGroup.add(radNaoExcluidos);
         radioGroup.add(radExcluidos);
         radNaoExcluidos.setSelected(true);
-        
-        
-        
+
     }
-    
-    public void clear(){
+
+    public void clear() {
         txtNome.setText("");
         txtTecnico.setText("");
     }
-    
-      public void enableTrash(boolean status)
-    {
+
+    public void enableTrash(boolean status) {
         btnExcluir.setEnabled(!status);
         btnRestaurar.setEnabled(status);
         btnExcluirLixeira.setEnabled(status);
@@ -304,7 +302,7 @@ public class CadastroEquipe extends javax.swing.JFrame {
         String nome = txtNome.getText();
         String tecnico = txtTecnico.getText();
 
-        JOptionPane.showMessageDialog(this, "Equipe: " + nome  + " Registrada!");
+        JOptionPane.showMessageDialog(this, "Equipe: " + nome + " Registrada!");
 
         Equipe e1 = new Equipe();
 
@@ -312,7 +310,7 @@ public class CadastroEquipe extends javax.swing.JFrame {
         e1.setTecnico(tecnico);
 
         equipeRepository.saveOrUpdate(e1);
-        
+
         clear();
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
@@ -325,70 +323,93 @@ public class CadastroEquipe extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNomeActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        if(lstEquipes.getSelectedIndices().length == 0){
+        if (lstEquipes.getSelectedIndices().length == 0) {
             //showWarning("Selecione ao menos um atleta");
             return;
         }
-        
-        if(lstEquipes.getSelectedIndices().length == 1){
+
+        if (lstEquipes.getSelectedIndices().length == 1) {
             Equipe selected = lstEquipes.getSelectedValue();
-            
-        equipeRepository.moveToTrash(selected);
-        modelEquipe.removeElement(selected);
-        }else{
-        
+
+            equipeRepository.moveToTrash(selected);
+            modelEquipe.removeElement(selected);
+        } else {
+
             List<Equipe> selection = lstEquipes.getSelectedValuesList();
-                
+
             equipeRepository.moveToTrash(selection);
-            for(Equipe aux : selection)
-            {
+            for (Equipe aux : selection) {
                 modelEquipe.removeElement(aux);
             }
         }
-        
+
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnRestaurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestaurarActionPerformed
-        // TODO add your handling code here:
+
+        if (lstEquipes.getSelectedIndices().length == 0) {
+            return;
+        }
+
+        if (lstEquipes.getSelectedIndices().length == 1) {
+
+            Equipe selected = lstEquipes.getSelectedValue();
+
+            equipeRepository.restoreFromTrash(selected);
+
+            modelEquipe.removeElement(selected);
+
+        } else {
+            List<Equipe> selection = lstEquipes.getSelectedValuesList();
+
+            equipeRepository.restoreFromTrash(selection);
+
+            for (Equipe aux : selection) {
+                modelEquipe.removeElement(aux);
+            }
+        }
+
+        JOptionPane.showMessageDialog(this, "Equipe(s) restaurada(s) com sucesso!");
+
     }//GEN-LAST:event_btnRestaurarActionPerformed
 
     private void radNaoExcluidosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_radNaoExcluidosItemStateChanged
-        
-        if(evt.getStateChange() == ItemEvent.SELECTED) {
+
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
             enableTrash(false);
         } else {
         }
-        
+
         modelEquipe.clear();
         modelEquipe.addAll(equipeRepository.findAll());
-        
-        
+
+
     }//GEN-LAST:event_radNaoExcluidosItemStateChanged
 
     private void radExcluidosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_radExcluidosItemStateChanged
-        if(evt.getStateChange() == ItemEvent.SELECTED)
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
             enableTrash(true);
-        
+        }
+
         modelEquipe.clear();
         modelEquipe.addAll(equipeRepository.loadFromTrash());
     }//GEN-LAST:event_radExcluidosItemStateChanged
 
     private void btnExcluirLixeiraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirLixeiraActionPerformed
-            if(lstEquipes.getSelectedIndices().length == 0){
+        if (lstEquipes.getSelectedIndices().length == 0) {
             //showWarning("Selecione ao menos um atleta");
             return;
         }
-         if(lstEquipes.getSelectedIndices().length == 1){
+        if (lstEquipes.getSelectedIndices().length == 1) {
             Equipe selected = lstEquipes.getSelectedValue();
-            
-        equipeRepository.delete(selected);
-        modelEquipe.removeElement(selected);
-        }else{
-        
-            List<Equipe> selection = lstEquipes.getSelectedValuesList();         
-            
-            for(Equipe aux : selection)
-            {
+
+            equipeRepository.delete(selected);
+            modelEquipe.removeElement(selected);
+        } else {
+
+            List<Equipe> selection = lstEquipes.getSelectedValuesList();
+
+            for (Equipe aux : selection) {
                 equipeRepository.delete(aux);
                 modelEquipe.removeElement(aux);
             }
@@ -397,21 +418,21 @@ public class CadastroEquipe extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExcluirLixeiraActionPerformed
 
     private void btnEsvaziarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEsvaziarActionPerformed
-          
+
         List<Equipe> selection = equipeRepository.loadFromTrash();
 
-    if (selection == null || selection.isEmpty()) {
-        return;
-    }
-    try {
-        for (Equipe aux : selection) {
-            equipeRepository.delete(aux);
-        }  
-        modelEquipe.clear();
+        if (selection == null || selection.isEmpty()) {
+            return;
+        }
+        try {
+            for (Equipe aux : selection) {
+                equipeRepository.delete(aux);
+            }
+            modelEquipe.clear();
 
-    } catch (Exception e) {
-        System.err.println("Erro ao deletar Equipes. A operação foi revertida. Detalhes: " + e.getMessage());
-    }
+        } catch (Exception e) {
+            System.err.println("Erro ao deletar Equipes. A operação foi revertida. Detalhes: " + e.getMessage());
+        }
     }//GEN-LAST:event_btnEsvaziarActionPerformed
 
     /**
