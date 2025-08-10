@@ -18,6 +18,8 @@ package io.github.guisso.javasepersistencewithhibernateorm.beta.gui;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.setvolei.SetVoleiRepository;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.setvolei.SetVolei;
 import javax.swing.DefaultListModel;
+import java.awt.event.ItemEvent;
+import java.util.List;
 import javax.swing.JOptionPane;
 /**
  *
@@ -35,8 +37,14 @@ public class CadastroSetVolei extends javax.swing.JFrame {
         
         setVoleiRepository = new SetVoleiRepository();
         modelSetVolei = new DefaultListModel<>();
+        modelSetVolei.addAll(setVoleiRepository.findAll());
         
         initComponents();
+        
+        javax.swing.ButtonGroup radioGroup = new javax.swing.ButtonGroup();
+        radioGroup.add(radNaoExcluidos);
+        radioGroup.add(radExcluidos);
+        radNaoExcluidos.setSelected(true);
     }
     public void cadastrarSetVolei()
     {
@@ -79,7 +87,7 @@ public class CadastroSetVolei extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
-        tabCadastroSet = new javax.swing.JTabbedPane();
+        tabListagemSets = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         lblPontuacaoTime1 = new javax.swing.JLabel();
         lblEquipe1 = new javax.swing.JLabel();
@@ -93,8 +101,18 @@ public class CadastroSetVolei extends javax.swing.JFrame {
         txtTimeVencedor = new javax.swing.JTextField();
         txtPontuacao2 = new javax.swing.JTextField();
         txtNumeroSet = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        btnCadastrar = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
+        lblSetVolei = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        lstSetVolei = new javax.swing.JList<>();
+        radNaoExcluidos = new javax.swing.JRadioButton();
+        radExcluidos = new javax.swing.JRadioButton();
+        lblLixeira = new javax.swing.JLabel();
+        btnExcluir = new javax.swing.JToggleButton();
+        btnExcluirLixeira = new javax.swing.JToggleButton();
+        btnEsvaziar = new javax.swing.JToggleButton();
+        btnRestaurar = new javax.swing.JToggleButton();
 
         jButton1.setText("jButton1");
 
@@ -112,10 +130,10 @@ public class CadastroSetVolei extends javax.swing.JFrame {
 
         lblTimeVencedor.setText("Time vencedor:");
 
-        jButton2.setText("Cadastrar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnCadastrar.setText("Cadastrar");
+        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnCadastrarActionPerformed(evt);
             }
         });
 
@@ -128,7 +146,7 @@ public class CadastroSetVolei extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(lblTimeVencedor)
                         .addGap(106, 106, 106)
-                        .addComponent(txtTimeVencedor, javax.swing.GroupLayout.DEFAULT_SIZE, 210, Short.MAX_VALUE))
+                        .addComponent(txtTimeVencedor, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -142,7 +160,7 @@ public class CadastroSetVolei extends javax.swing.JFrame {
                                     .addComponent(txtNumeroSet)))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jButton2))
+                                .addComponent(btnCadastrar))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblEquipe2)
@@ -182,25 +200,112 @@ public class CadastroSetVolei extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTimeVencedor)
                     .addComponent(txtTimeVencedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                .addComponent(jButton2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addComponent(btnCadastrar)
                 .addGap(19, 19, 19))
         );
 
-        tabCadastroSet.addTab("Cadastro de Set", jPanel2);
+        tabListagemSets.addTab("Cadastro de Set", jPanel2);
+
+        lblSetVolei.setText("Sets:");
+
+        lstSetVolei.setModel(modelSetVolei);
+        jScrollPane1.setViewportView(lstSetVolei);
+
+        radNaoExcluidos.setText("Não Excluídos");
+        radNaoExcluidos.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                radNaoExcluidosItemStateChanged(evt);
+            }
+        });
+
+        radExcluidos.setText("Excluídos");
+        radExcluidos.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                radExcluidosItemStateChanged(evt);
+            }
+        });
+
+        lblLixeira.setText("Lixeira:");
+
+        btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
+
+        btnExcluirLixeira.setText("Excluir");
+        btnExcluirLixeira.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirLixeiraActionPerformed(evt);
+            }
+        });
+
+        btnEsvaziar.setText("Esvaziar");
+        btnEsvaziar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEsvaziarActionPerformed(evt);
+            }
+        });
+
+        btnRestaurar.setText("Restaurar");
+        btnRestaurar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRestaurarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 432, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(lblSetVolei)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(radExcluidos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnExcluirLixeira, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnEsvaziar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnRestaurar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(radNaoExcluidos)
+                                    .addComponent(lblLixeira))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 325, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(lblSetVolei)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(radNaoExcluidos)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(radExcluidos)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnExcluir)
+                        .addGap(36, 36, 36)
+                        .addComponent(lblLixeira)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnExcluirLixeira)
+                        .addGap(12, 12, 12)
+                        .addComponent(btnEsvaziar)
+                        .addGap(9, 9, 9)
+                        .addComponent(btnRestaurar))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        tabCadastroSet.addTab("tab2", jPanel3);
+        tabListagemSets.addTab("Listagem de Set", jPanel3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -208,23 +313,133 @@ public class CadastroSetVolei extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(tabCadastroSet)
+                .addComponent(tabListagemSets)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabCadastroSet)
+            .addComponent(tabListagemSets, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         JOptionPane.showMessageDialog(this, "Set cadastrado com sucesso!");
         cadastrarSetVolei();
         clear();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnCadastrarActionPerformed
 
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+    if(lstSetVolei.getSelectedIndices().length == 0){
+            //showWarning("Selecione ao menos um atleta");
+            return;
+        }
+        if(lstSetVolei.getSelectedIndices().length == 1){
+            SetVolei selected = lstSetVolei.getSelectedValue();
+            
+        setVoleiRepository.moveToTrash(selected);
+        modelSetVolei.removeElement(selected);
+        }else{
+        
+            List<SetVolei> selection = lstSetVolei.getSelectedValuesList();
+                
+            setVoleiRepository.moveToTrash(selection);
+            for(SetVolei aux : selection)
+            {
+                modelSetVolei.removeElement(aux);
+            }
+        }
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void radNaoExcluidosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_radNaoExcluidosItemStateChanged
+        if(evt.getStateChange() == ItemEvent.SELECTED)
+        enableTrash(false);
+
+        modelSetVolei.clear();
+        modelSetVolei.addAll(setVoleiRepository.loadFromDataBase());
+    }//GEN-LAST:event_radNaoExcluidosItemStateChanged
+
+    private void radExcluidosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_radExcluidosItemStateChanged
+         if(evt.getStateChange() == ItemEvent.SELECTED)
+            enableTrash(true);
+        
+        modelSetVolei.clear();
+        modelSetVolei.addAll(setVoleiRepository.loadFromTrash());
+    }//GEN-LAST:event_radExcluidosItemStateChanged
+
+    private void btnExcluirLixeiraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirLixeiraActionPerformed
+         if(lstSetVolei.getSelectedIndices().length == 0){
+            //showWarning("Selecione ao menos um atleta");
+            return;
+        }
+         if(lstSetVolei.getSelectedIndices().length == 1){
+            SetVolei selected = lstSetVolei.getSelectedValue();
+            
+        setVoleiRepository.delete(selected);
+        modelSetVolei.removeElement(selected);
+        }else{
+        
+            List<SetVolei> selection = lstSetVolei.getSelectedValuesList();         
+            
+            for(SetVolei aux : selection)
+            {
+                setVoleiRepository.delete(aux);
+                modelSetVolei.removeElement(aux);
+            }
+        }
+    }//GEN-LAST:event_btnExcluirLixeiraActionPerformed
+
+    private void btnEsvaziarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEsvaziarActionPerformed
+        List<SetVolei> selection = setVoleiRepository.loadFromTrash();
+
+    if (selection == null || selection.isEmpty()) {
+        return;
+    }
+    try {
+        for (SetVolei aux : selection) {
+            setVoleiRepository.delete(aux);
+        }  
+        modelSetVolei.clear();
+
+    } catch (Exception e) {
+        System.err.println("Erro ao deletar atletas. A operação foi revertida. Detalhes: " + e.getMessage());
+    }
+    }//GEN-LAST:event_btnEsvaziarActionPerformed
+
+    private void btnRestaurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestaurarActionPerformed
+       if (lstSetVolei.getSelectedIndices().length == 0) {
+            return;
+        }
+
+        if (lstSetVolei.getSelectedIndices().length == 1) {
+
+            SetVolei selected = lstSetVolei.getSelectedValue();
+
+            setVoleiRepository.restoreFromTrash(selected);
+
+            modelSetVolei.removeElement(selected);
+
+        } else {
+            List<SetVolei> selection = lstSetVolei.getSelectedValuesList();
+
+            setVoleiRepository.restoreFromTrash(selection);
+
+            for (SetVolei aux : selection) {
+                modelSetVolei.removeElement(aux);
+            }
+        }
+
+        JOptionPane.showMessageDialog(this, "Set(s) restaurado(s) com sucesso!");
+    }//GEN-LAST:event_btnRestaurarActionPerformed
+    
+    public void enableTrash(boolean status)
+    {
+        btnExcluir.setEnabled(!status);
+        btnRestaurar.setEnabled(status);
+        btnExcluirLixeira.setEnabled(status);
+        btnEsvaziar.setEnabled(status);
+    }
     /**
      * @param args the command line arguments
      */
@@ -251,17 +466,27 @@ public class CadastroSetVolei extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCadastrar;
+    private javax.swing.JToggleButton btnEsvaziar;
+    private javax.swing.JToggleButton btnExcluir;
+    private javax.swing.JToggleButton btnExcluirLixeira;
+    private javax.swing.JToggleButton btnRestaurar;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblEquipe1;
     private javax.swing.JLabel lblEquipe2;
+    private javax.swing.JLabel lblLixeira;
     private javax.swing.JLabel lblNumeroSet;
     private javax.swing.JLabel lblPontuacao2;
     private javax.swing.JLabel lblPontuacaoTime1;
+    private javax.swing.JLabel lblSetVolei;
     private javax.swing.JLabel lblTimeVencedor;
-    private javax.swing.JTabbedPane tabCadastroSet;
+    private javax.swing.JList<SetVolei> lstSetVolei;
+    private javax.swing.JRadioButton radExcluidos;
+    private javax.swing.JRadioButton radNaoExcluidos;
+    private javax.swing.JTabbedPane tabListagemSets;
     private javax.swing.JTextField txtEquipe1;
     private javax.swing.JTextField txtEquipe2;
     private javax.swing.JTextField txtNumeroSet;

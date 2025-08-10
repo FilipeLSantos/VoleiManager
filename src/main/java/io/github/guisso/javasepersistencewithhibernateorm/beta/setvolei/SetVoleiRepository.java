@@ -17,6 +17,8 @@
 package io.github.guisso.javasepersistencewithhibernateorm.beta.setvolei;
 
 import io.github.guisso.javasepersistencewithhibernateorm.beta.repository.Repository;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -38,6 +40,59 @@ public class SetVoleiRepository
     @Override
     public String getJpqlDeleteById() {
         return "DELETE FROM SetVolei sv WHERE sv.id = :id";
+    }
+    
+    public void moveToTrash(SetVolei setVolei) {
+        setVolei.setLixo(true);
+        this.saveOrUpdate(setVolei);
+    }
+    public void moveToTrash(List<SetVolei> setVolei) {
+        for (SetVolei aux : setVolei) {
+            aux.setLixo(true);
+            this.saveOrUpdate(aux);
+        }
+    }
+
+    public List<SetVolei> loadFromTrash() {
+
+       List<SetVolei> aux = new ArrayList<>();
+        aux = this.findAll();
+        List<SetVolei> excluidos = new ArrayList<>();
+        for(SetVolei temp : aux)
+        {
+            if(temp.isLixo() == true)
+            {
+                excluidos.add(temp);
+            }      
+        }
+        return excluidos; 
+    }
+    
+    public List<SetVolei> loadFromDataBase() {
+
+       List<SetVolei> aux = new ArrayList<>();
+        aux = this.findAll();
+        List<SetVolei> incluidos = new ArrayList<>();
+        for(SetVolei temp : aux)
+        {
+            if(temp.isLixo() == false)
+            {
+                incluidos.add(temp);
+            }      
+        }
+        return incluidos; 
+    }
+
+    public void restoreFromTrash(SetVolei setVolei) {
+        setVolei.setLixo(false);
+        this.saveOrUpdate(setVolei);
+    }
+
+    public void restoreFromTrash(List<SetVolei> setVolei) {
+        for (SetVolei aux : setVolei) {
+            aux.setLixo(false);
+            this.saveOrUpdate(aux); 
+        }
     }
     
 }

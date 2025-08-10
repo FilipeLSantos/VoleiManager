@@ -30,6 +30,7 @@ import io.github.guisso.javasepersistencewithhibernateorm.beta.partida.PartidaRe
 
 import io.github.guisso.javasepersistencewithhibernateorm.beta.setvolei.SetVolei;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.setvolei.SetVoleiRepository;
+
 import io.github.guisso.javasepersistencewithhibernateorm.beta.tecnico.Tecnico;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.tecnico.TecnicoRepository;
 

@@ -51,6 +51,9 @@ public class SetVolei
     
     @Column(nullable = false)
     private String vencedor;
+    
+    @Column(nullable = false)
+    private boolean lixo;
 
     //<editor-fold defaultstate="collapsed" desc="Getters/Setters">
     public int getPontuacao1() {
@@ -99,6 +102,14 @@ public class SetVolei
 
     public void setEquipe2(String equipe2) {
         this.equipe2 = equipe2;
+    }
+
+    public boolean isLixo() {
+        return lixo;
+    }
+
+    public void setLixo(boolean lixo) {
+        this.lixo = lixo;
     }
 
     

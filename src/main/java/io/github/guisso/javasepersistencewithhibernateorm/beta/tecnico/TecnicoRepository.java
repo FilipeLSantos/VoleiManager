@@ -41,9 +41,9 @@ public class TecnicoRepository
     public String getJpqlDeleteById() {
         return "DELETE FROM Tecnico t WHERE t.id = :id";
     }
-        public void moveToTrash(Tecnico equipe) {
-        equipe.setLixo(true);
-        this.saveOrUpdate(equipe);
+        public void moveToTrash(Tecnico tecnico) {
+        tecnico.setLixo(true);
+        this.saveOrUpdate(tecnico);
     }
 
     public void moveToTrash(List<Tecnico> tecnico) {
@@ -72,15 +72,15 @@ public class TecnicoRepository
 
        List<Tecnico> aux = new ArrayList<>();
         aux = this.findAll();
-        List<Tecnico> excluidos = new ArrayList<>();
+        List<Tecnico> incluidos = new ArrayList<>();
         for(Tecnico temp : aux)
         {
             if(temp.isLixo() == false)
             {
-                excluidos.add(temp);
+                incluidos.add(temp);
             }      
         }
-        return excluidos; 
+        return incluidos; 
     }
 
     public void restoreFromTrash(Tecnico tecnico) {

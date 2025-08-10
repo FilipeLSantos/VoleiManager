@@ -18,7 +18,6 @@ package io.github.guisso.javasepersistencewithhibernateorm.beta.equipe;
 
 import io.github.guisso.javasepersistencewithhibernateorm.beta.atleta.Atleta;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.repository.ProjectEntity;
-import io.github.guisso.javasepersistencewithhibernateorm.beta.tecnico.Tecnico;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
