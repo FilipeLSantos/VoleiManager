@@ -10,6 +10,7 @@
     <class>io.github.guisso.javasepersistencewithhibernateorm.beta.tecnico.SetVolei</class>
     <class>io.github.guisso.javasepersistencewithhibernateorm.beta.atleta.SetVolei</class>
     <class>io.github.guisso.javasepersistencewithhibernateorm.beta.tecnico.Tecnico</class>
+    <class>io.github.guisso.javasepersistencewithhibernateorm.beta.atleta.Atleta</class>
     <properties>
       <property name="jakarta.persistence.jdbc.url" value="jdbc:mysql://127.0.0.1:3306/voleimanager?zeroDateTimeBehavior=CONVERT_TO_NULL&amp;connectTimeout=5000&amp;socketTimeout=10000&amp;useSSL=false&amp;serverTimezone=America/Fortaleza&amp;useUnicode=true&amp;characterEncoding=UTF-8"/>
       <property name="jakarta.persistence.jdbc.user" value="root"/>
