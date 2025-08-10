@@ -35,7 +35,7 @@ public class AtletaRepository
 
     @Override
     public String getJpqlFindAll() {
-        return "SELECT a FROM Atleta a";
+        return "SELECT a FROM Atleta a WHERE e.lixo = false";
     }
 
     @Override
@@ -45,7 +45,7 @@ public class AtletaRepository
 
     @Override
     public String getJpqlDeleteById() {
-        return "DELETE FROM Atleta a WHERE a.id = :id";
+        return "DELETE FROM Atleta a WHERE e.id = :id";
     }
      
     public void moveToTrash(Atleta atleta)

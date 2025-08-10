@@ -304,7 +304,7 @@ public class CadastroEquipe extends javax.swing.JFrame {
         String nome = txtNome.getText();
         String tecnico = txtTecnico.getText();
 
-        JOptionPane.showMessageDialog(this, "Equipe: " + nome + '\n' + "Registrada!");
+        JOptionPane.showMessageDialog(this, "Equipe: " + nome  + " Registrada!");
 
         Equipe e1 = new Equipe();
 
