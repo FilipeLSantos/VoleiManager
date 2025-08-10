@@ -21,6 +21,7 @@ import javax.swing.DefaultListModel;
 import java.awt.event.ItemEvent;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 /**
  *
  * @author robert
@@ -40,6 +41,8 @@ public class CadastroSetVolei extends javax.swing.JFrame {
         modelSetVolei.addAll(setVoleiRepository.findAll());
         
         initComponents();
+        
+        lblAlerta.setVisible(false);
         
         javax.swing.ButtonGroup radioGroup = new javax.swing.ButtonGroup();
         radioGroup.add(radNaoExcluidos);
@@ -65,6 +68,19 @@ public class CadastroSetVolei extends javax.swing.JFrame {
         setVolei.setVencedor(timeVencedor);
         
         setVoleiRepository.saveOrUpdate(setVolei);
+    }
+    
+    public void showWarning(String warning){
+        lblAlerta.setText(warning);
+        lblAlerta.setVisible(true);
+        
+        Timer timer = new Timer(4000, (e) -> {
+            lblAlerta.setVisible(false);
+            ((Timer) e.getSource()).stop();
+        });
+        
+        timer.setRepeats(false);
+        timer.start();
     }
     
     public void clear()
@@ -103,7 +119,6 @@ public class CadastroSetVolei extends javax.swing.JFrame {
         txtNumeroSet = new javax.swing.JTextField();
         btnCadastrar = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
-        lblSetVolei = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         lstSetVolei = new javax.swing.JList<>();
         radNaoExcluidos = new javax.swing.JRadioButton();
@@ -113,22 +128,30 @@ public class CadastroSetVolei extends javax.swing.JFrame {
         btnExcluirLixeira = new javax.swing.JToggleButton();
         btnEsvaziar = new javax.swing.JToggleButton();
         btnRestaurar = new javax.swing.JToggleButton();
+        lblAlerta = new javax.swing.JLabel();
+        lblTitulo = new javax.swing.JLabel();
 
         jButton1.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        lblPontuacaoTime1.setText("Pontuacao do 1° time");
+        lblPontuacaoTime1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblPontuacaoTime1.setText("Pontos do Time 1:");
 
-        lblEquipe1.setText("1° Equipe:");
+        lblEquipe1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblEquipe1.setText("Equipe 1:");
 
-        lblEquipe2.setText("2° Equipe:");
+        lblEquipe2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblEquipe2.setText("Equipe 2:");
 
-        lblPontuacao2.setText("Pontuacao do 2° time");
+        lblPontuacao2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblPontuacao2.setText("Pontos do Time 2:");
 
-        lblNumeroSet.setText("Numero do set");
+        lblNumeroSet.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblNumeroSet.setText("Nº do set:");
 
-        lblTimeVencedor.setText("Time vencedor:");
+        lblTimeVencedor.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblTimeVencedor.setText("Vencedor:");
 
         btnCadastrar.setText("Cadastrar");
         btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
@@ -141,73 +164,70 @@ public class CadastroSetVolei extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(lblPontuacaoTime1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtPontuacao1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(lblPontuacao2, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtPontuacao2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(29, 29, 29)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(lblEquipe1, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtEquipe1, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(lblEquipe2, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtEquipe2, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(lblTimeVencedor, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtTimeVencedor, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(lblNumeroSet, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtNumeroSet, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(147, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(lblTimeVencedor)
-                        .addGap(106, 106, 106)
-                        .addComponent(txtTimeVencedor, javax.swing.GroupLayout.DEFAULT_SIZE, 226, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblNumeroSet)
-                                    .addComponent(lblPontuacaoTime1))
-                                .addGap(61, 61, 61)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtPontuacao1)
-                                    .addComponent(txtNumeroSet)))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(btnCadastrar))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblEquipe2)
-                                    .addComponent(lblEquipe1)
-                                    .addComponent(lblPontuacao2))
-                                .addGap(61, 61, 61)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtPontuacao2)
-                                    .addComponent(txtEquipe2)
-                                    .addComponent(txtEquipe1))))))
-                .addGap(15, 15, 15))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnCadastrar)
+                .addGap(59, 59, 59))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
+                .addGap(16, 16, 16)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNumeroSet)
-                    .addComponent(txtNumeroSet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblPontuacaoTime1)
-                    .addComponent(txtPontuacao1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblPontuacao2)
-                    .addComponent(txtPontuacao2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtPontuacao1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblEquipe1)
                     .addComponent(txtEquipe1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
+                .addGap(15, 15, 15)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblPontuacao2)
+                    .addComponent(txtPontuacao2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblEquipe2)
                     .addComponent(txtEquipe2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(26, 26, 26)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblTimeVencedor)
-                    .addComponent(txtTimeVencedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                    .addComponent(txtTimeVencedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblNumeroSet)
+                    .addComponent(txtNumeroSet, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(47, 47, 47)
                 .addComponent(btnCadastrar)
-                .addGap(19, 19, 19))
+                .addContainerGap(96, Short.MAX_VALUE))
         );
 
         tabListagemSets.addTab("Cadastro de Set", jPanel2);
-
-        lblSetVolei.setText("Sets:");
 
         lstSetVolei.setModel(modelSetVolei);
         jScrollPane1.setViewportView(lstSetVolei);
@@ -218,6 +238,11 @@ public class CadastroSetVolei extends javax.swing.JFrame {
                 radNaoExcluidosItemStateChanged(evt);
             }
         });
+        radNaoExcluidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radNaoExcluidosActionPerformed(evt);
+            }
+        });
 
         radExcluidos.setText("Excluídos");
         radExcluidos.addItemListener(new java.awt.event.ItemListener() {
@@ -226,6 +251,7 @@ public class CadastroSetVolei extends javax.swing.JFrame {
             }
         });
 
+        lblLixeira.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblLixeira.setText("Lixeira:");
 
         btnExcluir.setText("Excluir");
@@ -256,56 +282,61 @@ public class CadastroSetVolei extends javax.swing.JFrame {
             }
         });
 
+        lblAlerta.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblAlerta.setForeground(new java.awt.Color(255, 0, 0));
+        lblAlerta.setText("Alerta");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 461, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblSetVolei)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(radExcluidos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnExcluirLixeira, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnEsvaziar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnRestaurar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(radNaoExcluidos)
-                                    .addComponent(lblLixeira))
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addContainerGap())))
+                    .addComponent(radNaoExcluidos)
+                    .addComponent(radExcluidos)
+                    .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblLixeira)
+                    .addComponent(btnExcluirLixeira, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEsvaziar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRestaurar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblAlerta)
+                .addGap(200, 200, 200))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(lblSetVolei)
+                .addGap(10, 10, 10)
+                .addComponent(lblAlerta)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(radNaoExcluidos)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(radExcluidos)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnExcluir)
-                        .addGap(36, 36, 36)
+                        .addGap(18, 18, 18)
                         .addComponent(lblLixeira)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnExcluirLixeira)
-                        .addGap(12, 12, 12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnEsvaziar)
-                        .addGap(9, 9, 9)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnRestaurar))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         tabListagemSets.addTab("Listagem de Set", jPanel3);
+
+        lblTitulo.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        lblTitulo.setText("Set's Volei");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -315,10 +346,19 @@ public class CadastroSetVolei extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(tabListagemSets)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(250, 250, 250)
+                .addComponent(lblTitulo)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tabListagemSets, javax.swing.GroupLayout.DEFAULT_SIZE, 342, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(40, Short.MAX_VALUE)
+                .addComponent(lblTitulo)
+                .addGap(18, 18, 18)
+                .addComponent(tabListagemSets, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -332,7 +372,7 @@ public class CadastroSetVolei extends javax.swing.JFrame {
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
     if(lstSetVolei.getSelectedIndices().length == 0){
-            //showWarning("Selecione ao menos um atleta");
+            showWarning("Selecione ao menos um atleta");
             return;
         }
         if(lstSetVolei.getSelectedIndices().length == 1){
@@ -370,7 +410,7 @@ public class CadastroSetVolei extends javax.swing.JFrame {
 
     private void btnExcluirLixeiraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirLixeiraActionPerformed
          if(lstSetVolei.getSelectedIndices().length == 0){
-            //showWarning("Selecione ao menos um atleta");
+            showWarning("Selecione ao menos um atleta");
             return;
         }
          if(lstSetVolei.getSelectedIndices().length == 1){
@@ -432,6 +472,10 @@ public class CadastroSetVolei extends javax.swing.JFrame {
 
         JOptionPane.showMessageDialog(this, "Set(s) restaurado(s) com sucesso!");
     }//GEN-LAST:event_btnRestaurarActionPerformed
+
+    private void radNaoExcluidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radNaoExcluidosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_radNaoExcluidosActionPerformed
     
     public void enableTrash(boolean status)
     {
@@ -475,14 +519,15 @@ public class CadastroSetVolei extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblAlerta;
     private javax.swing.JLabel lblEquipe1;
     private javax.swing.JLabel lblEquipe2;
     private javax.swing.JLabel lblLixeira;
     private javax.swing.JLabel lblNumeroSet;
     private javax.swing.JLabel lblPontuacao2;
     private javax.swing.JLabel lblPontuacaoTime1;
-    private javax.swing.JLabel lblSetVolei;
     private javax.swing.JLabel lblTimeVencedor;
+    private javax.swing.JLabel lblTitulo;
     private javax.swing.JList<SetVolei> lstSetVolei;
     private javax.swing.JRadioButton radExcluidos;
     private javax.swing.JRadioButton radNaoExcluidos;
