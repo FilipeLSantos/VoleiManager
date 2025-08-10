@@ -35,6 +35,11 @@ public class CadastroEquipe extends javax.swing.JFrame {
         equipeRepository = new EquipeRepository();
         initComponents();
     }
+    
+    public void clear(){
+        txtNome.setText("");
+        txtTecnico.setText("");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -145,6 +150,7 @@ public class CadastroEquipe extends javax.swing.JFrame {
         e1.setTecnico(tecnico);
         
         equipeRepository.saveOrUpdate(e1);
+        clear();
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void txtNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtNomeActionPerformed

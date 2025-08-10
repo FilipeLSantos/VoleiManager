@@ -35,6 +35,13 @@ public class CadastroPartida extends javax.swing.JFrame {
         partidaRepository = new PartidaRepository();
         initComponents();
     }
+    
+    public void clear(){
+        txtNomeEquipe1.setText("");
+        txtNomeEquipe2.setText("");
+        txtQtdSets.setText("");
+        txtVencedor.setText("");
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -178,6 +185,8 @@ public class CadastroPartida extends javax.swing.JFrame {
         p1.setVencedor(vencedor);
         
          partidaRepository.saveOrUpdate(p1);
+         
+         clear();
         
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
