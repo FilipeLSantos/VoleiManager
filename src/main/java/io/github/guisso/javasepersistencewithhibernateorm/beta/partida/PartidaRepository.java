@@ -21,6 +21,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -35,16 +37,70 @@ public class PartidaRepository
    
      @Override
     public String getJpqlFindAll() {
-        return "SELECT part FROM Partida";
+        return "SELECT p FROM Partida p";
     }
 
     @Override
     public String getJpqlFindById() {
-        return "SELECT part FROM Equipe part part.id = :id";
+        return "SELECT p FROM Equipe p p = :id";
     }
 
     @Override
     public String getJpqlDeleteById() {
-        return "DELETE FROM Partida part WHERE part.id = :id";
+        return "DELETE FROM Partida  p WHERE p.id = :id";
+    }
+    
+    public void moveToTrash(Partida partida) {
+        partida.setLixo(true);
+        this.saveOrUpdate(partida);
+    }
+
+    public void moveToTrash(List<Partida> atleta) {
+        for (Partida aux : atleta) {
+            aux.setLixo(true);
+            this.saveOrUpdate(aux);
+        }
+    }
+
+    public List<Partida> loadFromTrash() {
+
+       List<Partida> aux = new ArrayList<>();
+        aux = this.findAll();
+        List<Partida> excluidos = new ArrayList<>();
+        for(Partida temp : aux)
+        {
+            if(temp.isLixo() == true)
+            {
+                excluidos.add(temp);
+            }      
+        }
+        return excluidos; 
+    }
+    
+    public List<Partida> loadFromDataBase() {
+
+       List<Partida> aux = new ArrayList<>();
+        aux = this.findAll();
+        List<Partida> incluidos = new ArrayList<>();
+        for(Partida temp : aux)
+        {
+            if(temp.isLixo() == false)
+            {
+                incluidos.add(temp);
+            }      
+        }
+        return incluidos; 
+    }
+
+    public void restoreFromTrash(Partida equipe) {
+        equipe.setLixo(false);
+        this.saveOrUpdate(equipe);
+    }
+
+    public void restoreFromTrash(List<Partida> equipes) {
+        for (Partida aux : equipes) {
+            aux.setLixo(false);
+            this.saveOrUpdate(aux); 
+        }
     }
 }

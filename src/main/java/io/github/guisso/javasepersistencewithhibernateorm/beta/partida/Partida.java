@@ -121,6 +121,12 @@ public class Partida
         return lixo;
     }
     //</editor-fold>
-       
+
+    @Override
+    public String toString() {
+        return "Equipe 1: " + equipe1 + " x Equipe 2: " + equipe2 + " Vencedor: "   
+        + vencedor + " Quantidade de Sets: " + quantidadeSets;
+    }
+      
     
 }

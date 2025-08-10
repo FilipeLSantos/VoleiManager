@@ -79,15 +79,15 @@ public class EquipeRepository
 
        List<Equipe> aux = new ArrayList<>();
         aux = this.findAll();
-        List<Equipe> excluidos = new ArrayList<>();
+        List<Equipe> incluidos = new ArrayList<>();
         for(Equipe temp : aux)
         {
             if(temp.isLixo() == false)
             {
-                excluidos.add(temp);
+                incluidos.add(temp);
             }      
         }
-        return excluidos; 
+        return incluidos; 
     }
 
     public void restoreFromTrash(Equipe equipe) {
