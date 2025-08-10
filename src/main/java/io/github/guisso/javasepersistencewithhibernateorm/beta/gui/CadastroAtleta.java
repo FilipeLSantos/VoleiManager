@@ -30,7 +30,8 @@ public class CadastroAtleta extends javax.swing.JFrame {
     
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(CadastroAtleta.class.getName());
     private final AtletaRepository atletaRepository;
-    private final DefaultListModel<Atleta> modelAtleta; 
+    private final DefaultListModel<Atleta> modelAtleta;
+
     /**
      * Creates new form CadastroAtleta
      */
@@ -38,7 +39,13 @@ public class CadastroAtleta extends javax.swing.JFrame {
         atletaRepository = new AtletaRepository();
         modelAtleta = new DefaultListModel<>();
         modelAtleta.addAll(atletaRepository.findAll());
+
         initComponents();
+        javax.swing.ButtonGroup radioGroup = new javax.swing.ButtonGroup();
+        radioGroup.add(radNaoExcluidos);
+        radioGroup.add(radExcluidos);
+        radNaoExcluidos.setSelected(true);
+        
     }
     
     public void cadastrarAtleta()
@@ -64,6 +71,7 @@ public class CadastroAtleta extends javax.swing.JFrame {
         txtData.setText("");
         txtNumeroCamisa.setText("");
         txtCPF.setText("");
+        txtEquipe.setText("");
     }
 
     /**
@@ -201,11 +209,6 @@ public class CadastroAtleta extends javax.swing.JFrame {
         radExcluidos.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 radExcluidosItemStateChanged(evt);
-            }
-        });
-        radExcluidos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radExcluidosActionPerformed(evt);
             }
         });
 
@@ -356,17 +359,49 @@ public class CadastroAtleta extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnExcluirLixeiraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirLixeiraActionPerformed
+         if(lstAtletas.getSelectedIndices().length == 0){
+            //showWarning("Selecione ao menos um atleta");
+            return;
+        }
+         if(lstAtletas.getSelectedIndices().length == 1){
+            Atleta selected = lstAtletas.getSelectedValue();
+            
+        atletaRepository.delete(selected);
+        modelAtleta.removeElement(selected);
+        }else{
+        
+            List<Atleta> selection = lstAtletas.getSelectedValuesList();         
+            
+            for(Atleta aux : selection)
+            {
+                atletaRepository.delete(aux);
+                modelAtleta.removeElement(aux);
+            }
+        }
+       
     }//GEN-LAST:event_btnExcluirLixeiraActionPerformed
 
     private void btnEsvaziarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEsvaziarActionPerformed
+           
+       // 1. Carrega a lista de atletas a serem excluídos (sem alteração)
+    List<Atleta> selection = atletaRepository.loadFromTrash();
+
+    if (selection == null || selection.isEmpty()) {
+        return;
+    }
+    try {
+        for (Atleta aux : selection) {
+            atletaRepository.delete(aux);
+        }  
+        modelAtleta.clear();
+
+    } catch (Exception e) {
+        System.err.println("Erro ao deletar atletas. A operação foi revertida. Detalhes: " + e.getMessage());
+    }
     }//GEN-LAST:event_btnEsvaziarActionPerformed
 
     private void btnRestaurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestaurarActionPerformed
     }//GEN-LAST:event_btnRestaurarActionPerformed
-
-    private void radExcluidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radExcluidosActionPerformed
-        
-    }//GEN-LAST:event_radExcluidosActionPerformed
     
     public void enableTrash(boolean status)
     {

@@ -76,5 +76,4 @@ public class AtletaRepository
         return excluidos; 
     }
     
-
 }
