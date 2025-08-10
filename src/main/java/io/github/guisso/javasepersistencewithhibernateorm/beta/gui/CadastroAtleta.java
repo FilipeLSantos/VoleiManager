@@ -43,15 +43,16 @@ public class CadastroAtleta extends javax.swing.JFrame {
     {
        String nome = txtNome.getText();
        long CPF = Long.parseLong(txtCPF.getText());
-       String data = txtData.getName();
+       LocalDate data = LocalDate.parse(txtData.getText());
        int numeroCamisa = Integer.parseInt(txtNumeroCamisa.getText());
-       
+       String equipe = txtEquipe.getText();
        Atleta atleta = new Atleta();
        
        atleta.setCpf(CPF);
        atleta.setNome(nome);
-       atleta.setDate(LocalDate.now());
+       atleta.setDate(data);
        atleta.setNumeroCamisa(numeroCamisa);
+       atleta.setEquipe(equipe);
        
        atletaRepository.saveOrUpdate(atleta);
     }
@@ -84,6 +85,8 @@ public class CadastroAtleta extends javax.swing.JFrame {
         txtData = new javax.swing.JTextField();
         txtNumeroCamisa = new javax.swing.JTextField();
         btnCadastrar = new javax.swing.JButton();
+        lblEquipe = new javax.swing.JLabel();
+        txtEquipe = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -103,27 +106,37 @@ public class CadastroAtleta extends javax.swing.JFrame {
             }
         });
 
+        lblEquipe.setText("Equipe:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblNome)
-                    .addComponent(lblCPF)
-                    .addComponent(lblData)
-                    .addComponent(lblNumeroCamisa))
-                .addGap(32, 32, 32)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtNumeroCamisa, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(btnCadastrar)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnCadastrar))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblEquipe)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txtEquipe, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblNome)
+                            .addComponent(lblCPF)
+                            .addComponent(lblData)
+                            .addComponent(lblNumeroCamisa))
+                        .addGap(32, 32, 32)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNumeroCamisa, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -144,12 +157,15 @@ public class CadastroAtleta extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lblNumeroCamisa)
-                        .addGap(24, 24, 24))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(lblEquipe))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(txtNumeroCamisa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
-                .addComponent(btnCadastrar)
-                .addContainerGap(74, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txtEquipe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnCadastrar)))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         jTabbedPane2.addTab("Cadastro de Atletas", jPanel1);
@@ -226,10 +242,12 @@ public class CadastroAtleta extends javax.swing.JFrame {
     private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JLabel lblCPF;
     private javax.swing.JLabel lblData;
+    private javax.swing.JLabel lblEquipe;
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblNumeroCamisa;
     private javax.swing.JTextField txtCPF;
     private javax.swing.JTextField txtData;
+    private javax.swing.JTextField txtEquipe;
     private javax.swing.JTextField txtNome;
     private javax.swing.JTextField txtNumeroCamisa;
     // End of variables declaration//GEN-END:variables
