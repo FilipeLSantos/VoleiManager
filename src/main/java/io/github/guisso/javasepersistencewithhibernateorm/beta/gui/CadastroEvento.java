@@ -20,10 +20,14 @@ import com.github.lgooddatepicker.components.DatePickerSettings;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.eventoesportivo.EventoEsportivo;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.eventoesportivo.EventoEsportivoRepository;
 import java.awt.Font;
+import java.awt.event.ItemEvent;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
 import java.util.Locale;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 
 /**
  *
@@ -31,11 +35,24 @@ import javax.swing.JOptionPane;
  */
 public class CadastroEvento extends javax.swing.JFrame {
 
+    private final DefaultListModel<EventoEsportivo> modelEvento;
+    private final EventoEsportivoRepository repository;
+    
     /**
      * Creates new form CadastroEvento
      */
     public CadastroEvento() {
+        
+        // Repository for CRUD operations
+        repository = new EventoEsportivoRepository();
+        
+        //Default Evento list model
+        modelEvento = new DefaultListModel<>();
+        modelEvento.addAll(repository.findAll());
+        
         initComponents();
+        
+        lblAlerta.setVisible(false);
         
         //DatePicker settings
          DatePickerSettings settings
@@ -74,7 +91,8 @@ public class CadastroEvento extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        pnlPrincipal = new javax.swing.JPanel();
+        tabEventoEsportivo = new javax.swing.JTabbedPane();
+        pnlCadastro = new javax.swing.JPanel();
         lblNome = new javax.swing.JLabel();
         lblData = new javax.swing.JLabel();
         lblLocal = new javax.swing.JLabel();
@@ -82,28 +100,39 @@ public class CadastroEvento extends javax.swing.JFrame {
         txtNome = new javax.swing.JTextField();
         txtLocal = new javax.swing.JTextField();
         txtIngresso = new javax.swing.JTextField();
-        btnSalvar = new javax.swing.JButton();
-        lblTitulo = new javax.swing.JLabel();
         dtpData = new com.github.lgooddatepicker.components.DatePicker();
+        btnSalvar = new javax.swing.JButton();
+        pnlListagem = new javax.swing.JPanel();
+        radNExcluidos = new javax.swing.JRadioButton();
+        radExcluidos = new javax.swing.JRadioButton();
+        btnExcluir = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        btnLRestaurar = new javax.swing.JButton();
+        btnLExcluir = new javax.swing.JButton();
+        btnLEsvaziar = new javax.swing.JButton();
+        scrEvento = new javax.swing.JScrollPane();
+        lstEvento = new javax.swing.JList<>();
+        lblAlerta = new javax.swing.JLabel();
+        lblTitulo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Cadastro de Evento Esportivo");
 
-        lblNome.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblNome.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblNome.setText("Nome: ");
+        lblNome.setText("Nome:");
+        lblNome.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        lblData.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblData.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblData.setText("Data: ");
+        lblData.setText("Data:");
+        lblData.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        lblLocal.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblLocal.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblLocal.setText("Local: ");
+        lblLocal.setText("Local:");
+        lblLocal.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        lblIngresso.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblIngresso.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        lblIngresso.setText("Ingresso: ");
+        lblIngresso.setText("Ingresso:");
+        lblIngresso.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         btnSalvar.setText("Salvar");
         btnSalvar.addActionListener(new java.awt.event.ActionListener() {
@@ -112,81 +141,183 @@ public class CadastroEvento extends javax.swing.JFrame {
             }
         });
 
-        lblTitulo.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        lblTitulo.setText("Evento Esportivo");
-
-        javax.swing.GroupLayout pnlPrincipalLayout = new javax.swing.GroupLayout(pnlPrincipal);
-        pnlPrincipal.setLayout(pnlPrincipalLayout);
-        pnlPrincipalLayout.setHorizontalGroup(
-            pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPrincipalLayout.createSequentialGroup()
-                .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(pnlPrincipalLayout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lblIngresso, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblLocal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblNome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lblData, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(pnlPrincipalLayout.createSequentialGroup()
-                                .addGap(25, 25, 25)
-                                .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(txtLocal)
-                                    .addGroup(pnlPrincipalLayout.createSequentialGroup()
-                                        .addComponent(txtIngresso, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(0, 0, Short.MAX_VALUE))))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlPrincipalLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
-                                .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblTitulo)
-                                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(dtpData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addGroup(pnlPrincipalLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnSalvar)))
-                .addGap(40, 40, 40))
+        javax.swing.GroupLayout pnlCadastroLayout = new javax.swing.GroupLayout(pnlCadastro);
+        pnlCadastro.setLayout(pnlCadastroLayout);
+        pnlCadastroLayout.setHorizontalGroup(
+            pnlCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlCadastroLayout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addGroup(pnlCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnSalvar)
+                    .addGroup(pnlCadastroLayout.createSequentialGroup()
+                        .addGroup(pnlCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(pnlCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(lblLocal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblData, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(lblNome, javax.swing.GroupLayout.DEFAULT_SIZE, 66, Short.MAX_VALUE))
+                            .addComponent(lblIngresso, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(34, 34, 34)
+                        .addGroup(pnlCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtIngresso, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtNome)
+                            .addComponent(dtpData, javax.swing.GroupLayout.DEFAULT_SIZE, 279, Short.MAX_VALUE)
+                            .addComponent(txtLocal))))
+                .addContainerGap(95, Short.MAX_VALUE))
         );
-        pnlPrincipalLayout.setVerticalGroup(
-            pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(pnlPrincipalLayout.createSequentialGroup()
-                .addGap(34, 34, 34)
-                .addComponent(lblTitulo)
-                .addGap(18, 18, 18)
-                .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblNome, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+        pnlCadastroLayout.setVerticalGroup(
+            pnlCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlCadastroLayout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addGroup(pnlCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblNome)
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblData, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnlCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblData)
                     .addComponent(dtpData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblLocal, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblLocal)
                     .addComponent(txtLocal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(pnlPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblIngresso, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(pnlCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblIngresso)
                     .addComponent(txtIngresso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(btnSalvar)
-                .addGap(22, 22, 22))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
+
+        tabEventoEsportivo.addTab("Cadastro", pnlCadastro);
+
+        radNExcluidos.setSelected(true);
+        radNExcluidos.setText("Não excluídos");
+        radNExcluidos.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                radNExcluidosItemStateChanged(evt);
+            }
+        });
+        radNExcluidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radNExcluidosActionPerformed(evt);
+            }
+        });
+
+        radExcluidos.setText("Excluídos");
+        radExcluidos.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                radExcluidosItemStateChanged(evt);
+            }
+        });
+        radExcluidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radExcluidosActionPerformed(evt);
+            }
+        });
+
+        btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel1.setText("Lixeira:");
+
+        btnLRestaurar.setText("Restaurar");
+
+        btnLExcluir.setText("Excluir");
+
+        btnLEsvaziar.setText("Esvaziar");
+
+        lstEvento.setModel(modelEvento);
+        lstEvento.setToolTipText("");
+        scrEvento.setViewportView(lstEvento);
+
+        lblAlerta.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblAlerta.setText("Alerta");
+
+        javax.swing.GroupLayout pnlListagemLayout = new javax.swing.GroupLayout(pnlListagem);
+        pnlListagem.setLayout(pnlListagemLayout);
+        pnlListagemLayout.setHorizontalGroup(
+            pnlListagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlListagemLayout.createSequentialGroup()
+                .addGroup(pnlListagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlListagemLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(scrEvento, javax.swing.GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE)
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlListagemLayout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblAlerta)
+                        .addGap(56, 56, 56)))
+                .addGroup(pnlListagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlListagemLayout.createSequentialGroup()
+                        .addGroup(pnlListagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(radExcluidos)
+                            .addComponent(radNExcluidos)
+                            .addComponent(jLabel1)
+                            .addGroup(pnlListagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(btnLEsvaziar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnLExcluir, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnLRestaurar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlListagemLayout.createSequentialGroup()
+                        .addComponent(btnExcluir)
+                        .addGap(18, 18, 18))))
+        );
+        pnlListagemLayout.setVerticalGroup(
+            pnlListagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlListagemLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(pnlListagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(radNExcluidos)
+                    .addComponent(lblAlerta))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(pnlListagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(pnlListagemLayout.createSequentialGroup()
+                        .addComponent(radExcluidos)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnExcluir)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnLRestaurar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnLExcluir)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnLEsvaziar)
+                        .addContainerGap(17, Short.MAX_VALUE))
+                    .addComponent(scrEvento)))
+        );
+
+        tabEventoEsportivo.addTab("Listagem", pnlListagem);
+
+        lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitulo.setText("Evento Esportivo");
+        lblTitulo.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnlPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(tabEventoEsportivo)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(149, 149, 149)
+                .addComponent(lblTitulo)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(pnlPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblTitulo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tabEventoEsportivo)
                 .addContainerGap())
         );
 
@@ -194,21 +325,75 @@ public class CadastroEvento extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
-        String nome = txtNome.getText(), local = txtLocal.getText();
-        LocalDate data = dtpData.getDate();
-        double ingresso = Double.parseDouble(txtIngresso.getText());
+        EventoEsportivo ee = new EventoEsportivo();
         
-        JOptionPane.showMessageDialog(this,"Evento: " + txtNome.getText() + "salvo com sucesso !");
+        ee.setNome(txtNome.getText());
+        ee.setData(dtpData.getDate());
+        ee.setLocal(txtLocal.getText());
+        ee.setIngressoTime(Double.parseDouble(txtIngresso.getText()));
         
-        EventoEsportivo ee1 = new EventoEsportivo();
-        
-        ee1.setIngressoTime(ingresso);
-        ee1.setNome(nome);
-        ee1.setLocal(local);
-        
-        new EventoEsportivoRepository().saveOrUpdate(ee1);
+        try {
+            new EventoEsportivoRepository().saveOrUpdate(ee);
+            JOptionPane.showMessageDialog(this, "Evento: " + 
+                    ee.getNome() + ", salvo com sucesso !");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this,
+                    "Falha ao gravar o aluno no banco de dados",
+                    "Erro: ",
+                    JOptionPane.ERROR_MESSAGE);
+        }
         
     }//GEN-LAST:event_btnSalvarActionPerformed
+
+    private void radNExcluidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radNExcluidosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_radNExcluidosActionPerformed
+
+    private void radExcluidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radExcluidosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_radExcluidosActionPerformed
+
+    private void radNExcluidosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_radNExcluidosItemStateChanged
+        if(evt.getStateChange() == ItemEvent.SELECTED){
+            enableTrash(false);
+            
+            modelEvento.clear();
+            modelEvento.addAll(repository.findAll());
+            
+        }
+    }//GEN-LAST:event_radNExcluidosItemStateChanged
+
+    private void radExcluidosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_radExcluidosItemStateChanged
+        if(evt.getStateChange() == ItemEvent.SELECTED){
+            enableTrash(true);
+            
+            modelEvento.clear();
+            //modelEvento.addAll(repository.loadFromLixo);
+        }
+    }//GEN-LAST:event_radExcluidosItemStateChanged
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        if(lstEvento.getSelectedIndices().length == 0){
+            showWarning("Selecione ao menos um Evento");
+            return;
+        }
+        
+        if(lstEvento.getSelectedIndices().length == 1){
+            EventoEsportivo selected = lstEvento.getSelectedValue();
+            
+            //repository.moveToTrash(selected);
+            modelEvento.removeElement(selected);
+        
+        }else{
+            List<EventoEsportivo> selection = lstEvento.getSelectedValuesList();
+            
+            //repository.moveToTrash(selection);
+            
+            for(EventoEsportivo aux : selection){
+                modelEvento.removeElement(aux);
+            }
+        }
+    }//GEN-LAST:event_btnExcluirActionPerformed
 
     /**
      * @param args the command line arguments
@@ -244,16 +429,53 @@ public class CadastroEvento extends javax.swing.JFrame {
             }
         });
     }
+    
+    public void enableTrash(boolean status){
+        btnExcluir.setEnabled(!status);
+        btnLRestaurar.setEnabled(status);
+        btnLExcluir.setEnabled(status);
+        btnLEsvaziar.setEnabled(status);  
+    }
+    
+    public void showWarning(String warning){
+        lblAlerta.setText(warning);
+        lblAlerta.setVisible(true);
+        
+        Timer timer = new Timer(4000, (e) -> {
+            lblAlerta.setVisible(false);
+            ((Timer) e.getSource()).stop();
+        });
+        
+        timer.setRepeats(false);
+        timer.start();
+    }
+    
+    public void clearFields(){
+        txtNome.setText(null);
+        txtNome.requestFocus();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnExcluir;
+    private javax.swing.JButton btnLEsvaziar;
+    private javax.swing.JButton btnLExcluir;
+    private javax.swing.JButton btnLRestaurar;
     private javax.swing.JButton btnSalvar;
     private com.github.lgooddatepicker.components.DatePicker dtpData;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel lblAlerta;
     private javax.swing.JLabel lblData;
     private javax.swing.JLabel lblIngresso;
     private javax.swing.JLabel lblLocal;
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblTitulo;
-    private javax.swing.JPanel pnlPrincipal;
+    private javax.swing.JList<EventoEsportivo> lstEvento;
+    private javax.swing.JPanel pnlCadastro;
+    private javax.swing.JPanel pnlListagem;
+    private javax.swing.JRadioButton radExcluidos;
+    private javax.swing.JRadioButton radNExcluidos;
+    private javax.swing.JScrollPane scrEvento;
+    private javax.swing.JTabbedPane tabEventoEsportivo;
     private javax.swing.JTextField txtIngresso;
     private javax.swing.JTextField txtLocal;
     private javax.swing.JTextField txtNome;

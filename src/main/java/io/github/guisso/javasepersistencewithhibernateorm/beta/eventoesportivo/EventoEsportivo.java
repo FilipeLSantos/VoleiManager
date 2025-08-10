@@ -135,6 +135,7 @@ public class EventoEsportivo
                 + "Data: " + data
                 + "Local: " + local
                 + "Ingresso time: " + ingressoTime
+                + "Lixo: " + lixo
                 + '}';
     }
     //</editor-fold>
