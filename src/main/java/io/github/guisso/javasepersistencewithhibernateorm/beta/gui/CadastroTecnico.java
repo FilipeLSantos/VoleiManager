@@ -76,7 +76,7 @@ public class CadastroTecnico extends javax.swing.JFrame {
     private void initComponents() {
 
         jComboBox1 = new javax.swing.JComboBox<>();
-        tbpCadastroTecnico = new javax.swing.JTabbedPane();
+        tabCadastroTecnico = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         lblNome = new javax.swing.JLabel();
         lblCPF = new javax.swing.JLabel();
@@ -155,7 +155,7 @@ public class CadastroTecnico extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        tbpCadastroTecnico.addTab("Cadastro de Técnico", jPanel1);
+        tabCadastroTecnico.addTab("Cadastro de Técnico", jPanel1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -163,14 +163,14 @@ public class CadastroTecnico extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(tbpCadastroTecnico)
+                .addComponent(tabCadastroTecnico)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(tbpCadastroTecnico)
+                .addComponent(tabCadastroTecnico)
                 .addContainerGap())
         );
 
@@ -216,7 +216,7 @@ public class CadastroTecnico extends javax.swing.JFrame {
     private javax.swing.JLabel lblData;
     private javax.swing.JLabel lblEquipe;
     private javax.swing.JLabel lblNome;
-    private javax.swing.JTabbedPane tbpCadastroTecnico;
+    private javax.swing.JTabbedPane tabCadastroTecnico;
     private javax.swing.JTextField txtCPF;
     private javax.swing.JTextField txtData;
     private javax.swing.JTextField txtEquipe;

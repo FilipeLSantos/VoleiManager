@@ -16,6 +16,7 @@
  */
 package io.github.guisso.javasepersistencewithhibernateorm.beta.repository;
 
+import io.github.guisso.javasepersistencewithhibernateorm.beta.atleta.Atleta;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Query;

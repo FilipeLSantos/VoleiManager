@@ -73,4 +73,11 @@ public class Atleta
         this.equipe = equipe;
     }
 //</editor-fold>
+
+    @Override
+    public String toString() {
+        return this.getNome();
+    }
+    
+    
 }

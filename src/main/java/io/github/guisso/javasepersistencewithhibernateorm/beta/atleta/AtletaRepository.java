@@ -22,6 +22,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -45,5 +47,34 @@ public class AtletaRepository
     public String getJpqlDeleteById() {
         return "DELETE FROM Atleta a WHERE a.id = :id";
     }
+     
+    public void moveToTrash(Atleta atleta)
+    {
+        atleta.setLixo(true);
+        this.saveOrUpdate(atleta);
+    }
+    public void moveToTrash(List<Atleta> atleta)
+    {
+        for(Atleta aux : atleta)
+        {
+            aux.setLixo(true);
+            this.saveOrUpdate(aux);
+        }
+    }
+    public List<Atleta> loadFromTrash()
+    {
+        List<Atleta> aux = new ArrayList<>();
+        aux = this.findAll();
+        List<Atleta> excluidos = new ArrayList<>();
+        for(Atleta temp : aux)
+        {
+            if(temp.isLixo() == true)
+            {
+                excluidos.add(temp);
+            }      
+        }
+        return excluidos; 
+    }
     
+
 }

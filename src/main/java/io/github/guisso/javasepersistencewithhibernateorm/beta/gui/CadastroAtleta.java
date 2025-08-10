@@ -19,7 +19,9 @@ import io.github.guisso.javasepersistencewithhibernateorm.beta.atleta.AtletaRepo
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.atleta.Atleta;
+import java.awt.event.ItemEvent;
 import java.time.LocalDate;
+import java.util.List;
 /**
  *
  * @author robert
@@ -35,7 +37,7 @@ public class CadastroAtleta extends javax.swing.JFrame {
     public CadastroAtleta() {
         atletaRepository = new AtletaRepository();
         modelAtleta = new DefaultListModel<>();
-        
+        modelAtleta.addAll(atletaRepository.findAll());
         initComponents();
     }
     
@@ -43,14 +45,14 @@ public class CadastroAtleta extends javax.swing.JFrame {
     {
        String nome = txtNome.getText();
        long CPF = Long.parseLong(txtCPF.getText());
-       LocalDate data = LocalDate.parse(txtData.getText());
+       //LocalDate data = LocalDate.parse(txtData.getText());
        int numeroCamisa = Integer.parseInt(txtNumeroCamisa.getText());
        String equipe = txtEquipe.getText();
        Atleta atleta = new Atleta();
        
        atleta.setCpf(CPF);
        atleta.setNome(nome);
-       atleta.setDate(data);
+       atleta.setDate(LocalDate.now());
        atleta.setNumeroCamisa(numeroCamisa);
        atleta.setEquipe(equipe);
        
@@ -74,7 +76,8 @@ public class CadastroAtleta extends javax.swing.JFrame {
     private void initComponents() {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jTabbedPane2 = new javax.swing.JTabbedPane();
+        popupMenu1 = new java.awt.PopupMenu();
+        tabCadastroAtleta = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         lblNome = new javax.swing.JLabel();
         lblCPF = new javax.swing.JLabel();
@@ -88,6 +91,18 @@ public class CadastroAtleta extends javax.swing.JFrame {
         lblEquipe = new javax.swing.JLabel();
         txtEquipe = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
+        txtAtletaList = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        lstAtletas = new javax.swing.JList<>();
+        radNaoExcluidos = new javax.swing.JRadioButton();
+        radExcluidos = new javax.swing.JRadioButton();
+        btnExcluir = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        btnExcluirLixeira = new javax.swing.JButton();
+        btnEsvaziar = new javax.swing.JButton();
+        btnRestaurar = new javax.swing.JButton();
+
+        popupMenu1.setLabel("popupMenu1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -165,23 +180,114 @@ public class CadastroAtleta extends javax.swing.JFrame {
                         .addComponent(txtEquipe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnCadastrar)))
-                .addContainerGap(50, Short.MAX_VALUE))
+                .addContainerGap(98, Short.MAX_VALUE))
         );
 
-        jTabbedPane2.addTab("Cadastro de Atletas", jPanel1);
+        tabCadastroAtleta.addTab("Cadastro de Atletas", jPanel1);
+
+        txtAtletaList.setText("Atletas:");
+
+        lstAtletas.setModel(modelAtleta);
+        jScrollPane1.setViewportView(lstAtletas);
+
+        radNaoExcluidos.setText("Não excluídos");
+        radNaoExcluidos.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                radNaoExcluidosItemStateChanged(evt);
+            }
+        });
+
+        radExcluidos.setText("Excluídos");
+        radExcluidos.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                radExcluidosItemStateChanged(evt);
+            }
+        });
+        radExcluidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radExcluidosActionPerformed(evt);
+            }
+        });
+
+        btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Lixeira:");
+
+        btnExcluirLixeira.setText("Excluir");
+        btnExcluirLixeira.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirLixeiraActionPerformed(evt);
+            }
+        });
+
+        btnEsvaziar.setText("Esvaziar");
+        btnEsvaziar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEsvaziarActionPerformed(evt);
+            }
+        });
+
+        btnRestaurar.setText("Restaurar");
+        btnRestaurar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRestaurarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 460, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(txtAtletaList)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 334, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(radNaoExcluidos, javax.swing.GroupLayout.DEFAULT_SIZE, 124, Short.MAX_VALUE)
+                            .addComponent(radExcluidos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1)
+                            .addComponent(btnEsvaziar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnRestaurar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnExcluirLixeira, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 253, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtAtletaList)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(radNaoExcluidos)
+                        .addGap(18, 18, 18)
+                        .addComponent(radExcluidos)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnExcluir)
+                        .addGap(36, 36, 36)
+                        .addComponent(jLabel1)
+                        .addGap(12, 12, 12)
+                        .addComponent(btnExcluirLixeira)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnEsvaziar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                        .addComponent(btnRestaurar)))
+                .addContainerGap())
         );
 
-        jTabbedPane2.addTab("Listagem de Atletas", jPanel2);
+        tabCadastroAtleta.addTab("Listagem de Atletas", jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -189,14 +295,14 @@ public class CadastroAtleta extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane2)
+                .addComponent(tabCadastroAtleta)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane2)
+                .addComponent(tabCadastroAtleta)
                 .addContainerGap())
         );
 
@@ -209,6 +315,66 @@ public class CadastroAtleta extends javax.swing.JFrame {
         clear();
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
+    private void radNaoExcluidosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_radNaoExcluidosItemStateChanged
+        if(evt.getStateChange() == ItemEvent.SELECTED)
+            enableTrash(false);
+        
+        modelAtleta.clear();
+        modelAtleta.addAll(atletaRepository.findAll());
+       
+    }//GEN-LAST:event_radNaoExcluidosItemStateChanged
+
+    private void radExcluidosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_radExcluidosItemStateChanged
+        if(evt.getStateChange() == ItemEvent.SELECTED)
+            enableTrash(true);
+        
+        modelAtleta.clear();
+        modelAtleta.addAll(atletaRepository.loadFromTrash());
+    }//GEN-LAST:event_radExcluidosItemStateChanged
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        if(lstAtletas.getSelectedIndices().length == 0){
+            //showWarning("Selecione ao menos um atleta");
+            return;
+        }
+        if(lstAtletas.getSelectedIndices().length == 1){
+            Atleta selected = lstAtletas.getSelectedValue();
+            
+        atletaRepository.moveToTrash(selected);
+        modelAtleta.removeElement(selected);
+        }else{
+        
+            List<Atleta> selection = lstAtletas.getSelectedValuesList();
+                
+            atletaRepository.moveToTrash(selection);
+            for(Atleta aux : selection)
+            {
+                modelAtleta.removeElement(aux);
+            }
+        }
+        
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void btnExcluirLixeiraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirLixeiraActionPerformed
+    }//GEN-LAST:event_btnExcluirLixeiraActionPerformed
+
+    private void btnEsvaziarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEsvaziarActionPerformed
+    }//GEN-LAST:event_btnEsvaziarActionPerformed
+
+    private void btnRestaurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestaurarActionPerformed
+    }//GEN-LAST:event_btnRestaurarActionPerformed
+
+    private void radExcluidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radExcluidosActionPerformed
+        
+    }//GEN-LAST:event_radExcluidosActionPerformed
+    
+    public void enableTrash(boolean status)
+    {
+        btnExcluir.setEnabled(!status);
+        btnRestaurar.setEnabled(status);
+        btnExcluirLixeira.setEnabled(status);
+        btnEsvaziar.setEnabled(status);
+    }
     /**
      * @param args the command line arguments
      */
@@ -236,15 +402,26 @@ public class CadastroAtleta extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrar;
+    private javax.swing.JButton btnEsvaziar;
+    private javax.swing.JButton btnExcluir;
+    private javax.swing.JButton btnExcluirLixeira;
+    private javax.swing.JButton btnRestaurar;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTabbedPane jTabbedPane2;
     private javax.swing.JLabel lblCPF;
     private javax.swing.JLabel lblData;
     private javax.swing.JLabel lblEquipe;
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblNumeroCamisa;
+    private javax.swing.JList<Atleta> lstAtletas;
+    private java.awt.PopupMenu popupMenu1;
+    private javax.swing.JRadioButton radExcluidos;
+    private javax.swing.JRadioButton radNaoExcluidos;
+    private javax.swing.JTabbedPane tabCadastroAtleta;
+    private javax.swing.JLabel txtAtletaList;
     private javax.swing.JTextField txtCPF;
     private javax.swing.JTextField txtData;
     private javax.swing.JTextField txtEquipe;

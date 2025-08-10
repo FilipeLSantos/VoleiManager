@@ -79,7 +79,7 @@ public class CadastroSetVolei extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        tabCadastroSet = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
         lblPontuacaoTime1 = new javax.swing.JLabel();
         lblEquipe1 = new javax.swing.JLabel();
@@ -187,7 +187,7 @@ public class CadastroSetVolei extends javax.swing.JFrame {
                 .addGap(19, 19, 19))
         );
 
-        jTabbedPane1.addTab("tab1", jPanel2);
+        tabCadastroSet.addTab("Cadastro de Set", jPanel2);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -200,7 +200,7 @@ public class CadastroSetVolei extends javax.swing.JFrame {
             .addGap(0, 325, Short.MAX_VALUE)
         );
 
-        jTabbedPane1.addTab("tab2", jPanel3);
+        tabCadastroSet.addTab("tab2", jPanel3);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -208,12 +208,12 @@ public class CadastroSetVolei extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1)
+                .addComponent(tabCadastroSet)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(tabCadastroSet)
         );
 
         pack();
@@ -255,13 +255,13 @@ public class CadastroSetVolei extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel lblEquipe1;
     private javax.swing.JLabel lblEquipe2;
     private javax.swing.JLabel lblNumeroSet;
     private javax.swing.JLabel lblPontuacao2;
     private javax.swing.JLabel lblPontuacaoTime1;
     private javax.swing.JLabel lblTimeVencedor;
+    private javax.swing.JTabbedPane tabCadastroSet;
     private javax.swing.JTextField txtEquipe1;
     private javax.swing.JTextField txtEquipe2;
     private javax.swing.JTextField txtNumeroSet;

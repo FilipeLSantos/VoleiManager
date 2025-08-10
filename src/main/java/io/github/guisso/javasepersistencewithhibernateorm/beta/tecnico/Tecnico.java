@@ -48,4 +48,11 @@ public class Tecnico
     }
     
 //</editor-fold>
+
+    @Override
+    public String toString() {
+        return this.getNome();
+    }
+    
+    
 }
