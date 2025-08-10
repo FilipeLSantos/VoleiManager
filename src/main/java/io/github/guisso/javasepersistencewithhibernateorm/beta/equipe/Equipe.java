@@ -41,11 +41,8 @@ public class Equipe
     
     @Column(nullable = false, length = 50)
     private String nome;
-    
-    @Column(nullable = true)
-    private boolean pago;
-    
-    @Column(nullable = false)
+   
+   @Column(nullable = false)
     private boolean lixo;
     
     @Column(nullable = false)
@@ -58,14 +55,6 @@ public class Equipe
     
     public void setNome(String nome) {
         this.nome = nome;
-    }
-    
-    public boolean isPago() {
-        return pago;
-    }
-    
-    public void setPago(boolean pago) {
-        this.pago = pago;
     }
 
     public boolean isLixo() {
@@ -89,15 +78,15 @@ public class Equipe
     //</editor-fold>
 
     //<editor-fold defaultstate="collapsed" desc="HashCodes/Equals/ToString">
-    
+
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 89 * hash + Objects.hashCode(this.nome);
-        hash = 89 * hash + (this.pago ? 1 : 0);
+        hash = 71 * hash + Objects.hashCode(this.nome);
+        hash = 71 * hash + Objects.hashCode(this.tecnico);
         return hash;
     }
-    
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -110,14 +99,18 @@ public class Equipe
             return false;
         }
         final Equipe other = (Equipe) obj;
-        if (this.pago != other.pago) {
+        if (!Objects.equals(this.nome, other.nome)) {
             return false;
         }
-        return Objects.equals(this.nome, other.nome);
+        return Objects.equals(this.tecnico, other.tecnico);
     }
+    
+   
+    
+    
     @Override
     public String toString() {
-        return "Equipe{" + "nome=" + nome + ", pago=" + pago + '}';
+        return "Equipe{" + "nome=" + nome + ", pago=" + '}';
     }
 //</editor-fold>
     

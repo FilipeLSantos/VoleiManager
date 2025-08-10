@@ -52,11 +52,9 @@ public class Program {
         
         Equipe e1 = new Equipe();
         e1.setNome("Angicos");
-        e1.setPago(true);
         
         Equipe e2 = new Equipe();
         e2.setNome("Retiro");
-        e2.setPago(false);
         
         equipeRepository.saveOrUpdate(e1);
         System.out.println("> " + e1);
