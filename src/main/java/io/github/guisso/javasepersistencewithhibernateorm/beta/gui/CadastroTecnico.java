@@ -475,7 +475,7 @@ public class CadastroTecnico extends javax.swing.JFrame {
         btnEsvaziar.setEnabled(status);
     }
      
-     public void showWarning(String warning){
+    public void showWarning(String warning){
         lblAlerta.setText(warning);
         lblAlerta.setVisible(true);
         
