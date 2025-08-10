@@ -318,15 +318,6 @@ public class CadastroAtleta extends javax.swing.JFrame {
         clear();
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
-    private void radNaoExcluidosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_radNaoExcluidosItemStateChanged
-        if(evt.getStateChange() == ItemEvent.SELECTED)
-            enableTrash(false);
-        
-        modelAtleta.clear();
-        modelAtleta.addAll(atletaRepository.findAll());
-       
-    }//GEN-LAST:event_radNaoExcluidosItemStateChanged
-
     private void radExcluidosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_radExcluidosItemStateChanged
         if(evt.getStateChange() == ItemEvent.SELECTED)
             enableTrash(true);
@@ -402,6 +393,15 @@ public class CadastroAtleta extends javax.swing.JFrame {
 
     private void btnRestaurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestaurarActionPerformed
     }//GEN-LAST:event_btnRestaurarActionPerformed
+
+    private void radNaoExcluidosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_radNaoExcluidosItemStateChanged
+        if(evt.getStateChange() == ItemEvent.SELECTED)
+        enableTrash(false);
+
+        modelAtleta.clear();
+        modelAtleta.addAll(atletaRepository.findAll());
+
+    }//GEN-LAST:event_radNaoExcluidosItemStateChanged
     
     public void enableTrash(boolean status)
     {

@@ -110,7 +110,7 @@ public class Equipe
     
     @Override
     public String toString() {
-        return "Equipe{" + "nome=" + nome + ", pago=" + '}';
+        return "Equipe: + nome";
     }
 //</editor-fold>
     

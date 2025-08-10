@@ -18,6 +18,9 @@ package io.github.guisso.javasepersistencewithhibernateorm.beta.equipe;
 
 import io.github.guisso.javasepersistencewithhibernateorm.beta.repository.Repository;
 import jakarta.persistence.Entity;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
  *
@@ -40,6 +43,22 @@ public class EquipeRepository
     @Override
     public String getJpqlDeleteById() {
         return "DELETE FROM Equipe e WHERE e.id = :id";
+    }
+
+    public List<Equipe> loadFromTrash()
+                 
+    {
+        List<Equipe> aux = new ArrayList<>();
+        aux = this.findAll();
+        List<Equipe> excluidos = new ArrayList<>();
+        for(Equipe temp : aux)
+        {
+            if(temp.isLixo() == true)
+            {
+                excluidos.add(temp);
+            }      
+        }
+        return excluidos; 
     }
     
 }

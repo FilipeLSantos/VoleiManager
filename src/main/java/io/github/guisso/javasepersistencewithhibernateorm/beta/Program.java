@@ -52,9 +52,11 @@ public class Program {
         
         Equipe e1 = new Equipe();
         e1.setNome("Angicos");
+        e1.setTecnico("Robert");
         
         Equipe e2 = new Equipe();
         e2.setNome("Retiro");
+        e2.setTecnico("Chico");
         
         equipeRepository.saveOrUpdate(e1);
         System.out.println("> " + e1);
