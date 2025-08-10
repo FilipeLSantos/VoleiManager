@@ -19,6 +19,7 @@ package io.github.guisso.javasepersistencewithhibernateorm.beta.gui;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.equipe.Equipe;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.equipe.EquipeRepository;
 import java.awt.event.ItemEvent;
+import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
@@ -82,7 +83,7 @@ public class CadastroEquipe extends javax.swing.JFrame {
         txtEquipeList = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         lstEquipe = new javax.swing.JScrollPane();
-        ltsEquipeLista = new javax.swing.JList<>();
+        lstEquipes = new javax.swing.JList<>();
         radNaoExcluidos = new javax.swing.JRadioButton();
         radExcluidos = new javax.swing.JRadioButton();
         btnExcluir = new javax.swing.JButton();
@@ -123,31 +124,30 @@ public class CadastroEquipe extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18)
                         .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel2)
-                        .addGap(72, 72, 72)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnCadastrar)
-                            .addComponent(txtTecnico, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(72, 72, 72)
+                                .addComponent(btnCadastrar))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtTecnico, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(277, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(27, 27, 27)
-                        .addComponent(jLabel1)
-                        .addGap(14, 14, 14))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)))
+                .addGap(24, 24, 24)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
                     .addComponent(txtTecnico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -160,8 +160,8 @@ public class CadastroEquipe extends javax.swing.JFrame {
 
         jLabel3.setText("Equipe");
 
-        ltsEquipeLista.setModel(modelEquipe);
-        lstEquipe.setViewportView(ltsEquipeLista);
+        lstEquipes.setModel(modelEquipe);
+        lstEquipe.setViewportView(lstEquipes);
 
         radNaoExcluidos.setText("Não Excluídos");
         radNaoExcluidos.addItemListener(new java.awt.event.ItemListener() {
@@ -324,7 +324,27 @@ public class CadastroEquipe extends javax.swing.JFrame {
     }//GEN-LAST:event_txtNomeActionPerformed
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        // TODO add your handling code here:
+        if(lstEquipes.getSelectedIndices().length == 0){
+            //showWarning("Selecione ao menos um atleta");
+            return;
+        }
+        
+        if(lstEquipes.getSelectedIndices().length == 1){
+            Equipe selected = lstEquipes.getSelectedValue();
+            
+        equipeRepository.moveToTrash(selected);
+        modelEquipe.removeElement(selected);
+        }else{
+        
+            List<Equipe> selection = lstEquipes.getSelectedValuesList();
+                
+            equipeRepository.moveToTrash(selection);
+            for(Equipe aux : selection)
+            {
+                modelEquipe.removeElement(aux);
+            }
+        }
+        
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnRestaurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestaurarActionPerformed
@@ -353,12 +373,44 @@ public class CadastroEquipe extends javax.swing.JFrame {
     }//GEN-LAST:event_radExcluidosItemStateChanged
 
     private void btnExcluirLixeiraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirLixeiraActionPerformed
-
+            if(lstEquipes.getSelectedIndices().length == 0){
+            //showWarning("Selecione ao menos um atleta");
+            return;
+        }
+         if(lstEquipes.getSelectedIndices().length == 1){
+            Equipe selected = lstEquipes.getSelectedValue();
+            
+        equipeRepository.delete(selected);
+        modelEquipe.removeElement(selected);
+        }else{
+        
+            List<Equipe> selection = lstEquipes.getSelectedValuesList();         
+            
+            for(Equipe aux : selection)
+            {
+                equipeRepository.delete(aux);
+                modelEquipe.removeElement(aux);
+            }
+        }
 
     }//GEN-LAST:event_btnExcluirLixeiraActionPerformed
 
     private void btnEsvaziarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEsvaziarActionPerformed
-        // TODO add your handling code here:
+          
+        List<Equipe> selection = equipeRepository.loadFromTrash();
+
+    if (selection == null || selection.isEmpty()) {
+        return;
+    }
+    try {
+        for (Equipe aux : selection) {
+            equipeRepository.delete(aux);
+        }  
+        modelEquipe.clear();
+
+    } catch (Exception e) {
+        System.err.println("Erro ao deletar Equipes. A operação foi revertida. Detalhes: " + e.getMessage());
+    }
     }//GEN-LAST:event_btnEsvaziarActionPerformed
 
     /**
@@ -400,7 +452,7 @@ public class CadastroEquipe extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JScrollPane lstEquipe;
-    private javax.swing.JList<Equipe> ltsEquipeLista;
+    private javax.swing.JList<Equipe> lstEquipes;
     private javax.swing.JRadioButton radExcluidos;
     private javax.swing.JRadioButton radNaoExcluidos;
     private javax.swing.JLabel txtAlerta;

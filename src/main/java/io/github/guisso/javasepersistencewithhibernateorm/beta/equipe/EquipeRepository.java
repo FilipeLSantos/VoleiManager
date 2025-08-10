@@ -45,8 +45,21 @@ public class EquipeRepository
         return "DELETE FROM Equipe e WHERE e.id = :id";
     }
 
-    public List<Equipe> loadFromTrash()
-                 
+    public void moveToTrash(Equipe equipe)
+    {
+        equipe.setLixo(true);
+        this.saveOrUpdate(equipe);
+    }
+    public void moveToTrash(List<Equipe> atleta)
+    {
+        for(Equipe aux : atleta)
+        {
+            aux.setLixo(true);
+            this.saveOrUpdate(aux);
+        }
+    } 
+    
+    public List<Equipe> loadFromTrash()           
     {
         List<Equipe> aux = new ArrayList<>();
         aux = this.findAll();
