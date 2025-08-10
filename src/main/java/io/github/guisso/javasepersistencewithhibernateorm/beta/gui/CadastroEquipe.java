@@ -210,7 +210,7 @@ public class CadastroEquipe extends javax.swing.JFrame {
 
         lblAlerta.setFont(new java.awt.Font("Noto Sans", 1, 14)); // NOI18N
         lblAlerta.setForeground(new java.awt.Color(255, 0, 0));
-        lblAlerta.setText("Selecione uma Equipe");
+        lblAlerta.setText("Alerta");
 
         javax.swing.GroupLayout pnlListagemLayout = new javax.swing.GroupLayout(pnlListagem);
         pnlListagem.setLayout(pnlListagemLayout);
