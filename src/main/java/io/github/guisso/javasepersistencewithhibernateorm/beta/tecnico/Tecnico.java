@@ -18,6 +18,7 @@ package io.github.guisso.javasepersistencewithhibernateorm.beta.tecnico;
 
 import io.github.guisso.javasepersistencewithhibernateorm.beta.equipe.Equipe;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.pessoa.Pessoa;
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -35,7 +36,11 @@ public class Tecnico
     
     private static final long serialVersionUID = 1L;
     
+    @Column(nullable = false)
     private String equipe;
+    
+    @Column(nullable = false)
+    private boolean lixo;
     
     //<editor-fold defaultstate="collapsed" desc="GettersAndSetters">
      
@@ -46,6 +51,15 @@ public class Tecnico
     public void setEquipe(String equipe) {
         this.equipe = equipe;
     }
+
+    public boolean isLixo() {
+        return lixo;
+    }
+
+    public void setLixo(boolean lixo) {
+        this.lixo = lixo;
+    }
+    
     
 //</editor-fold>
 

@@ -18,8 +18,10 @@ package io.github.guisso.javasepersistencewithhibernateorm.beta.gui;
 
 import io.github.guisso.javasepersistencewithhibernateorm.beta.tecnico.TecnicoRepository;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.tecnico.Tecnico;
+import java.awt.event.ItemEvent;
 import javax.swing.DefaultListModel;
 import java.time.LocalDate;
+import java.util.List;
 import javax.swing.JOptionPane;
 /**
  *
@@ -34,16 +36,23 @@ public class CadastroTecnico extends javax.swing.JFrame {
      * Creates new form CadastroTecnico
      */
     public CadastroTecnico() {
-        initComponents();
-        
         tecnicoRepository = new TecnicoRepository();
         modelTecnico = new DefaultListModel<>();
+        modelTecnico.addAll(tecnicoRepository.findAll());
+        
+        initComponents();
+        
+        
+        javax.swing.ButtonGroup radioGroup = new javax.swing.ButtonGroup();
+        radioGroup.add(radNaoExcluidos);
+        radioGroup.add(radExcluidos);
+        radNaoExcluidos.setSelected(true);
         
     }
     
     public void cadastrarTecnico()
     {
-      String nome = txtNome.getText();
+        String nome = txtNome.getText();
         Long CPF = Long.parseLong(txtCPF.getText());
         String equipe = txtEquipe.getText();
         //LocalDate data = LocalDate.parse(txtData.getText());
@@ -76,7 +85,7 @@ public class CadastroTecnico extends javax.swing.JFrame {
     private void initComponents() {
 
         jComboBox1 = new javax.swing.JComboBox<>();
-        tabCadastroTecnico = new javax.swing.JTabbedPane();
+        tabListagemTecnico = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
         lblNome = new javax.swing.JLabel();
         lblCPF = new javax.swing.JLabel();
@@ -87,6 +96,17 @@ public class CadastroTecnico extends javax.swing.JFrame {
         txtData = new javax.swing.JTextField();
         txtEquipe = new javax.swing.JTextField();
         btnCadastrar = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        lblTecnico = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        lstTecnicos = new javax.swing.JList<>();
+        radNaoExcluidos = new javax.swing.JRadioButton();
+        radExcluidos = new javax.swing.JRadioButton();
+        btnExcluir = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
+        btnExcluirLixeira = new javax.swing.JButton();
+        btnEsvaziar = new javax.swing.JButton();
+        btnRestaurar = new javax.swing.JButton();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -155,7 +175,106 @@ public class CadastroTecnico extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        tabCadastroTecnico.addTab("Cadastro de Técnico", jPanel1);
+        tabListagemTecnico.addTab("Cadastro de Técnico", jPanel1);
+
+        lblTecnico.setText("Tecnicos:");
+
+        lstTecnicos.setModel(modelTecnico);
+        jScrollPane1.setViewportView(lstTecnicos);
+
+        radNaoExcluidos.setText("Não Excluídos");
+        radNaoExcluidos.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                radNaoExcluidosItemStateChanged(evt);
+            }
+        });
+
+        radExcluidos.setText("Excluídos");
+        radExcluidos.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                radExcluidosItemStateChanged(evt);
+            }
+        });
+
+        btnExcluir.setText("Excluir");
+        btnExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirActionPerformed(evt);
+            }
+        });
+
+        jLabel2.setText("Lixeira:");
+
+        btnExcluirLixeira.setText("Excluir");
+        btnExcluirLixeira.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirLixeiraActionPerformed(evt);
+            }
+        });
+
+        btnEsvaziar.setText("Esvaziar");
+        btnEsvaziar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEsvaziarActionPerformed(evt);
+            }
+        });
+
+        btnRestaurar.setText("Restaurar");
+        btnRestaurar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRestaurarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(lblTecnico)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(radNaoExcluidos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(radExcluidos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnExcluir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel2)
+                    .addComponent(btnExcluirLixeira, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnEsvaziar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnRestaurar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblTecnico)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(14, 14, 14)
+                        .addComponent(radNaoExcluidos)
+                        .addGap(18, 18, 18)
+                        .addComponent(radExcluidos)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnExcluir)
+                        .addGap(48, 48, 48)
+                        .addComponent(jLabel2)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnExcluirLixeira)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnEsvaziar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                        .addComponent(btnRestaurar)))
+                .addContainerGap())
+        );
+
+        tabListagemTecnico.addTab("Listagem de Tecnicos", jPanel2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -163,14 +282,14 @@ public class CadastroTecnico extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(tabCadastroTecnico)
+                .addComponent(tabListagemTecnico)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(tabCadastroTecnico)
+                .addComponent(tabListagemTecnico)
                 .addContainerGap())
         );
 
@@ -183,6 +302,117 @@ public class CadastroTecnico extends javax.swing.JFrame {
         clear();
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
+    private void radNaoExcluidosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_radNaoExcluidosItemStateChanged
+     if(evt.getStateChange() == ItemEvent.SELECTED)
+        enableTrash(false);
+
+        modelTecnico.clear();
+        modelTecnico.addAll(tecnicoRepository.loadFromDataBase());
+    }//GEN-LAST:event_radNaoExcluidosItemStateChanged
+
+    private void radExcluidosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_radExcluidosItemStateChanged
+           if(evt.getStateChange() == ItemEvent.SELECTED)
+            enableTrash(true);
+        
+        modelTecnico.clear();
+        modelTecnico.addAll(tecnicoRepository.loadFromTrash());
+    }//GEN-LAST:event_radExcluidosItemStateChanged
+
+    private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
+        if(lstTecnicos.getSelectedIndices().length == 0){
+            //showWarning("Selecione ao menos um atleta");
+            return;
+        }
+        if(lstTecnicos.getSelectedIndices().length == 1){
+            Tecnico selected = lstTecnicos.getSelectedValue();
+            
+        tecnicoRepository.moveToTrash(selected);
+        modelTecnico.removeElement(selected);
+        }else{
+        
+            List<Tecnico> selection = lstTecnicos.getSelectedValuesList();
+                
+            tecnicoRepository.moveToTrash(selection);
+            for(Tecnico aux : selection)
+            {
+                modelTecnico.removeElement(aux);
+            }
+        }
+    }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void btnExcluirLixeiraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirLixeiraActionPerformed
+        if(lstTecnicos.getSelectedIndices().length == 0){
+            //showWarning("Selecione ao menos um atleta");
+            return;
+        }
+         if(lstTecnicos.getSelectedIndices().length == 1){
+            Tecnico selected = lstTecnicos.getSelectedValue();
+            
+        tecnicoRepository.delete(selected);
+        modelTecnico.removeElement(selected);
+        }else{
+        
+            List<Tecnico> selection = lstTecnicos.getSelectedValuesList();         
+            
+            for(Tecnico aux : selection)
+            {
+                tecnicoRepository.delete(aux);
+                modelTecnico.removeElement(aux);
+            }
+        }
+       
+    }//GEN-LAST:event_btnExcluirLixeiraActionPerformed
+
+    private void btnEsvaziarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEsvaziarActionPerformed
+       
+    List<Tecnico> selection = tecnicoRepository.loadFromTrash();
+
+    if (selection == null || selection.isEmpty()) {
+        return;
+    }
+    try {
+        for (Tecnico aux : selection) {
+            tecnicoRepository.delete(aux);
+        }  
+        modelTecnico.clear();
+
+    } catch (Exception e) {
+        System.err.println("Erro ao deletar atletas. A operação foi revertida. Detalhes: " + e.getMessage());
+    }
+    }//GEN-LAST:event_btnEsvaziarActionPerformed
+
+    private void btnRestaurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestaurarActionPerformed
+        if (lstTecnicos.getSelectedIndices().length == 0) {
+            return;
+        }
+
+        if (lstTecnicos.getSelectedIndices().length == 1) {
+
+            Tecnico selected = lstTecnicos.getSelectedValue();
+
+            tecnicoRepository.restoreFromTrash(selected);
+
+            modelTecnico.removeElement(selected);
+
+        } else {
+            List<Tecnico> selection = lstTecnicos.getSelectedValuesList();
+
+            tecnicoRepository.restoreFromTrash(selection);
+
+            for (Tecnico aux : selection) {
+                modelTecnico.removeElement(aux);
+            }
+        }
+
+        JOptionPane.showMessageDialog(this, "Equipe(s) restaurada(s) com sucesso!");
+    }//GEN-LAST:event_btnRestaurarActionPerformed
+     public void enableTrash(boolean status)
+    {
+        btnExcluir.setEnabled(!status);
+        btnRestaurar.setEnabled(status);
+        btnExcluirLixeira.setEnabled(status);
+        btnEsvaziar.setEnabled(status);
+    }
     /**
      * @param args the command line arguments
      */
@@ -210,13 +440,24 @@ public class CadastroTecnico extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCadastrar;
+    private javax.swing.JButton btnEsvaziar;
+    private javax.swing.JButton btnExcluir;
+    private javax.swing.JButton btnExcluirLixeira;
+    private javax.swing.JButton btnRestaurar;
     private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblCPF;
     private javax.swing.JLabel lblData;
     private javax.swing.JLabel lblEquipe;
     private javax.swing.JLabel lblNome;
-    private javax.swing.JTabbedPane tabCadastroTecnico;
+    private javax.swing.JLabel lblTecnico;
+    private javax.swing.JList<Tecnico> lstTecnicos;
+    private javax.swing.JRadioButton radExcluidos;
+    private javax.swing.JRadioButton radNaoExcluidos;
+    private javax.swing.JTabbedPane tabListagemTecnico;
     private javax.swing.JTextField txtCPF;
     private javax.swing.JTextField txtData;
     private javax.swing.JTextField txtEquipe;

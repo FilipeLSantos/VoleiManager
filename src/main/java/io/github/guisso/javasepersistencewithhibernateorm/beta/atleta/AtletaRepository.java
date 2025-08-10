@@ -91,6 +91,17 @@ public class AtletaRepository
         }
         return incluidos; 
     }
+    public void restoreFromTrash(Atleta atleta) {
+        atleta.setLixo(false);
+        this.saveOrUpdate(atleta);
+    }
+
+    public void restoreFromTrash(List<Atleta> equipes) {
+        for (Atleta aux : equipes) {
+            aux.setLixo(false);
+            this.saveOrUpdate(aux); 
+        }
+    }
     
     
 }

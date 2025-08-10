@@ -17,6 +17,8 @@
 package io.github.guisso.javasepersistencewithhibernateorm.beta.tecnico;
 
 import io.github.guisso.javasepersistencewithhibernateorm.beta.repository.Repository;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -39,6 +41,58 @@ public class TecnicoRepository
     public String getJpqlDeleteById() {
         return "DELETE FROM Tecnico t WHERE t.id = :id";
     }
+        public void moveToTrash(Tecnico equipe) {
+        equipe.setLixo(true);
+        this.saveOrUpdate(equipe);
+    }
+
+    public void moveToTrash(List<Tecnico> tecnico) {
+        for (Tecnico aux : tecnico) {
+            aux.setLixo(true);
+            this.saveOrUpdate(aux);
+        }
+    }
+
+    public List<Tecnico> loadFromTrash() {
+
+       List<Tecnico> aux = new ArrayList<>();
+        aux = this.findAll();
+        List<Tecnico> excluidos = new ArrayList<>();
+        for(Tecnico temp : aux)
+        {
+            if(temp.isLixo() == true)
+            {
+                excluidos.add(temp);
+            }      
+        }
+        return excluidos; 
+    }
     
+    public List<Tecnico> loadFromDataBase() {
+
+       List<Tecnico> aux = new ArrayList<>();
+        aux = this.findAll();
+        List<Tecnico> excluidos = new ArrayList<>();
+        for(Tecnico temp : aux)
+        {
+            if(temp.isLixo() == false)
+            {
+                excluidos.add(temp);
+            }      
+        }
+        return excluidos; 
+    }
+
+    public void restoreFromTrash(Tecnico tecnico) {
+        tecnico.setLixo(false);
+        this.saveOrUpdate(tecnico);
+    }
+
+    public void restoreFromTrash(List<Tecnico> tecnico) {
+        for (Tecnico aux : tecnico) {
+            aux.setLixo(false);
+            this.saveOrUpdate(aux); 
+        }
+    }
     
 }
