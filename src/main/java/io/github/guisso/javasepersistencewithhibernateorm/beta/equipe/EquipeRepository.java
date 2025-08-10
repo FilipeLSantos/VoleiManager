@@ -32,7 +32,7 @@ public class EquipeRepository
 
     @Override
     public String getJpqlFindAll() {
-        return "SELECT e FROM Equipe e";
+         return "SELECT e FROM Equipe e WHERE e.lixo = false";
     }
 
     @Override

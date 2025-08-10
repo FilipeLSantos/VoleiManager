@@ -312,6 +312,7 @@ public class CadastroEquipe extends javax.swing.JFrame {
         e1.setTecnico(tecnico);
 
         equipeRepository.saveOrUpdate(e1);
+        
         clear();
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
