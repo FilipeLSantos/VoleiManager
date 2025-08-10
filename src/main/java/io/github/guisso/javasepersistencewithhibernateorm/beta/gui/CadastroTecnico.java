@@ -16,13 +16,18 @@
  */
 package io.github.guisso.javasepersistencewithhibernateorm.beta.gui;
 
+import com.github.lgooddatepicker.components.DatePickerSettings;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.tecnico.TecnicoRepository;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.tecnico.Tecnico;
+import java.awt.Font;
 import java.awt.event.ItemEvent;
 import javax.swing.DefaultListModel;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Locale;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 /**
  *
  * @author robert
@@ -42,6 +47,34 @@ public class CadastroTecnico extends javax.swing.JFrame {
         
         initComponents();
         
+        lblAlerta.setVisible(false);
+        
+        //DatePicker settings
+         DatePickerSettings settings
+                = new DatePickerSettings(Locale.of("pt", "BR"));
+        
+        // Date format
+        settings.setFormatForDatesCommonEra(
+                DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+        settings.setFormatForDatesBeforeCommonEra(
+                DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+
+        // Translations
+        settings.setTranslationToday("Hoje");
+        settings.setTranslationClear("Limpar");
+
+        // Same font as text fields
+        Font defaultFont = txtNome.getFont();
+
+        settings.setFontValidDate(defaultFont);
+        settings.setFontInvalidDate(defaultFont);
+        settings.setFontVetoedDate(defaultFont);
+        
+        // Applying settings
+        dtpDataNascimento.setSettings(settings);
+        
+        // Date range limits
+        settings.setDateRangeLimits(LocalDate.MIN, LocalDate.now());
         
         javax.swing.ButtonGroup radioGroup = new javax.swing.ButtonGroup();
         radioGroup.add(radNaoExcluidos);
@@ -55,14 +88,14 @@ public class CadastroTecnico extends javax.swing.JFrame {
         String nome = txtNome.getText();
         Long CPF = Long.parseLong(txtCPF.getText());
         String equipe = txtEquipe.getText();
-        //LocalDate data = LocalDate.parse(txtData.getText());
+        LocalDate data = dtpDataNascimento.getDate();
         
         Tecnico tecnico = new Tecnico();
         
         tecnico.setNome(nome);
         tecnico.setCpf(CPF);
         tecnico.setEquipe(equipe);
-        tecnico.setDate(LocalDate.now());
+        tecnico.setDate(data);
         
         tecnicoRepository.saveOrUpdate(tecnico);   
     }
@@ -72,7 +105,7 @@ public class CadastroTecnico extends javax.swing.JFrame {
       txtNome.setText("");
       txtCPF.setText("");
       txtEquipe.setText("");
-      txtData.setText("");
+      dtpDataNascimento.setText("");
     }
 
     /**
@@ -93,11 +126,10 @@ public class CadastroTecnico extends javax.swing.JFrame {
         lblEquipe = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
         txtCPF = new javax.swing.JTextField();
-        txtData = new javax.swing.JTextField();
         txtEquipe = new javax.swing.JTextField();
         btnCadastrar = new javax.swing.JButton();
+        dtpDataNascimento = new com.github.lgooddatepicker.components.DatePicker();
         jPanel2 = new javax.swing.JPanel();
-        lblTecnico = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         lstTecnicos = new javax.swing.JList<>();
         radNaoExcluidos = new javax.swing.JRadioButton();
@@ -107,20 +139,30 @@ public class CadastroTecnico extends javax.swing.JFrame {
         btnExcluirLixeira = new javax.swing.JButton();
         btnEsvaziar = new javax.swing.JButton();
         btnRestaurar = new javax.swing.JButton();
+        lblAlerta = new javax.swing.JLabel();
+        lblTitulo = new javax.swing.JLabel();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        lblNome.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblNome.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblNome.setText("Nome:");
 
+        lblCPF.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblCPF.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblCPF.setText("CPF:");
 
+        lblData.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblData.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblData.setText("Data de Nascimento:");
 
+        lblEquipe.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblEquipe.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblEquipe.setText("Equipe:");
 
-        btnCadastrar.setText("Cadastrar");
+        btnCadastrar.setText("Salvar");
         btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCadastrarActionPerformed(evt);
@@ -132,24 +174,27 @@ public class CadastroTecnico extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblEquipe, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(30, 30, 30)
+                        .addComponent(txtEquipe, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblNome)
-                            .addComponent(lblCPF)
+                            .addComponent(lblCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblData)
-                            .addComponent(lblEquipe))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(lblNome, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txtNome, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
-                            .addComponent(txtCPF, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtData, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txtEquipe)))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnCadastrar)))
-                .addContainerGap())
+                            .addComponent(txtNome, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
+                            .addComponent(txtCPF, javax.swing.GroupLayout.DEFAULT_SIZE, 214, Short.MAX_VALUE)
+                            .addComponent(dtpDataNascimento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(114, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnCadastrar)
+                .addGap(30, 30, 30))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -159,25 +204,23 @@ public class CadastroTecnico extends javax.swing.JFrame {
                     .addComponent(lblNome)
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblCPF)
                     .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(20, 20, 20)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblData)
-                    .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(dtpDataNascimento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblEquipe)
                     .addComponent(txtEquipe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(btnCadastrar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(115, Short.MAX_VALUE))
         );
 
-        tabListagemTecnico.addTab("Cadastro de Técnico", jPanel1);
-
-        lblTecnico.setText("Tecnicos:");
+        tabListagemTecnico.addTab("Cadastro", jPanel1);
 
         lstTecnicos.setModel(modelTecnico);
         jScrollPane1.setViewportView(lstTecnicos);
@@ -204,6 +247,7 @@ public class CadastroTecnico extends javax.swing.JFrame {
         });
 
         jLabel2.setText("Lixeira:");
+        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         btnExcluirLixeira.setText("Excluir");
         btnExcluirLixeira.addActionListener(new java.awt.event.ActionListener() {
@@ -226,55 +270,66 @@ public class CadastroTecnico extends javax.swing.JFrame {
             }
         });
 
+        lblAlerta.setText("Alerta");
+        lblAlerta.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(lblTecnico)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 343, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(radNaoExcluidos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(radExcluidos, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnExcluir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(radExcluidos, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(radNaoExcluidos)
+                    .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel2)
-                    .addComponent(btnExcluirLixeira, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnEsvaziar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnRestaurar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnEsvaziar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnExcluirLixeira, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnRestaurar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(31, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblAlerta)
+                .addGap(165, 165, 165))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblTecnico)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblAlerta)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jScrollPane1))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
+                        .addGap(36, 36, 36)
                         .addComponent(radNaoExcluidos)
                         .addGap(18, 18, 18)
                         .addComponent(radExcluidos)
                         .addGap(18, 18, 18)
                         .addComponent(btnExcluir)
-                        .addGap(48, 48, 48)
-                        .addComponent(jLabel2)
                         .addGap(18, 18, 18)
-                        .addComponent(btnExcluirLixeira)
+                        .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnExcluirLixeira)
+                        .addGap(18, 18, 18)
                         .addComponent(btnEsvaziar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-                        .addComponent(btnRestaurar)))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnRestaurar)
+                        .addGap(0, 18, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
-        tabListagemTecnico.addTab("Listagem de Tecnicos", jPanel2);
+        tabListagemTecnico.addTab("Listagem", jPanel2);
+
+        lblTitulo.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        lblTitulo.setText("Tecnico");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -284,12 +339,18 @@ public class CadastroTecnico extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(tabListagemTecnico)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(187, 187, 187)
+                .addComponent(lblTitulo)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(tabListagemTecnico)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(7, Short.MAX_VALUE)
+                .addComponent(lblTitulo)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(tabListagemTecnico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -320,7 +381,7 @@ public class CadastroTecnico extends javax.swing.JFrame {
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         if(lstTecnicos.getSelectedIndices().length == 0){
-            //showWarning("Selecione ao menos um atleta");
+            showWarning("Selecione ao menos um atleta");
             return;
         }
         if(lstTecnicos.getSelectedIndices().length == 1){
@@ -342,7 +403,7 @@ public class CadastroTecnico extends javax.swing.JFrame {
 
     private void btnExcluirLixeiraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirLixeiraActionPerformed
         if(lstTecnicos.getSelectedIndices().length == 0){
-            //showWarning("Selecione ao menos um atleta");
+            showWarning("Selecione ao menos um atleta");
             return;
         }
          if(lstTecnicos.getSelectedIndices().length == 1){
@@ -404,7 +465,7 @@ public class CadastroTecnico extends javax.swing.JFrame {
             }
         }
 
-        JOptionPane.showMessageDialog(this, "Equipe(s) restaurada(s) com sucesso!");
+        JOptionPane.showMessageDialog(this, "Tecnico(s) restaurada(s) com sucesso!");
     }//GEN-LAST:event_btnRestaurarActionPerformed
      public void enableTrash(boolean status)
     {
@@ -413,6 +474,20 @@ public class CadastroTecnico extends javax.swing.JFrame {
         btnExcluirLixeira.setEnabled(status);
         btnEsvaziar.setEnabled(status);
     }
+     
+     public void showWarning(String warning){
+        lblAlerta.setText(warning);
+        lblAlerta.setVisible(true);
+        
+        Timer timer = new Timer(4000, (e) -> {
+            lblAlerta.setVisible(false);
+            ((Timer) e.getSource()).stop();
+        });
+        
+        timer.setRepeats(false);
+        timer.start();
+    }
+     
     /**
      * @param args the command line arguments
      */
@@ -444,22 +519,23 @@ public class CadastroTecnico extends javax.swing.JFrame {
     private javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnExcluirLixeira;
     private javax.swing.JButton btnRestaurar;
+    private com.github.lgooddatepicker.components.DatePicker dtpDataNascimento;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblAlerta;
     private javax.swing.JLabel lblCPF;
     private javax.swing.JLabel lblData;
     private javax.swing.JLabel lblEquipe;
     private javax.swing.JLabel lblNome;
-    private javax.swing.JLabel lblTecnico;
+    private javax.swing.JLabel lblTitulo;
     private javax.swing.JList<Tecnico> lstTecnicos;
     private javax.swing.JRadioButton radExcluidos;
     private javax.swing.JRadioButton radNaoExcluidos;
     private javax.swing.JTabbedPane tabListagemTecnico;
     private javax.swing.JTextField txtCPF;
-    private javax.swing.JTextField txtData;
     private javax.swing.JTextField txtEquipe;
     private javax.swing.JTextField txtNome;
     // End of variables declaration//GEN-END:variables
