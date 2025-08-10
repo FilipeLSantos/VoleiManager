@@ -130,13 +130,7 @@ public class EventoEsportivo
     
     @Override
     public String toString(){
-        return "Evento esportivo {"
-                + "Nome: " + nome
-                + "Data: " + data
-                + "Local: " + local
-                + "Ingresso time: " + ingressoTime
-                + "Lixo: " + lixo
-                + '}';
+        return this.getNome();
     }
     //</editor-fold>
     

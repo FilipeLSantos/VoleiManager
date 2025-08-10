@@ -17,6 +17,8 @@
 package io.github.guisso.javasepersistencewithhibernateorm.beta.eventoesportivo;
 
 import io.github.guisso.javasepersistencewithhibernateorm.beta.repository.Repository;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -41,5 +43,58 @@ public class EventoEsportivoRepository
     public String getJpqlDeleteById() {
         return "DELETE FROM EventoEsportivo ee WHERE ee.id = :id";
     }
+         
+    public void moveToTrash(EventoEsportivo eventoEsportivo)
+    {
+        eventoEsportivo.setLixo(true);
+        this.saveOrUpdate(eventoEsportivo);
+    }
+    public void moveToTrash(List<EventoEsportivo> eventoEsportivo)
+    {
+        for(EventoEsportivo aux : eventoEsportivo)
+        {
+            aux.setLixo(true);
+            this.saveOrUpdate(aux);
+        }
+    }
+    public List<EventoEsportivo> loadFromTrash()
+    {
+        List<EventoEsportivo> aux = new ArrayList<>();
+        aux = this.findAll();
+        List<EventoEsportivo> excluidos = new ArrayList<>();
+        for(EventoEsportivo temp : aux)
+        {
+            if(temp.isLixo() == true)
+            {
+                excluidos.add(temp);
+            }      
+        }
+        return excluidos; 
+    }
     
+    public List<EventoEsportivo> loadFromDataBase()
+    {
+        List<EventoEsportivo> aux = new ArrayList<>();
+        aux = this.findAll();
+        List<EventoEsportivo> incluidos = new ArrayList<>();
+        for(EventoEsportivo temp : aux)
+        {
+            if(temp.isLixo() == false)
+            {
+                incluidos.add(temp);
+            }      
+        }
+        return incluidos; 
+    }
+    public void restoreFromTrash(EventoEsportivo atleta) {
+        atleta.setLixo(false);
+        this.saveOrUpdate(atleta);
+    }
+
+    public void restoreFromTrash(List<EventoEsportivo> equipes) {
+        for (EventoEsportivo aux : equipes) {
+            aux.setLixo(false);
+            this.saveOrUpdate(aux); 
+        }
+    }
 }

@@ -28,6 +28,7 @@ import java.util.Locale;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
+import java.awt.event.ItemEvent;
 
 /**
  *
@@ -37,7 +38,7 @@ public class CadastroEvento extends javax.swing.JFrame {
 
     private final DefaultListModel<EventoEsportivo> modelEvento;
     private final EventoEsportivoRepository repository;
-    
+
     /**
      * Creates new form CadastroEvento
      */
@@ -51,6 +52,11 @@ public class CadastroEvento extends javax.swing.JFrame {
         modelEvento.addAll(repository.findAll());
         
         initComponents();
+        
+        javax.swing.ButtonGroup radioGroup = new javax.swing.ButtonGroup();
+        radioGroup.add(radNaoExcluidos);
+        radioGroup.add(radExcluidos);
+        radNaoExcluidos.setSelected(true);
         
         lblAlerta.setVisible(false);
         
@@ -103,16 +109,17 @@ public class CadastroEvento extends javax.swing.JFrame {
         dtpData = new com.github.lgooddatepicker.components.DatePicker();
         btnSalvar = new javax.swing.JButton();
         pnlListagem = new javax.swing.JPanel();
-        radNExcluidos = new javax.swing.JRadioButton();
+        radNaoExcluidos = new javax.swing.JRadioButton();
         radExcluidos = new javax.swing.JRadioButton();
         btnExcluir = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         btnLRestaurar = new javax.swing.JButton();
-        btnLExcluir = new javax.swing.JButton();
-        btnLEsvaziar = new javax.swing.JButton();
+        btnExcluirLixeira = new javax.swing.JButton();
+        btnEsvaziar = new javax.swing.JButton();
         scrEvento = new javax.swing.JScrollPane();
         lstEvento = new javax.swing.JList<>();
         lblAlerta = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         lblTitulo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -190,16 +197,11 @@ public class CadastroEvento extends javax.swing.JFrame {
 
         tabEventoEsportivo.addTab("Cadastro", pnlCadastro);
 
-        radNExcluidos.setSelected(true);
-        radNExcluidos.setText("Não excluídos");
-        radNExcluidos.addItemListener(new java.awt.event.ItemListener() {
+        radNaoExcluidos.setSelected(true);
+        radNaoExcluidos.setText("Não excluídos");
+        radNaoExcluidos.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                radNExcluidosItemStateChanged(evt);
-            }
-        });
-        radNExcluidos.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                radNExcluidosActionPerformed(evt);
+                radNaoExcluidosItemStateChanged(evt);
             }
         });
 
@@ -226,54 +228,69 @@ public class CadastroEvento extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         btnLRestaurar.setText("Restaurar");
+        btnLRestaurar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLRestaurarActionPerformed(evt);
+            }
+        });
 
-        btnLExcluir.setText("Excluir");
+        btnExcluirLixeira.setText("Excluir");
+        btnExcluirLixeira.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExcluirLixeiraActionPerformed(evt);
+            }
+        });
 
-        btnLEsvaziar.setText("Esvaziar");
+        btnEsvaziar.setText("Esvaziar");
+        btnEsvaziar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEsvaziarActionPerformed(evt);
+            }
+        });
 
         lstEvento.setModel(modelEvento);
         lstEvento.setToolTipText("");
         scrEvento.setViewportView(lstEvento);
 
-        lblAlerta.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblAlerta.setText("Alerta");
+        lblAlerta.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+
+        jLabel2.setText("Eventos:");
 
         javax.swing.GroupLayout pnlListagemLayout = new javax.swing.GroupLayout(pnlListagem);
         pnlListagem.setLayout(pnlListagemLayout);
         pnlListagemLayout.setHorizontalGroup(
             pnlListagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlListagemLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(pnlListagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlListagemLayout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(scrEvento, javax.swing.GroupLayout.DEFAULT_SIZE, 379, Short.MAX_VALUE)
                         .addGap(18, 18, 18))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlListagemLayout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(lblAlerta)
                         .addGap(56, 56, 56)))
                 .addGroup(pnlListagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlListagemLayout.createSequentialGroup()
-                        .addGroup(pnlListagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(radExcluidos)
-                            .addComponent(radNExcluidos)
-                            .addComponent(jLabel1)
-                            .addGroup(pnlListagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(btnLExcluir, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnLRestaurar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnLEsvaziar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlListagemLayout.createSequentialGroup()
-                        .addComponent(btnExcluir)
-                        .addGap(18, 18, 18))))
+                    .addComponent(radExcluidos)
+                    .addComponent(radNaoExcluidos)
+                    .addComponent(jLabel1)
+                    .addGroup(pnlListagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(btnExcluir, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnExcluirLixeira, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnLRestaurar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnEsvaziar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         pnlListagemLayout.setVerticalGroup(
             pnlListagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlListagemLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(pnlListagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(radNExcluidos)
-                    .addComponent(lblAlerta))
+                    .addComponent(radNaoExcluidos)
+                    .addComponent(lblAlerta)
+                    .addComponent(jLabel2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(pnlListagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlListagemLayout.createSequentialGroup()
@@ -285,10 +302,10 @@ public class CadastroEvento extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnLRestaurar)
                         .addGap(18, 18, 18)
-                        .addComponent(btnLExcluir)
+                        .addComponent(btnExcluirLixeira)
                         .addGap(18, 18, 18)
-                        .addComponent(btnLEsvaziar)
-                        .addContainerGap(17, Short.MAX_VALUE))
+                        .addComponent(btnEsvaziar)
+                        .addContainerGap(18, Short.MAX_VALUE))
                     .addComponent(scrEvento)))
         );
 
@@ -323,7 +340,13 @@ public class CadastroEvento extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    public void clear()
+    {
+        txtNome.setText("");
+        dtpData.setText("");
+        txtLocal.setText("");
+        txtIngresso.setText("");
+    }
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         EventoEsportivo ee = new EventoEsportivo();
         
@@ -333,9 +356,10 @@ public class CadastroEvento extends javax.swing.JFrame {
         ee.setIngressoTime(Double.parseDouble(txtIngresso.getText()));
         
         try {
-            new EventoEsportivoRepository().saveOrUpdate(ee);
+            repository.saveOrUpdate(ee);
             JOptionPane.showMessageDialog(this, "Evento: " + 
                     ee.getNome() + ", salvo com sucesso !");
+            clear();
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this,
                     "Falha ao gravar o aluno no banco de dados",
@@ -345,15 +369,11 @@ public class CadastroEvento extends javax.swing.JFrame {
         
     }//GEN-LAST:event_btnSalvarActionPerformed
 
-    private void radNExcluidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radNExcluidosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_radNExcluidosActionPerformed
-
     private void radExcluidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radExcluidosActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_radExcluidosActionPerformed
 
-    private void radNExcluidosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_radNExcluidosItemStateChanged
+    private void radNaoExcluidosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_radNaoExcluidosItemStateChanged
         if(evt.getStateChange() == ItemEvent.SELECTED){
             enableTrash(false);
             
@@ -361,14 +381,14 @@ public class CadastroEvento extends javax.swing.JFrame {
             modelEvento.addAll(repository.findAll());
             
         }
-    }//GEN-LAST:event_radNExcluidosItemStateChanged
+    }//GEN-LAST:event_radNaoExcluidosItemStateChanged
 
     private void radExcluidosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_radExcluidosItemStateChanged
         if(evt.getStateChange() == ItemEvent.SELECTED){
             enableTrash(true);
             
             modelEvento.clear();
-            //modelEvento.addAll(repository.loadFromLixo);
+            modelEvento.addAll(repository.loadFromTrash());
         }
     }//GEN-LAST:event_radExcluidosItemStateChanged
 
@@ -379,9 +399,9 @@ public class CadastroEvento extends javax.swing.JFrame {
         }
         
         if(lstEvento.getSelectedIndices().length == 1){
-            EventoEsportivo selected = lstEvento.getSelectedValue();
             
-            //repository.moveToTrash(selected);
+            EventoEsportivo selected = lstEvento.getSelectedValue();
+            repository.moveToTrash(selected);
             modelEvento.removeElement(selected);
         
         }else{
@@ -394,6 +414,71 @@ public class CadastroEvento extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
+
+    private void btnLRestaurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLRestaurarActionPerformed
+        if (lstEvento.getSelectedIndices().length == 0) {
+            return;
+        }
+
+        if (lstEvento.getSelectedIndices().length == 1) {
+
+            EventoEsportivo selected = lstEvento.getSelectedValue();
+
+            repository.restoreFromTrash(selected);
+
+            modelEvento.removeElement(selected);
+
+        } else {
+            List<EventoEsportivo> selection = lstEvento.getSelectedValuesList();
+
+            repository.restoreFromTrash(selection);
+
+            for (EventoEsportivo aux : selection) {
+                modelEvento.removeElement(aux);
+            }
+        }
+
+        JOptionPane.showMessageDialog(this, "Evento(s) restaurado(s) com sucesso!");
+    }//GEN-LAST:event_btnLRestaurarActionPerformed
+
+    private void btnExcluirLixeiraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirLixeiraActionPerformed
+        if(lstEvento.getSelectedIndices().length == 0){
+            showWarning("Selecione ao menos um atleta");
+            return;
+        }
+         if(lstEvento.getSelectedIndices().length == 1){
+            EventoEsportivo selected = lstEvento.getSelectedValue();
+            
+        repository.delete(selected);
+        modelEvento.removeElement(selected);
+        }else{
+        
+            List<EventoEsportivo> selection = lstEvento.getSelectedValuesList();         
+            
+            for(EventoEsportivo aux : selection)
+            {
+                repository.delete(aux);
+                modelEvento.removeElement(aux);
+            }
+        }
+    }//GEN-LAST:event_btnExcluirLixeiraActionPerformed
+
+    private void btnEsvaziarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEsvaziarActionPerformed
+        List<EventoEsportivo> selection = repository.loadFromTrash();
+
+    if (selection == null || selection.isEmpty()) {
+        return;
+    }
+    try {
+        for (EventoEsportivo aux : selection) {
+                repository.delete(aux);
+        }  
+        modelEvento.clear();
+
+    } catch (Exception e) {
+        System.err.println("Erro ao deletar atletas. A operação foi revertida. Detalhes: " + e.getMessage());
+    }
+    }//GEN-LAST:event_btnEsvaziarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -433,8 +518,8 @@ public class CadastroEvento extends javax.swing.JFrame {
     public void enableTrash(boolean status){
         btnExcluir.setEnabled(!status);
         btnLRestaurar.setEnabled(status);
-        btnLExcluir.setEnabled(status);
-        btnLEsvaziar.setEnabled(status);  
+        btnExcluirLixeira.setEnabled(status);
+        btnEsvaziar.setEnabled(status);  
     }
     
     public void showWarning(String warning){
@@ -456,13 +541,14 @@ public class CadastroEvento extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnEsvaziar;
     private javax.swing.JButton btnExcluir;
-    private javax.swing.JButton btnLEsvaziar;
-    private javax.swing.JButton btnLExcluir;
+    private javax.swing.JButton btnExcluirLixeira;
     private javax.swing.JButton btnLRestaurar;
     private javax.swing.JButton btnSalvar;
     private com.github.lgooddatepicker.components.DatePicker dtpData;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel lblAlerta;
     private javax.swing.JLabel lblData;
     private javax.swing.JLabel lblIngresso;
@@ -473,7 +559,7 @@ public class CadastroEvento extends javax.swing.JFrame {
     private javax.swing.JPanel pnlCadastro;
     private javax.swing.JPanel pnlListagem;
     private javax.swing.JRadioButton radExcluidos;
-    private javax.swing.JRadioButton radNExcluidos;
+    private javax.swing.JRadioButton radNaoExcluidos;
     private javax.swing.JScrollPane scrEvento;
     private javax.swing.JTabbedPane tabEventoEsportivo;
     private javax.swing.JTextField txtIngresso;

@@ -189,37 +189,31 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="scrEvento" pref="379" max="32767" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
+                              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="lblAlerta" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="56" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="radExcluidos" min="-2" max="-2" attributes="0"/>
-                                  <Component id="radNExcluidos" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="btnLExcluir" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="btnLRestaurar" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="btnLEsvaziar" alignment="0" max="32767" attributes="0"/>
-                                  </Group>
-                              </Group>
-                              <EmptySpace max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="btnExcluir" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                          <Component id="radExcluidos" min="-2" max="-2" attributes="0"/>
+                          <Component id="radNaoExcluidos" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="btnExcluir" alignment="0" max="32767" attributes="0"/>
+                              <Component id="btnExcluirLixeira" alignment="0" max="32767" attributes="0"/>
+                              <Component id="btnLRestaurar" alignment="0" max="32767" attributes="0"/>
+                              <Component id="btnEsvaziar" alignment="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
+                      <EmptySpace max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -228,8 +222,9 @@
                   <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="radNExcluidos" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="radNaoExcluidos" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="lblAlerta" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -242,10 +237,10 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="btnLRestaurar" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="btnLExcluir" min="-2" max="-2" attributes="0"/>
+                              <Component id="btnExcluirLixeira" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Component id="btnLEsvaziar" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="17" max="32767" attributes="0"/>
+                              <Component id="btnEsvaziar" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace pref="18" max="32767" attributes="0"/>
                           </Group>
                           <Component id="scrEvento" max="32767" attributes="0"/>
                       </Group>
@@ -254,14 +249,13 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JRadioButton" name="radNExcluidos">
+            <Component class="javax.swing.JRadioButton" name="radNaoExcluidos">
               <Properties>
                 <Property name="selected" type="boolean" value="true"/>
                 <Property name="text" type="java.lang.String" value="N&#xe3;o exclu&#xed;dos"/>
               </Properties>
               <Events>
-                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="radNExcluidosItemStateChanged"/>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="radNExcluidosActionPerformed"/>
+                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="radNaoExcluidosItemStateChanged"/>
               </Events>
             </Component>
             <Component class="javax.swing.JRadioButton" name="radExcluidos">
@@ -293,16 +287,25 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Restaurar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLRestaurarActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnLExcluir">
+            <Component class="javax.swing.JButton" name="btnExcluirLixeira">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Excluir"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnExcluirLixeiraActionPerformed"/>
+              </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnLEsvaziar">
+            <Component class="javax.swing.JButton" name="btnEsvaziar">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Esvaziar"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEsvaziarActionPerformed"/>
+              </Events>
             </Component>
             <Container class="javax.swing.JScrollPane" name="scrEvento">
 
@@ -327,6 +330,11 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="0"/>
                 </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel2">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Eventos:"/>
               </Properties>
             </Component>
           </SubComponents>
