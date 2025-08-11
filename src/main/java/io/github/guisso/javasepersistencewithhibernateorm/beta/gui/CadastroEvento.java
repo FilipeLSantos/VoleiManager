@@ -85,7 +85,7 @@ public class CadastroEvento extends javax.swing.JFrame {
         dtpData.setSettings(settings);
         
         // Date range limits
-        settings.setDateRangeLimits(LocalDate.MIN, LocalDate.now());
+        settings.setDateRangeLimits(LocalDate.now(), LocalDate.MAX);
     }
 
     /**
