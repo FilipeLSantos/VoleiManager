@@ -86,15 +86,34 @@ public class EventoEsportivoRepository
         }
         return incluidos; 
     }
-    public void restoreFromTrash(EventoEsportivo atleta) {
-        atleta.setLixo(false);
-        this.saveOrUpdate(atleta);
+    public void restoreFromTrash(EventoEsportivo eventoEsportivo) {
+        eventoEsportivo.setLixo(false);
+        this.saveOrUpdate(eventoEsportivo);
     }
 
-    public void restoreFromTrash(List<EventoEsportivo> equipes) {
-        for (EventoEsportivo aux : equipes) {
+    public void restoreFromTrash(List<EventoEsportivo> eventoEsportivo) {
+        for (EventoEsportivo aux : eventoEsportivo) {
             aux.setLixo(false);
             this.saveOrUpdate(aux); 
+        }
+    }
+    public void moveToTrash(Long partidaId) {
+        EventoEsportivo partidaParaMover = this.findById(partidaId);
+        if (partidaParaMover != null) {
+            partidaParaMover.setLixo(true);
+            this.saveOrUpdate(partidaParaMover);
+        } else {
+            throw new IllegalArgumentException("Partida com ID " + partidaId + " não encontrada.");
+        }
+    }
+    
+    public void restoreFromTrash(Long partidaId) {
+        EventoEsportivo partidaParaRestaurar = this.findById(partidaId);
+        if (partidaParaRestaurar != null) {
+            partidaParaRestaurar.setLixo(false);
+            this.saveOrUpdate(partidaParaRestaurar);
+        } else {
+            throw new IllegalArgumentException("Partida com ID " + partidaId + " não encontrada.");
         }
     }
 }

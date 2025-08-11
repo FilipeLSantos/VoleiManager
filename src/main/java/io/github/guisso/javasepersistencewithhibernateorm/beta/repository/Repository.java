@@ -170,5 +170,35 @@ public abstract class Repository<T extends ProjectEntity>
             return false;
         }
     }
+    public <T, ID> boolean deleteById(ID id, Class<T> entityClass) {
+      
+        try (EntityManager em = DataSourceFactory.getEntityManager()) {
+            EntityTransaction tx = em.getTransaction();
+            try {
+                tx.begin();
+
+                //Encontra a entidade no banco de dados usando o ID e a classe.
+                T entityToDelete = em.find(entityClass, id);
+
+                //Verifica se a entidade realmente existe antes de tentar remover.
+                if (entityToDelete != null) {
+                    em.remove(entityToDelete); 
+                    tx.commit();
+                    return true; 
+                } else {
+    
+                    tx.rollback();
+                    return false; 
+                }
+
+            } catch (Exception ex) {
+                if (tx != null && tx.isActive()) {
+                    tx.rollback();
+                }
+                throw ex; 
+            }
+        }
+    }
+
 
 }

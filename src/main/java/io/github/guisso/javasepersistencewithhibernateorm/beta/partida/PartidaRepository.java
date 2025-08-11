@@ -92,15 +92,33 @@ public class PartidaRepository
         return incluidos; 
     }
 
-    public void restoreFromTrash(Partida equipe) {
-        equipe.setLixo(false);
-        this.saveOrUpdate(equipe);
+    public void restoreFromTrash(Partida partidas) {
+        partidas.setLixo(false);
+        this.saveOrUpdate(partidas);
     }
 
-    public void restoreFromTrash(List<Partida> equipes) {
-        for (Partida aux : equipes) {
+    public void restoreFromTrash(List<Partida> partidas) {
+        for (Partida aux : partidas) {
             aux.setLixo(false);
             this.saveOrUpdate(aux); 
         }
+    }
+    public void restoreFromTrashId(Long rodadaId) {
+    // 1. Busca o objeto no banco de dados usando o ID.
+    // Assumindo que você tem um método findById(). Se o nome for outro (ex: getById), apenas substitua.
+    Partida rodadaParaRestaurar = this.findById(rodadaId);
+
+    // 2. Verifica se o objeto realmente foi encontrado.
+    if (rodadaParaRestaurar == null) {
+        // Lança uma exceção ou trata o erro como preferir.
+        // É importante não continuar se o objeto não existe.
+        throw new IllegalArgumentException("Rodada com ID " + rodadaId + " não encontrada.");
+    }
+
+    // 3. Modifica o estado do objeto.
+    rodadaParaRestaurar.setLixo(false);
+
+    // 4. Salva a alteração no banco de dados.
+    this.saveOrUpdate(rodadaParaRestaurar);
     }
 }

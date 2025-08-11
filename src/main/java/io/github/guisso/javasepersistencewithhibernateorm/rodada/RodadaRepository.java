@@ -85,16 +85,34 @@ public class RodadaRepository
         }
         return incluidos; 
     }
-    public void restoreFromTrash(Rodada atleta) {
-        atleta.setLixo(false);
-        this.saveOrUpdate(atleta);
+    public void restoreFromTrash(Rodada rodadas) {
+        rodadas.setLixo(false);
+        this.saveOrUpdate(rodadas);
     }
 
-    public void restoreFromTrash(List<Rodada> equipes) {
-        for (Rodada aux : equipes) {
+    public void restoreFromTrash(List<Rodada> rodadas) {
+        for (Rodada aux : rodadas) {
             aux.setLixo(false);
             this.saveOrUpdate(aux); 
+        } 
+    }   
+      public void moveToTrash(Long partidaId) {
+        Rodada partidaParaMover = this.findById(partidaId);
+        if (partidaParaMover != null) {
+            partidaParaMover.setLixo(true);
+            this.saveOrUpdate(partidaParaMover);
+        } else {
+            throw new IllegalArgumentException("Partida com ID " + partidaId + " não encontrada.");
         }
     }
-        
+    
+    public void restoreFromTrash(Long partidaId) {
+        Rodada partidaParaRestaurar = this.findById(partidaId);
+        if (partidaParaRestaurar != null) {
+            partidaParaRestaurar.setLixo(false);
+            this.saveOrUpdate(partidaParaRestaurar);
+        } else {
+            throw new IllegalArgumentException("Partida com ID " + partidaId + " não encontrada.");
+        }
+    }
 }

@@ -347,7 +347,7 @@ public class CadastroRodada extends javax.swing.JFrame {
     }    }//GEN-LAST:event_btnEsvaziarActionPerformed
 
     private void btnRestaurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestaurarActionPerformed
-            if (lstRodada.getSelectedIndices().length == 0) {
+        if (lstRodada.getSelectedIndices().length == 0) {
             return;
         }
 
