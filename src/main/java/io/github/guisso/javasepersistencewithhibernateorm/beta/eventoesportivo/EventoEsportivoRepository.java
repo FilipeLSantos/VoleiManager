@@ -36,7 +36,7 @@ public class EventoEsportivoRepository
 
     @Override
     public String getJpqlFindById() {
-        return "SELECT ee FROM EventoEsportivo ee ee.id = :id";
+        return "SELECT ee FROM EventoEsportivo ee WHERE ee.id = :id";
     }
 
     @Override
