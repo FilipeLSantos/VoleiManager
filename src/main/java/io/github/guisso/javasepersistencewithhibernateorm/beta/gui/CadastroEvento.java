@@ -253,7 +253,8 @@ public class CadastroEvento extends javax.swing.JFrame {
         scrEvento.setViewportView(lstEvento);
 
         lblAlerta.setText("Alerta");
-        lblAlerta.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        lblAlerta.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblAlerta.setForeground(new java.awt.Color(255, 0, 0));
 
         jLabel2.setText("Eventos:");
 

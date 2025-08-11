@@ -149,21 +149,21 @@ public class CadastroAtleta extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        lblNome.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblNome.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblNome.setText("Nome:");
+        lblNome.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        lblCPF.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblCPF.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblCPF.setText("CPF:");
+        lblCPF.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        lblData.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblData.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblData.setText("Data de Nascimento:");
+        lblData.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
-        lblNumeroCamisa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblNumeroCamisa.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblNumeroCamisa.setText("Numero da Camisa:");
+        lblNumeroCamisa.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         btnCadastrar.setText("Cadastrar");
         btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
@@ -172,9 +172,9 @@ public class CadastroAtleta extends javax.swing.JFrame {
             }
         });
 
-        lblEquipe.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblEquipe.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         lblEquipe.setText("Equipe:");
+        lblEquipe.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -261,8 +261,8 @@ public class CadastroAtleta extends javax.swing.JFrame {
             }
         });
 
-        lblLixeira.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblLixeira.setText("Lixeira:");
+        lblLixeira.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
 
         btnExcluirLixeira.setText("Excluir");
         btnExcluirLixeira.addActionListener(new java.awt.event.ActionListener() {
@@ -285,8 +285,9 @@ public class CadastroAtleta extends javax.swing.JFrame {
             }
         });
 
-        lblAlerta.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblAlerta.setText("Alerta");
+        lblAlerta.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblAlerta.setForeground(new java.awt.Color(255, 0, 0));
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -340,8 +341,8 @@ public class CadastroAtleta extends javax.swing.JFrame {
 
         tabListagemAtleta.addTab("Listagem", jPanel2);
 
-        lblTitulo.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
         lblTitulo.setText("Atleta");
+        lblTitulo.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
