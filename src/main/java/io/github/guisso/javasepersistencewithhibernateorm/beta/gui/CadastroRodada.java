@@ -43,23 +43,24 @@ public class CadastroRodada extends javax.swing.JFrame {
         //Default Evento list model
         modelRodada = new DefaultListModel<>();
         modelRodada.addAll(rodadaRepository.findAll());
+           
+        initComponents();
         
         lblAlerta.setVisible(false);
-        
-        initComponents();
         
         javax.swing.ButtonGroup radioGroup = new javax.swing.ButtonGroup();
         radioGroup.add(radNaoExcluidos);
         radioGroup.add(radExcluidos);
         radNaoExcluidos.setSelected(true);
     }
-  public void cadastrarAtleta()
+  public void cadastrarRodada()
     {
        String nomeRodada = txtRodada.getText();
        
        Rodada rodada = new Rodada();
        
        rodada.setNomeRodada(nomeRodada);
+       rodadaRepository.saveOrUpdate(rodada);
     }
     public void clear()
     {
@@ -279,7 +280,7 @@ public class CadastroRodada extends javax.swing.JFrame {
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         JOptionPane.showMessageDialog(this, "Rodada Cadastrada!");     
-        cadastrarAtleta();
+        cadastrarRodada();
         clear();
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
@@ -301,7 +302,7 @@ public class CadastroRodada extends javax.swing.JFrame {
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         if(lstRodada.getSelectedIndices().length == 0){
-            showWarning("Selecione ao menos um atleta");
+            showWarning("Selecione ao menos uma rodada");
             return;
         }
         if(lstRodada.getSelectedIndices().length == 1){

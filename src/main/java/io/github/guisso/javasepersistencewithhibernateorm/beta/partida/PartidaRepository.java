@@ -16,8 +16,11 @@
  */
 package io.github.guisso.javasepersistencewithhibernateorm.beta.partida;
 
+import io.github.guisso.javasepersistencewithhibernateorm.beta.repository.DataSourceFactory;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.repository.Repository;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -103,22 +106,24 @@ public class PartidaRepository
             this.saveOrUpdate(aux); 
         }
     }
-    public void restoreFromTrashId(Long rodadaId) {
-    // 1. Busca o objeto no banco de dados usando o ID.
-    // Assumindo que você tem um método findById(). Se o nome for outro (ex: getById), apenas substitua.
-    Partida rodadaParaRestaurar = this.findById(rodadaId);
-
-    // 2. Verifica se o objeto realmente foi encontrado.
-    if (rodadaParaRestaurar == null) {
-        // Lança uma exceção ou trata o erro como preferir.
-        // É importante não continuar se o objeto não existe.
-        throw new IllegalArgumentException("Rodada com ID " + rodadaId + " não encontrada.");
+    public void moveToTrash(Long partidaId) {
+        Partida partidaParaMover = this.findById(partidaId);
+        if (partidaParaMover != null) {
+            partidaParaMover.setLixo(true);
+            this.saveOrUpdate(partidaParaMover);
+        } else {
+            throw new IllegalArgumentException("Partida com ID " + partidaId + " não encontrada.");
+        }
     }
-
-    // 3. Modifica o estado do objeto.
-    rodadaParaRestaurar.setLixo(false);
-
-    // 4. Salva a alteração no banco de dados.
-    this.saveOrUpdate(rodadaParaRestaurar);
+    
+    public void restoreFromTrash(Long partidaId) {
+        Partida partidaParaRestaurar = this.findById(partidaId);
+        if (partidaParaRestaurar != null) {
+            partidaParaRestaurar.setLixo(false);
+            this.saveOrUpdate(partidaParaRestaurar);
+        } else {
+            throw new IllegalArgumentException("Partida com ID " + partidaId + " não encontrada.");
+        }
     }
+    
 }

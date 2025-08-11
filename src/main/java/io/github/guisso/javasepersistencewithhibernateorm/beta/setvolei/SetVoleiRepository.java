@@ -94,23 +94,23 @@ public class SetVoleiRepository
             this.saveOrUpdate(aux); 
         }
     }
-    public void restoreFromTrashId(Long rodadaId) {
-    // 1. Busca o objeto no banco de dados usando o ID.
-    // Assumindo que você tem um método findById(). Se o nome for outro (ex: getById), apenas substitua.
-    SetVolei rodadaParaRestaurar = this.findById(rodadaId);
-
-    // 2. Verifica se o objeto realmente foi encontrado.
-    if (rodadaParaRestaurar == null) {
-        // Lança uma exceção ou trata o erro como preferir.
-        // É importante não continuar se o objeto não existe.
-        throw new IllegalArgumentException("Rodada com ID " + rodadaId + " não encontrada.");
-    }
-
-    // 3. Modifica o estado do objeto.
-    rodadaParaRestaurar.setLixo(false);
-
-    // 4. Salva a alteração no banco de dados.
-    this.saveOrUpdate(rodadaParaRestaurar);
+     public void moveToTrash(Long partidaId) {
+        SetVolei setVoleiParaMover = this.findById(partidaId);
+        if (setVoleiParaMover != null) {
+            setVoleiParaMover.setLixo(true);
+            this.saveOrUpdate(setVoleiParaMover);
+        } else {
+            throw new IllegalArgumentException("Partida com ID " + partidaId + " não encontrada.");
+        }
     }
     
+    public void restoreFromTrash(Long partidaId) {
+        SetVolei setVoleiParaRestaurar = this.findById(partidaId);
+        if (setVoleiParaRestaurar != null) {
+            setVoleiParaRestaurar.setLixo(false);
+            this.saveOrUpdate(setVoleiParaRestaurar);
+        } else {
+            throw new IllegalArgumentException("Partida com ID " + partidaId + " não encontrada.");
+        }
+    }
 }

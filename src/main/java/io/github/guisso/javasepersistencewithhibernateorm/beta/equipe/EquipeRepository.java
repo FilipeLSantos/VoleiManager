@@ -102,20 +102,20 @@ public class EquipeRepository
         }
     }
     public void moveToTrash(Long partidaId) {
-        Equipe partidaParaMover = this.findById(partidaId);
-        if (partidaParaMover != null) {
-            partidaParaMover.setLixo(true);
-            this.saveOrUpdate(partidaParaMover);
+        Equipe equipeParaMover = this.findById(partidaId);
+        if (equipeParaMover != null) {
+            equipeParaMover.setLixo(true);
+            this.saveOrUpdate(equipeParaMover);
         } else {
             throw new IllegalArgumentException("Partida com ID " + partidaId + " não encontrada.");
         }
     }
     
     public void restoreFromTrash(Long partidaId) {
-        Equipe partidaParaRestaurar = this.findById(partidaId);
-        if (partidaParaRestaurar != null) {
-            partidaParaRestaurar.setLixo(false);
-            this.saveOrUpdate(partidaParaRestaurar);
+        Equipe equipeParaRestaurar = this.findById(partidaId);
+        if (equipeParaRestaurar != null) {
+            equipeParaRestaurar.setLixo(false);
+            this.saveOrUpdate(equipeParaRestaurar);
         } else {
             throw new IllegalArgumentException("Partida com ID " + partidaId + " não encontrada.");
         }

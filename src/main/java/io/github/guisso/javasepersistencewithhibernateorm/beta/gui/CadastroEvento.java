@@ -408,7 +408,7 @@ public class CadastroEvento extends javax.swing.JFrame {
         }else{
             List<EventoEsportivo> selection = lstEvento.getSelectedValuesList();
             
-            //repository.moveToTrash(selection);
+            repository.moveToTrash(selection);
             
             for(EventoEsportivo aux : selection){
                 modelEvento.removeElement(aux);

@@ -103,20 +103,20 @@ public class AtletaRepository
         }
     }
  public void moveToTrash(Long partidaId) {
-        Atleta partidaParaMover = this.findById(partidaId);
-        if (partidaParaMover != null) {
-            partidaParaMover.setLixo(true);
-            this.saveOrUpdate(partidaParaMover);
+        Atleta atletaParaMover = this.findById(partidaId);
+        if (atletaParaMover != null) {
+            atletaParaMover.setLixo(true);
+            this.saveOrUpdate(atletaParaMover);
         } else {
             throw new IllegalArgumentException("Partida com ID " + partidaId + " não encontrada.");
         }
     }
     
     public void restoreFromTrash(Long partidaId) {
-        Atleta partidaParaRestaurar = this.findById(partidaId);
-        if (partidaParaRestaurar != null) {
-            partidaParaRestaurar.setLixo(false);
-            this.saveOrUpdate(partidaParaRestaurar);
+        Atleta atletaParaRestaurar = this.findById(partidaId);
+        if (atletaParaRestaurar != null) {
+            atletaParaRestaurar.setLixo(false);
+            this.saveOrUpdate(atletaParaRestaurar);
         } else {
             throw new IllegalArgumentException("Partida com ID " + partidaId + " não encontrada.");
         }

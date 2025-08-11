@@ -30,17 +30,17 @@ public class RodadaRepository
 
     @Override
     public String getJpqlFindAll() {
-        return "SELECT r FROM EventoEsportivo r";
+        return "SELECT r FROM Rodada r";
     }
 
     @Override
     public String getJpqlFindById() {
-        return "SELECT r FROM EventoEsportivo r r.id = :id";
+        return "SELECT r FROM Rodada r r.id = :id";
     }
 
     @Override
     public String getJpqlDeleteById() {
-        return "DELETE FROM EventoEsportivo r WHERE r.id = :id";
+        return "DELETE FROM Rodada r WHERE r.id = :id";
     }
          
     public void moveToTrash(Rodada rodada)
@@ -97,20 +97,20 @@ public class RodadaRepository
         } 
     }   
       public void moveToTrash(Long partidaId) {
-        Rodada partidaParaMover = this.findById(partidaId);
-        if (partidaParaMover != null) {
-            partidaParaMover.setLixo(true);
-            this.saveOrUpdate(partidaParaMover);
+        Rodada rodadaParaMover = this.findById(partidaId);
+        if (rodadaParaMover != null) {
+            rodadaParaMover.setLixo(true);
+            this.saveOrUpdate(rodadaParaMover);
         } else {
             throw new IllegalArgumentException("Partida com ID " + partidaId + " não encontrada.");
         }
     }
     
     public void restoreFromTrash(Long partidaId) {
-        Rodada partidaParaRestaurar = this.findById(partidaId);
-        if (partidaParaRestaurar != null) {
-            partidaParaRestaurar.setLixo(false);
-            this.saveOrUpdate(partidaParaRestaurar);
+        Rodada rodadaParaRestaurar = this.findById(partidaId);
+        if (rodadaParaRestaurar != null) {
+            rodadaParaRestaurar.setLixo(false);
+            this.saveOrUpdate(rodadaParaRestaurar);
         } else {
             throw new IllegalArgumentException("Partida com ID " + partidaId + " não encontrada.");
         }
