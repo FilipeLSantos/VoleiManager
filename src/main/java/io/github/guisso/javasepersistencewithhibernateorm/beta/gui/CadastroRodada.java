@@ -22,6 +22,7 @@ import java.awt.event.ItemEvent;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import java.util.List;
+import javax.swing.Timer;
 
 /**
  *
@@ -43,6 +44,7 @@ public class CadastroRodada extends javax.swing.JFrame {
         modelRodada = new DefaultListModel<>();
         modelRodada.addAll(rodadaRepository.findAll());
         
+        lblAlerta.setVisible(false);
         
         initComponents();
         
@@ -75,14 +77,13 @@ public class CadastroRodada extends javax.swing.JFrame {
 
         jPanel2 = new javax.swing.JPanel();
         jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
+        pnlCadastro = new javax.swing.JPanel();
         lblRodada = new javax.swing.JLabel();
         txtRodada = new javax.swing.JTextField();
         btnCadastrar = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
+        pnlListagem = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         lstRodada = new javax.swing.JList<>();
-        lblRodadas = new javax.swing.JLabel();
         radNaoExcluidos = new javax.swing.JRadioButton();
         radExcluidos = new javax.swing.JRadioButton();
         btnExcluir = new javax.swing.JButton();
@@ -90,6 +91,8 @@ public class CadastroRodada extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         btnEsvaziar = new javax.swing.JButton();
         btnRestaurar = new javax.swing.JButton();
+        lblAlerta = new javax.swing.JLabel();
+        lblTitulo = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -104,51 +107,49 @@ public class CadastroRodada extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        lblRodada.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblRodada.setText("Rodada:");
 
-        btnCadastrar.setText("Cadastrar");
+        btnCadastrar.setText("Salvar");
         btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCadastrarActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout pnlCadastroLayout = new javax.swing.GroupLayout(pnlCadastro);
+        pnlCadastro.setLayout(pnlCadastroLayout);
+        pnlCadastroLayout.setHorizontalGroup(
+            pnlCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlCadastroLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblRodada)
-                        .addGap(37, 37, 37)
-                        .addComponent(txtRodada, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(btnCadastrar)))
-                .addContainerGap())
+                .addComponent(lblRodada)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addComponent(txtRodada, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(139, 139, 139))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlCadastroLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnCadastrar)
+                .addGap(21, 21, 21))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        pnlCadastroLayout.setVerticalGroup(
+            pnlCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlCadastroLayout.createSequentialGroup()
                 .addGap(13, 13, 13)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(pnlCadastroLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblRodada)
                     .addComponent(txtRodada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGap(38, 38, 38)
                 .addComponent(btnCadastrar)
-                .addContainerGap(212, Short.MAX_VALUE))
+                .addContainerGap(166, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Cadastro de Rodadas", jPanel1);
+        jTabbedPane1.addTab("Cadastro", pnlCadastro);
 
         lstRodada.setModel(modelRodada
         );
         lstRodada.setToolTipText("");
         jScrollPane1.setViewportView(lstRodada);
-
-        lblRodadas.setText("Rodadas:");
 
         radNaoExcluidos.setText("Não Excluídos");
         radNaoExcluidos.addItemListener(new java.awt.event.ItemListener() {
@@ -178,6 +179,7 @@ public class CadastroRodada extends javax.swing.JFrame {
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel3.setText("Lixeira:");
 
         btnEsvaziar.setText("Esvaziar");
@@ -194,53 +196,60 @@ public class CadastroRodada extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(lblRodadas)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(radNaoExcluidos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(radExcluidos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnEsvaziar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        lblAlerta.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        lblAlerta.setForeground(new java.awt.Color(255, 0, 0));
+        lblAlerta.setText("Alerta");
+
+        javax.swing.GroupLayout pnlListagemLayout = new javax.swing.GroupLayout(pnlListagem);
+        pnlListagem.setLayout(pnlListagemLayout);
+        pnlListagemLayout.setHorizontalGroup(
+            pnlListagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(pnlListagemLayout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 304, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(pnlListagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(radExcluidos, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(radNaoExcluidos)
+                    .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addComponent(btnExcluir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnExcluirLixeira, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnRestaurar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(btnExcluirLixeira, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEsvaziar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnRestaurar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(20, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlListagemLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblAlerta)
+                .addGap(157, 157, 157))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+        pnlListagemLayout.setVerticalGroup(
+            pnlListagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlListagemLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblRodadas)
+                .addComponent(lblAlerta)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGroup(pnlListagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(pnlListagemLayout.createSequentialGroup()
                         .addComponent(radNaoExcluidos)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(radExcluidos)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnExcluir)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
-                        .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnExcluirLixeira)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnEsvaziar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnRestaurar))
-                    .addComponent(jScrollPane1))
-                .addContainerGap())
+                        .addComponent(btnRestaurar)))
+                .addGap(12, 12, 12))
         );
 
-        jTabbedPane1.addTab("Listagem de Rodadas", jPanel3);
+        jTabbedPane1.addTab("Listagem", pnlListagem);
+
+        lblTitulo.setFont(new java.awt.Font("Segoe UI", 0, 20)); // NOI18N
+        lblTitulo.setText("Rodada");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -250,12 +259,18 @@ public class CadastroRodada extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jTabbedPane1)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(188, 188, 188)
+                .addComponent(lblTitulo)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jTabbedPane1)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(22, Short.MAX_VALUE)
+                .addComponent(lblTitulo)
+                .addGap(18, 18, 18)
+                .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -286,7 +301,7 @@ public class CadastroRodada extends javax.swing.JFrame {
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
         if(lstRodada.getSelectedIndices().length == 0){
-            //showWarning("Selecione ao menos um atleta");
+            showWarning("Selecione ao menos um atleta");
             return;
         }
         if(lstRodada.getSelectedIndices().length == 1){
@@ -310,7 +325,7 @@ public class CadastroRodada extends javax.swing.JFrame {
 
     private void btnExcluirLixeiraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirLixeiraActionPerformed
          if(lstRodada.getSelectedIndices().length == 0){
-            //showWarning("Selecione ao menos um atleta");
+            showWarning("Selecione ao menos um atleta");
             return;
         }
          if(lstRodada.getSelectedIndices().length == 1){
@@ -379,7 +394,7 @@ public class CadastroRodada extends javax.swing.JFrame {
         btnEsvaziar.setEnabled(status);
     }
     
-    /*public void showWarning(String warning){
+    public void showWarning(String warning){
         lblAlerta.setText(warning);
         lblAlerta.setVisible(true);
         
@@ -390,7 +405,7 @@ public class CadastroRodada extends javax.swing.JFrame {
         
         timer.setRepeats(false);
         timer.start();
-    }*/
+    }
     /**
      * @param args the command line arguments
      */
@@ -423,14 +438,15 @@ public class CadastroRodada extends javax.swing.JFrame {
     private javax.swing.JButton btnExcluirLixeira;
     private javax.swing.JButton btnRestaurar;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JLabel lblAlerta;
     private javax.swing.JLabel lblRodada;
-    private javax.swing.JLabel lblRodadas;
+    private javax.swing.JLabel lblTitulo;
     private javax.swing.JList<Rodada> lstRodada;
+    private javax.swing.JPanel pnlCadastro;
+    private javax.swing.JPanel pnlListagem;
     private javax.swing.JRadioButton radExcluidos;
     private javax.swing.JRadioButton radNaoExcluidos;
     private javax.swing.JTextField txtRodada;
