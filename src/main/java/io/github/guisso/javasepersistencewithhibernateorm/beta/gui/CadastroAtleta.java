@@ -86,9 +86,15 @@ public class CadastroAtleta extends javax.swing.JFrame {
     {
        String nome = txtNome.getText();
        long CPF = Long.parseLong(txtCPF.getText());
+       String numeroCamisaTxt = txtNumeroCamisa.getText();
        LocalDate data = dtpDataNascimento.getDate();
-       int numeroCamisa = Integer.parseInt(txtNumeroCamisa.getText());
+       
        String equipe = txtEquipe.getText();
+  
+        int numeroCamisa = Integer.parseInt(numeroCamisaTxt);
+
+  
+       
        Atleta atleta = new Atleta();
        
        atleta.setCpf(CPF);
@@ -98,6 +104,9 @@ public class CadastroAtleta extends javax.swing.JFrame {
        atleta.setEquipe(equipe);
        
        atletaRepository.saveOrUpdate(atleta);
+       JOptionPane.showMessageDialog(this, "Bem-vindo meu jogador!");   
+       clear();
+       
     }
     public void clear()
     {
@@ -371,9 +380,8 @@ public class CadastroAtleta extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        JOptionPane.showMessageDialog(this, "Bem-vindo meu jogador!");     
+
         cadastrarAtleta();
-        clear();
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void radExcluidosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_radExcluidosItemStateChanged

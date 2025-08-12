@@ -34,7 +34,7 @@ public class Chaveamento extends ProjectEntity implements Serializable {
     private static final long serialVersionUID = 1L;
    
     @Column(nullable = false)
-    private String Evento;
+    private String evento;
     
     @Column(nullable = false)
     private boolean lixo;
@@ -43,11 +43,11 @@ public class Chaveamento extends ProjectEntity implements Serializable {
     private String campeao;
 
     public String getEvento() {
-        return Evento;
+        return evento;
     }
 
     public void setEvento(String Evento) {
-        this.Evento = Evento;
+        this.evento = Evento;
     }
 
     public boolean isLixo() {
@@ -70,6 +70,6 @@ public class Chaveamento extends ProjectEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "Chaveamento{" + "Evento=" + Evento + ", lixo=" + lixo + ", campeao=" + campeao + '}';
+        return "Chaveamento do Evento: "  + evento + " Campeão: " + campeao;
     }
 }

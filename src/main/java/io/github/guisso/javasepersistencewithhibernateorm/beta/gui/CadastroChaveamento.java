@@ -29,10 +29,11 @@ import javax.swing.Timer;
  * @author rdpp
  */
 public class CadastroChaveamento extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(CadastroChaveamento.class.getName());
     private final ChaveamentoRepository chaveamentoRepository;
-     private final DefaultListModel<Chaveamento> modelChaveamento;
+    private final DefaultListModel<Chaveamento> modelChaveamento;
+
     /**
      * Creates new form CadastroChaveamento
      */
@@ -46,23 +47,33 @@ public class CadastroChaveamento extends javax.swing.JFrame {
         radioGroup.add(radNaoExcluidos);
         radioGroup.add(radExcluidos);
         radNaoExcluidos.setSelected(true);
-        
+
     }
-    
-      public void clear()
-    {
+
+    public void clear() {
         txtEvento.setText("");
         txtCampeao.setText("");
     }
-      
-       public void enableTrash(boolean status)
-    {
+
+    public void enableTrash(boolean status) {
         btnExcluir.setEnabled(!status);
         btnRestaurar.setEnabled(status);
         btnExcluirLixeira.setEnabled(status);
         btnEsvaziar.setEnabled(status);
     }
-    
+
+    public void showWarning(String warning) {
+        lblAlerta.setText(warning);
+        lblAlerta.setVisible(true);
+
+        Timer timer = new Timer(4000, (e) -> {
+            lblAlerta.setVisible(false);
+            ((Timer) e.getSource()).stop();
+        });
+
+        timer.setRepeats(false);
+        timer.start();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -90,6 +101,7 @@ public class CadastroChaveamento extends javax.swing.JFrame {
         btnEsvaziar = new javax.swing.JButton();
         btnRestaurar = new javax.swing.JButton();
         jblLixeira = new javax.swing.JLabel();
+        lblAlerta = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -191,13 +203,18 @@ public class CadastroChaveamento extends javax.swing.JFrame {
 
         jblLixeira.setText("Lixeira:");
 
+        lblAlerta.setForeground(new java.awt.Color(255, 0, 0));
+        lblAlerta.setText("Alerta");
+
         javax.swing.GroupLayout pnlListagemLayout = new javax.swing.GroupLayout(pnlListagem);
         pnlListagem.setLayout(pnlListagemLayout);
         pnlListagemLayout.setHorizontalGroup(
             pnlListagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlListagemLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(pnlListagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblAlerta)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(pnlListagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlListagemLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
@@ -217,7 +234,9 @@ public class CadastroChaveamento extends javax.swing.JFrame {
         pnlListagemLayout.setVerticalGroup(
             pnlListagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(pnlListagemLayout.createSequentialGroup()
-                .addGap(27, 27, 27)
+                .addContainerGap()
+                .addComponent(lblAlerta)
+                .addGap(3, 3, 3)
                 .addGroup(pnlListagemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(pnlListagemLayout.createSequentialGroup()
                         .addComponent(radNaoExcluidos)
@@ -261,63 +280,63 @@ public class CadastroChaveamento extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void radNaoExcluidosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_radNaoExcluidosItemStateChanged
-              
-         if(evt.getStateChange() == ItemEvent.SELECTED)
-        enableTrash(false);
+
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            enableTrash(false);
+        }
 
         modelChaveamento.clear();
         modelChaveamento.addAll(chaveamentoRepository.loadFromDataBase());
-        
+
     }//GEN-LAST:event_radNaoExcluidosItemStateChanged
 
     private void radExcluidosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_radExcluidosItemStateChanged
 
-         if(evt.getStateChange() == ItemEvent.SELECTED)
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
             enableTrash(true);
-        
+        }
+
         modelChaveamento.clear();
         modelChaveamento.addAll(chaveamentoRepository.loadFromTrash());
     }//GEN-LAST:event_radExcluidosItemStateChanged
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        if(lstChaveamento.getSelectedIndices().length == 0){
-            //showWarning("Selecione ao menos um atleta");
+        if (lstChaveamento.getSelectedIndices().length == 0) {
+            showWarning("Selecione ao menos um atleta");
             return;
         }
-        if(lstChaveamento.getSelectedIndices().length == 1){
+        if (lstChaveamento.getSelectedIndices().length == 1) {
             Chaveamento selected = lstChaveamento.getSelectedValue();
-            
-        chaveamentoRepository.moveToTrash(selected);
-        modelChaveamento.removeElement(selected);
-        }else{
-        
+
+            chaveamentoRepository.moveToTrash(selected);
+            modelChaveamento.removeElement(selected);
+        } else {
+
             List<Chaveamento> selection = lstChaveamento.getSelectedValuesList();
-                
+
             chaveamentoRepository.moveToTrash(selection);
-            for(Chaveamento aux : selection)
-            {
+            for (Chaveamento aux : selection) {
                 modelChaveamento.removeElement(aux);
             }
         }
-        
+
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnExcluirLixeiraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirLixeiraActionPerformed
-        if(lstChaveamento.getSelectedIndices().length == 0){
-            //showWarning("Selecione ao menos um atleta");
+        if (lstChaveamento.getSelectedIndices().length == 0) {
+            showWarning("Selecione ao menos um atleta");
             return;
         }
-         if(lstChaveamento.getSelectedIndices().length == 1){
+        if (lstChaveamento.getSelectedIndices().length == 1) {
             Chaveamento selected = lstChaveamento.getSelectedValue();
-            
-        chaveamentoRepository.delete(selected);
-        modelChaveamento.removeElement(selected);
-        }else{
-        
-            List<Chaveamento> selection = lstChaveamento.getSelectedValuesList();         
-            
-            for(Chaveamento aux : selection)
-            {
+
+            chaveamentoRepository.delete(selected);
+            modelChaveamento.removeElement(selected);
+        } else {
+
+            List<Chaveamento> selection = lstChaveamento.getSelectedValuesList();
+
+            for (Chaveamento aux : selection) {
                 chaveamentoRepository.delete(aux);
                 modelChaveamento.removeElement(aux);
             }
@@ -325,24 +344,24 @@ public class CadastroChaveamento extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExcluirLixeiraActionPerformed
 
     private void btnEsvaziarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEsvaziarActionPerformed
-         List<Chaveamento> selection = chaveamentoRepository.loadFromTrash();
+        List<Chaveamento> selection = chaveamentoRepository.loadFromTrash();
 
-    if (selection == null || selection.isEmpty()) {
-        return;
-    }
-    try {
-        for (Chaveamento aux : selection) {
-            chaveamentoRepository.delete(aux);
-        }  
-        modelChaveamento.clear();
+        if (selection == null || selection.isEmpty()) {
+            return;
+        }
+        try {
+            for (Chaveamento aux : selection) {
+                chaveamentoRepository.delete(aux);
+            }
+            modelChaveamento.clear();
 
-    } catch (Exception e) {
-        System.err.println("Erro ao deletar chaveamentos. A operação foi revertida. Detalhes: " + e.getMessage());
-    }
+        } catch (Exception e) {
+            System.err.println("Erro ao deletar chaveamentos. A operação foi revertida. Detalhes: " + e.getMessage());
+        }
     }//GEN-LAST:event_btnEsvaziarActionPerformed
 
     private void btnRestaurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestaurarActionPerformed
-         if (lstChaveamento.getSelectedIndices().length == 0) {
+        if (lstChaveamento.getSelectedIndices().length == 0) {
             return;
         }
 
@@ -368,18 +387,18 @@ public class CadastroChaveamento extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRestaurarActionPerformed
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-         String evento = txtEvento.getText();
-         String campeao = txtCampeao.getText();
-        JOptionPane.showMessageDialog(this, "A"); 
-        
+        String evento = txtEvento.getText();
+        String campeao = txtCampeao.getText();
+        JOptionPane.showMessageDialog(this, "A");
+
         Chaveamento chaveamento = new Chaveamento();
-        
+
         chaveamento.setEvento(evento);
         chaveamento.setCampeao(campeao);
-        
+
         chaveamentoRepository.saveOrUpdate(chaveamento);
-        
-        clear();         
+
+        clear();
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     /**
@@ -415,6 +434,7 @@ public class CadastroChaveamento extends javax.swing.JFrame {
     private javax.swing.JButton btnRestaurar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel jblLixeira;
+    private javax.swing.JLabel lblAlerta;
     private javax.swing.JLabel lblCampeao;
     private javax.swing.JLabel lblEvento;
     private javax.swing.JList<Chaveamento> lstChaveamento;
