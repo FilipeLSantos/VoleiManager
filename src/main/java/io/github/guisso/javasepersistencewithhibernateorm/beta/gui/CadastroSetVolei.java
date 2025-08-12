@@ -76,7 +76,6 @@ public class CadastroSetVolei extends javax.swing.JFrame {
             return;
         }    
         
-        
         if (equipe1.isEmpty()) {
             JOptionPane.showMessageDialog(this, "O campo 'Equipe 1' é obrigatório.\n");
             return;

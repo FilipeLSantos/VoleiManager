@@ -113,6 +113,7 @@ public class CadastroAtleta extends javax.swing.JFrame {
 
         if (!atleta.validacao(CPF)) {
             JOptionPane.showMessageDialog(this, "O campo 'CPF' é obrigatório.\n");
+            txtCPF.setText("");
             return;
         }
 
