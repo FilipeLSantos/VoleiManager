@@ -118,6 +118,8 @@ public class CadastroTecnico extends javax.swing.JFrame {
         tecnico.setDate(data);
 
         tecnicoRepository.saveOrUpdate(tecnico);
+        JOptionPane.showMessageDialog(this, "Tecnico cadastrado com sucesso!");
+
         clear();
     }
 
@@ -379,7 +381,6 @@ public class CadastroTecnico extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
-        JOptionPane.showMessageDialog(this, "Tecnico cadastrado com sucesso!");
         cadastrarTecnico();
     }//GEN-LAST:event_btnCadastrarActionPerformed
 

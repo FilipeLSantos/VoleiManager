@@ -96,23 +96,23 @@ public class RodadaRepository
             this.saveOrUpdate(aux); 
         } 
     }   
-      public void moveToTrash(Long partidaId) {
-        Rodada rodadaParaMover = this.findById(partidaId);
+      public void moveToTrash(Long rodadaId) {
+        Rodada rodadaParaMover = this.findById(rodadaId);
         if (rodadaParaMover != null) {
             rodadaParaMover.setLixo(true);
             this.saveOrUpdate(rodadaParaMover);
         } else {
-            throw new IllegalArgumentException("Partida com ID " + partidaId + " não encontrada.");
+            throw new IllegalArgumentException("Partida com ID " + rodadaId + " não encontrada.");
         }
     }
     
-    public void restoreFromTrash(Long partidaId) {
-        Rodada rodadaParaRestaurar = this.findById(partidaId);
+    public void restoreFromTrash(Long rodadaId) {
+        Rodada rodadaParaRestaurar = this.findById(rodadaId);
         if (rodadaParaRestaurar != null) {
             rodadaParaRestaurar.setLixo(false);
             this.saveOrUpdate(rodadaParaRestaurar);
         } else {
-            throw new IllegalArgumentException("Partida com ID " + partidaId + " não encontrada.");
+            throw new IllegalArgumentException("Partida com ID " + rodadaId + " não encontrada.");
         }
     }
 }

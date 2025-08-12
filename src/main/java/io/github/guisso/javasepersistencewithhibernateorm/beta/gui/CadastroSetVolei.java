@@ -53,13 +53,47 @@ public class CadastroSetVolei extends javax.swing.JFrame {
     {
         SetVolei setVolei = new SetVolei();
         
-        int pontuacao1 = Integer.parseInt(txtPontuacao1.getText());
-        int pontuacao2 = Integer.parseInt(txtPontuacao2.getText());
-        int numeroSet = Integer.parseInt(txtNumeroSet.getText());
+        String pontuacao1Aux = txtPontuacao1.getText();
+        String pontuacao2Aux = txtPontuacao2.getText();
+        String numeroSetAux = txtNumeroSet.getText();
         String equipe1 = txtEquipe1.getText();
         String equipe2 = txtEquipe2.getText();
         String timeVencedor = txtTimeVencedor.getText(); 
         
+        if(pontuacao1Aux.isEmpty())
+        {
+            JOptionPane.showMessageDialog(this, "O campo 'Pontuação 1' é obrigatório.\n");
+            return;
+        }
+        if(pontuacao2Aux.isEmpty())
+        {
+            JOptionPane.showMessageDialog(this, "O campo 'Pontuação 2' é obrigatório.\n");
+            return;
+        }
+        if(numeroSetAux.isEmpty())
+        {
+            JOptionPane.showMessageDialog(this, "O campo 'Numero do Set'é obrigatório.\n");
+            return;
+        }    
+        
+        
+        if (equipe1.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "O campo 'Equipe 1' é obrigatório.\n");
+            return;
+        }
+        if (equipe2 == null) {
+             JOptionPane.showMessageDialog(this, "O campo 'Equipe 2' é obrigatório.\n");
+             return;
+        }
+        if (timeVencedor == null) {
+             JOptionPane.showMessageDialog(this, "O campo 'Vencedor' é obrigatório.\n");
+             return;             
+        }
+        
+        Integer pontuacao1 = Integer.parseInt(txtPontuacao1.getText());
+        Integer pontuacao2 = Integer.parseInt(txtPontuacao1.getText());
+        Integer numeroSet = Integer.parseInt(txtNumeroSet.getText());
+         
         setVolei.setPontuacao1(pontuacao1);
         setVolei.setPontuacao2(pontuacao2);
         setVolei.setNumeroSet(numeroSet);

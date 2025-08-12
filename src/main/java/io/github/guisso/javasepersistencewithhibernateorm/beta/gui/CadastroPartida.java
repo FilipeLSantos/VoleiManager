@@ -358,15 +358,38 @@ public class CadastroPartida extends javax.swing.JFrame {
 
         String equipe1 = txtNomeEquipe1.getText();
         String equipe2 = txtNomeEquipe2.getText();
-        int qtdSet = Integer.parseInt(txtQtdSets.getText());
+        String aux = txtQtdSets.getText();
         String vencedor = txtVencedor.getText();
+        
+        if(aux == null)
+        {
+            JOptionPane.showMessageDialog(this, "O campo 'Quantidade de Sets' é obrigatório.\n");
+            return;
+        }
+        
+        Integer qtdSets = Integer.parseInt(txtQtdSets.getText());
+        
+        if (equipe1.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "O campo 'Equipe 1' é obrigatório.\n");
+            return;
+        }
+        if (equipe2.isEmpty()) {
+             JOptionPane.showMessageDialog(this, "O campo 'Equipe 2' é obrigatório.\n");
+             return;
+        }
+        
+        if (vencedor.isEmpty()) {
+             JOptionPane.showMessageDialog(this, "O campo 'Vencedor' é obrigatório.\n");
+             return;             
+        }
+
 
         JOptionPane.showMessageDialog(this, "Partida Registrada!");
 
         Partida p1 = new Partida();
         p1.setEquipe1(equipe1);
         p1.setEquipe2(equipe2);
-        p1.setQuantidadeSets(qtdSet);
+        p1.setQuantidadeSets(qtdSets);
         p1.setVencedor(vencedor);
 
         partidaRepository.saveOrUpdate(p1);
