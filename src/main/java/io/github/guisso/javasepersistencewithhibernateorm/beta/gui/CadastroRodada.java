@@ -57,10 +57,16 @@ public class CadastroRodada extends javax.swing.JFrame {
     {
        String nomeRodada = txtRodada.getText();
        
+        if (nomeRodada.isEmpty()) {
+             JOptionPane.showMessageDialog(this, "O campo 'Nome da Rodada' é obrigatório.\n");
+             return;
+        }
+       
        Rodada rodada = new Rodada();
        
        rodada.setNomeRodada(nomeRodada);
        rodadaRepository.saveOrUpdate(rodada);
+       JOptionPane.showMessageDialog(this, "Rodada Cadastrada com sucesso!");
     }
     public void clear()
     {

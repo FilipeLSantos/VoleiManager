@@ -351,10 +351,38 @@ public class CadastroEvento extends javax.swing.JFrame {
     private void btnSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalvarActionPerformed
         EventoEsportivo ee = new EventoEsportivo();
         
-        ee.setNome(txtNome.getText());
-        ee.setData(dtpData.getDate());
-        ee.setLocal(txtLocal.getText());
-        ee.setIngressoTime(Double.parseDouble(txtIngresso.getText()));
+        String nome = txtNome.getText();
+        String local = txtLocal.getText();
+        String aux = txtIngresso.getText();
+        LocalDate data = dtpData.getDate();
+        
+        if(aux == null)
+        {
+            JOptionPane.showMessageDialog(this, "O campo 'Ingresso' é obrigatório.\n");
+            return;
+        }
+        
+        Double ingresso = Double.parseDouble(txtIngresso.getName());
+                
+        ee.setNome(nome);
+        ee.setData(data);
+        ee.setLocal(local);
+        ee.setIngressoTime(ingresso);
+       
+        if (nome.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "O campo 'Nome' é obrigatório.\n");
+            return;
+        }
+        if (data == null) {
+             JOptionPane.showMessageDialog(this, "O campo 'Data' é obrigatório.\n");
+             return;
+        }
+        if (data == null) {
+             JOptionPane.showMessageDialog(this, "O campo 'Data de nascimento' é obrigatório.\n");
+             return;             
+        }
+
+       
         
         try {
             repository.saveOrUpdate(ee);

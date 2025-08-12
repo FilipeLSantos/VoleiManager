@@ -94,23 +94,23 @@ public class TecnicoRepository
             this.saveOrUpdate(aux); 
         }
     }
-       public void moveToTrash(Long partidaId) {
-        Tecnico tecnicoParaMover = this.findById(partidaId);
+       public void moveToTrash(Long tecnicoId) {
+        Tecnico tecnicoParaMover = this.findById(tecnicoId);
         if (tecnicoParaMover != null) {
             tecnicoParaMover.setLixo(true);
             this.saveOrUpdate(tecnicoParaMover);
         } else {
-            throw new IllegalArgumentException("Partida com ID " + partidaId + " não encontrada.");
+            throw new IllegalArgumentException("Partida com ID " + tecnicoId + " não encontrada.");
         }
     }
     
-    public void restoreFromTrash(Long partidaId) {
-        Tecnico tecnicoParaRestaurar = this.findById(partidaId);
+    public void restoreFromTrash(Long tecnicoId) {
+        Tecnico tecnicoParaRestaurar = this.findById(tecnicoId);
         if (tecnicoParaRestaurar != null) {
             tecnicoParaRestaurar.setLixo(false);
             this.saveOrUpdate(tecnicoParaRestaurar);
         } else {
-            throw new IllegalArgumentException("Partida com ID " + partidaId + " não encontrada.");
+            throw new IllegalArgumentException("Partida com ID " + tecnicoId + " não encontrada.");
         }
     }
     

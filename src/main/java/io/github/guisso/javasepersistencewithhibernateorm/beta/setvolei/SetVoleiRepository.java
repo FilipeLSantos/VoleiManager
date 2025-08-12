@@ -94,23 +94,23 @@ public class SetVoleiRepository
             this.saveOrUpdate(aux); 
         }
     }
-     public void moveToTrash(Long partidaId) {
-        SetVolei setVoleiParaMover = this.findById(partidaId);
+     public void moveToTrash(Long setVoleiId) {
+        SetVolei setVoleiParaMover = this.findById(setVoleiId);
         if (setVoleiParaMover != null) {
             setVoleiParaMover.setLixo(true);
             this.saveOrUpdate(setVoleiParaMover);
         } else {
-            throw new IllegalArgumentException("Partida com ID " + partidaId + " não encontrada.");
+            throw new IllegalArgumentException("Partida com ID " + setVoleiId + " não encontrada.");
         }
     }
     
-    public void restoreFromTrash(Long partidaId) {
-        SetVolei setVoleiParaRestaurar = this.findById(partidaId);
+    public void restoreFromTrash(Long setVoleiId) {
+        SetVolei setVoleiParaRestaurar = this.findById(setVoleiId);
         if (setVoleiParaRestaurar != null) {
             setVoleiParaRestaurar.setLixo(false);
             this.saveOrUpdate(setVoleiParaRestaurar);
         } else {
-            throw new IllegalArgumentException("Partida com ID " + partidaId + " não encontrada.");
+            throw new IllegalArgumentException("Partida com ID " + setVoleiId + " não encontrada.");
         }
     }
 }
