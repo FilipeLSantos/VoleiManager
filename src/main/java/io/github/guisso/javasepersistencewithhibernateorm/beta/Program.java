@@ -97,7 +97,7 @@ public class Program {
         // Atleta
         Atleta at1 = new Atleta();
         at1.setNumeroCamisa(10);
-        at1.setCpf(12345874562L);
+        at1.setCpf("12345874562");
         at1.setDate(LocalDate.of(2000, Month.AUGUST, 5));
         at1.setNome("Robert Carlos Nascimento Carvalho");
         
@@ -106,7 +106,7 @@ public class Program {
         
         Atleta at2 = new Atleta();
         at2.setNumeroCamisa(29);
-        at2.setCpf(293234042L);
+        at2.setCpf("293234042");
         at2.setDate(LocalDate.of(2001, Month.MARCH, 30));
         at2.setNome("Ronaldinho Gaucho");
         
@@ -161,7 +161,7 @@ public class Program {
         setVoleiRepository.findAll();
         // Tecnico
         Tecnico t1 = new Tecnico();
-        t1.setCpf(123456L);
+        t1.setCpf("123456L");
         t1.setDate(LocalDate.of(1980, Month.JANUARY, 15));
         t1.setNome("Joao da Silva Josefa");
    
@@ -170,7 +170,7 @@ public class Program {
         tecnicoRepository.saveOrUpdate(t1);
         
         Tecnico t2 = new Tecnico();
-        t2.setCpf(12345678L);
+        t2.setCpf("12345678L");
         t2.setDate(LocalDate.of(1988, Month.JANUARY, 17));
         t2.setNome("Joao Melao");
         

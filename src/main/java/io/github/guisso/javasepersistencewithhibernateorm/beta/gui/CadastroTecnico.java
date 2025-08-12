@@ -86,7 +86,7 @@ public class CadastroTecnico extends javax.swing.JFrame {
     public void cadastrarTecnico()
     {
         String nome = txtNome.getText();
-        Long CPF = Long.parseLong(txtCPF.getText());
+        String CPF = txtCPF.getText();
         String equipe = txtEquipe.getText();
         LocalDate data = dtpDataNascimento.getDate();
         

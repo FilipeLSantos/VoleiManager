@@ -15,6 +15,7 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 package io.github.guisso.javasepersistencewithhibernateorm.beta.gui;
+
 import com.github.lgooddatepicker.components.DatePickerSettings;
 import io.github.guisso.javasepersistencewithhibernateorm.beta.atleta.AtletaRepository;
 import javax.swing.DefaultListModel;
@@ -27,12 +28,13 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Locale;
 import javax.swing.Timer;
+
 /**
  *
  * @author robert
  */
 public class CadastroAtleta extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(CadastroAtleta.class.getName());
     private final AtletaRepository atletaRepository;
     private final DefaultListModel<Atleta> modelAtleta;
@@ -50,13 +52,13 @@ public class CadastroAtleta extends javax.swing.JFrame {
         radioGroup.add(radNaoExcluidos);
         radioGroup.add(radExcluidos);
         radNaoExcluidos.setSelected(true);
-        
+
         lblAlerta.setVisible(false);
-        
+
         //DatePicker settings
-         DatePickerSettings settings
+        DatePickerSettings settings
                 = new DatePickerSettings(Locale.of("pt", "BR"));
-        
+
         // Date format
         settings.setFormatForDatesCommonEra(
                 DateTimeFormatter.ofPattern("dd/MM/yyyy"));
@@ -73,62 +75,62 @@ public class CadastroAtleta extends javax.swing.JFrame {
         settings.setFontValidDate(defaultFont);
         settings.setFontInvalidDate(defaultFont);
         settings.setFontVetoedDate(defaultFont);
-        
+
         // Applying settings
         dtpDataNascimento.setSettings(settings);
-        
+
         // Date range limits
         settings.setDateRangeLimits(LocalDate.MIN, LocalDate.now());
-        
+
     }
-    
-    public void cadastrarAtleta()
-    {
-       String nome = txtNome.getText();
-       long CPF = Long.parseLong(txtCPF.getText());
-       String numeroCamisaTxt = txtNumeroCamisa.getText();
-       LocalDate data = dtpDataNascimento.getDate();
-       
-       String equipe = txtEquipe.getText();
-       
-            if (nome.isEmpty()) {
+
+    public void cadastrarAtleta() {
+        String nome = txtNome.getText();
+        String CPF = txtCPF.getText();
+        String numeroCamisaTxt = txtNumeroCamisa.getText();
+        LocalDate data = dtpDataNascimento.getDate();
+        Atleta atleta = new Atleta();
+
+        String equipe = txtEquipe.getText();
+
+        if (nome.isEmpty()) {
             JOptionPane.showMessageDialog(this, "O campo 'Nome' é obrigatório.\n");
             return;
         }
         if (equipe.isEmpty()) {
-             JOptionPane.showMessageDialog(this, "O campo 'Equipe' é obrigatório.\n");
-             return;
+            JOptionPane.showMessageDialog(this, "O campo 'Equipe' é obrigatório.\n");
+            return;
         }
         if (numeroCamisaTxt.isEmpty()) {
-             JOptionPane.showMessageDialog(this, "O campo 'Número da Camisa' é obrigatório.\n");
-             return;
+            JOptionPane.showMessageDialog(this, "O campo 'Número da Camisa' é obrigatório.\n");
+            return;
         }
         if (data == null) {
-             JOptionPane.showMessageDialog(this, "O campo 'Data de nascimento' é obrigatório.\n");
-             return;
-             
+            JOptionPane.showMessageDialog(this, "O campo 'Data de nascimento' é obrigatório.\n");
+            return;
+
         }
-         (CPF == null) {
-             JOptionPane.showMessageDialog(this, "O campo 'Nome' é obrigatório.\n");
-             return;
+
+        if (!atleta.validacao(CPF)) {
+            JOptionPane.showMessageDialog(this, "O campo 'CPF' é obrigatório.\n");
+            return;
         }
+
         int numeroCamisa = Integer.parseInt(numeroCamisaTxt);
-       
-       Atleta atleta = new Atleta();
-       
-       atleta.setCpf(CPF);
-       atleta.setNome(nome);
-       atleta.setDate(data);
-       atleta.setNumeroCamisa(numeroCamisa);
-       atleta.setEquipe(equipe);
-       
-       atletaRepository.saveOrUpdate(atleta);
-       JOptionPane.showMessageDialog(this, "Bem-vindo meu jogador!");   
-       clear();
-       
+
+        atleta.setCpf(CPF);
+        atleta.setNome(nome);
+        atleta.setDate(data);
+        atleta.setNumeroCamisa(numeroCamisa);
+        atleta.setEquipe(equipe);
+
+        atletaRepository.saveOrUpdate(atleta);
+        JOptionPane.showMessageDialog(this, "Bem-vindo meu jogador!");
+        clear();
+
     }
-    public void clear()
-    {
+
+    public void clear() {
         txtNome.setText("");
         dtpDataNascimento.setText("");
         txtNumeroCamisa.setText("");
@@ -137,7 +139,9 @@ public class CadastroAtleta extends javax.swing.JFrame {
     }
 
     /**
-     * This method is called from within the constructor to initialize the form.
+     * This method is cal led from within the constructor to initialize the
+     * form.
+     *
      * WARNING: Do NOT modify this code. The content of this method is always
      * regenerated by the Form Editor.
      */
@@ -404,75 +408,74 @@ public class CadastroAtleta extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void radExcluidosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_radExcluidosItemStateChanged
-        if(evt.getStateChange() == ItemEvent.SELECTED)
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
             enableTrash(true);
-        
+        }
+
         modelAtleta.clear();
         modelAtleta.addAll(atletaRepository.loadFromTrash());
     }//GEN-LAST:event_radExcluidosItemStateChanged
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        if(lstAtletas.getSelectedIndices().length == 0){
+        if (lstAtletas.getSelectedIndices().length == 0) {
             showWarning("Selecione ao menos um atleta");
             return;
         }
-        if(lstAtletas.getSelectedIndices().length == 1){
+        if (lstAtletas.getSelectedIndices().length == 1) {
             Atleta selected = lstAtletas.getSelectedValue();
-            
-        atletaRepository.moveToTrash(selected);
-        modelAtleta.removeElement(selected);
-        }else{
-        
+
+            atletaRepository.moveToTrash(selected);
+            modelAtleta.removeElement(selected);
+        } else {
+
             List<Atleta> selection = lstAtletas.getSelectedValuesList();
-                
+
             atletaRepository.moveToTrash(selection);
-            for(Atleta aux : selection)
-            {
+            for (Atleta aux : selection) {
                 modelAtleta.removeElement(aux);
             }
         }
-        
+
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnExcluirLixeiraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirLixeiraActionPerformed
-         if(lstAtletas.getSelectedIndices().length == 0){
+        if (lstAtletas.getSelectedIndices().length == 0) {
             showWarning("Selecione ao menos um atleta");
             return;
         }
-         if(lstAtletas.getSelectedIndices().length == 1){
+        if (lstAtletas.getSelectedIndices().length == 1) {
             Atleta selected = lstAtletas.getSelectedValue();
-            
-        atletaRepository.delete(selected);
-        modelAtleta.removeElement(selected);
-        }else{
-        
-            List<Atleta> selection = lstAtletas.getSelectedValuesList();         
-            
-            for(Atleta aux : selection)
-            {
+
+            atletaRepository.delete(selected);
+            modelAtleta.removeElement(selected);
+        } else {
+
+            List<Atleta> selection = lstAtletas.getSelectedValuesList();
+
+            for (Atleta aux : selection) {
                 atletaRepository.delete(aux);
                 modelAtleta.removeElement(aux);
             }
         }
-       
+
     }//GEN-LAST:event_btnExcluirLixeiraActionPerformed
 
     private void btnEsvaziarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEsvaziarActionPerformed
-           
-    List<Atleta> selection = atletaRepository.loadFromTrash();
 
-    if (selection == null || selection.isEmpty()) {
-        return;
-    }
-    try {
-        for (Atleta aux : selection) {
-            atletaRepository.delete(aux);
-        }  
-        modelAtleta.clear();
+        List<Atleta> selection = atletaRepository.loadFromTrash();
 
-    } catch (Exception e) {
-        System.err.println("Erro ao deletar atletas. A operação foi revertida. Detalhes: " + e.getMessage());
-    }
+        if (selection == null || selection.isEmpty()) {
+            return;
+        }
+        try {
+            for (Atleta aux : selection) {
+                atletaRepository.delete(aux);
+            }
+            modelAtleta.clear();
+
+        } catch (Exception e) {
+            System.err.println("Erro ao deletar atletas. A operação foi revertida. Detalhes: " + e.getMessage());
+        }
     }//GEN-LAST:event_btnEsvaziarActionPerformed
 
     private void btnRestaurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestaurarActionPerformed
@@ -502,35 +505,35 @@ public class CadastroAtleta extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRestaurarActionPerformed
 
     private void radNaoExcluidosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_radNaoExcluidosItemStateChanged
-        if(evt.getStateChange() == ItemEvent.SELECTED)
-        enableTrash(false);
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            enableTrash(false);
+        }
 
         modelAtleta.clear();
         modelAtleta.addAll(atletaRepository.loadFromDataBase());
 
     }//GEN-LAST:event_radNaoExcluidosItemStateChanged
-    
-    public void enableTrash(boolean status)
-    {
+
+    public void enableTrash(boolean status) {
         btnExcluir.setEnabled(!status);
         btnRestaurar.setEnabled(status);
         btnExcluirLixeira.setEnabled(status);
         btnEsvaziar.setEnabled(status);
     }
-    
-    public void showWarning(String warning){
+
+    public void showWarning(String warning) {
         lblAlerta.setText(warning);
         lblAlerta.setVisible(true);
-        
+
         Timer timer = new Timer(4000, (e) -> {
             lblAlerta.setVisible(false);
             ((Timer) e.getSource()).stop();
         });
-        
+
         timer.setRepeats(false);
         timer.start();
     }
-    
+
     /**
      * @param args the command line arguments
      */
