@@ -362,7 +362,7 @@ public class CadastroEvento extends javax.swing.JFrame {
             return;
         }
         
-        Double ingresso = Double.parseDouble(txtIngresso.getName());
+        Double ingresso = Double.parseDouble(txtIngresso.getText());
                 
         ee.setNome(nome);
         ee.setData(data);
