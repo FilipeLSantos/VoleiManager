@@ -90,10 +90,29 @@ public class CadastroAtleta extends javax.swing.JFrame {
        LocalDate data = dtpDataNascimento.getDate();
        
        String equipe = txtEquipe.getText();
-  
+       
+            if (nome.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "O campo 'Nome' é obrigatório.\n");
+            return;
+        }
+        if (equipe.isEmpty()) {
+             JOptionPane.showMessageDialog(this, "O campo 'Equipe' é obrigatório.\n");
+             return;
+        }
+        if (numeroCamisaTxt.isEmpty()) {
+             JOptionPane.showMessageDialog(this, "O campo 'Número da Camisa' é obrigatório.\n");
+             return;
+        }
+        if (data == null) {
+             JOptionPane.showMessageDialog(this, "O campo 'Data de nascimento' é obrigatório.\n");
+             return;
+             
+        }
+         (CPF == null) {
+             JOptionPane.showMessageDialog(this, "O campo 'Nome' é obrigatório.\n");
+             return;
+        }
         int numeroCamisa = Integer.parseInt(numeroCamisaTxt);
-
-  
        
        Atleta atleta = new Atleta();
        
