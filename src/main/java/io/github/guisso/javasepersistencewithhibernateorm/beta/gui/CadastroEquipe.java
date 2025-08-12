@@ -42,9 +42,9 @@ public class CadastroEquipe extends javax.swing.JFrame {
         modelEquipe = new DefaultListModel<>();
         modelEquipe.addAll(equipeRepository.findAll());
         
-        lblAlerta.setVisible(false);
 
         initComponents();
+        lblAlerta.setVisible(false);
         javax.swing.ButtonGroup radioGroup = new javax.swing.ButtonGroup();
         radioGroup.add(radNaoExcluidos);
         radioGroup.add(radExcluidos);

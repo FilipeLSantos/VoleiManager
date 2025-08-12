@@ -74,6 +74,8 @@ public class Pessoa
     }
 
 //</editor-fold>
+    
+    
     public boolean validacao(String cpf) {
         char digD, digV;
         int soma, peso, num, resto;
