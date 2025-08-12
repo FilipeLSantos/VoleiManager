@@ -97,18 +97,20 @@ public class Program {
         // Atleta
         Atleta at1 = new Atleta();
         at1.setNumeroCamisa(10);
-        at1.setCpf("12345874562");
+        at1.setCpf("16287820640");
         at1.setDate(LocalDate.of(2000, Month.AUGUST, 5));
         at1.setNome("Robert Carlos Nascimento Carvalho");
+        at1.setEquipe("EGO");
         
         AtletaRepository atletaRepository = new AtletaRepository();
         atletaRepository.saveOrUpdate(at1);
         
         Atleta at2 = new Atleta();
         at2.setNumeroCamisa(29);
-        at2.setCpf("293234042");
+        at2.setCpf("16995323629");
         at2.setDate(LocalDate.of(2001, Month.MARCH, 30));
         at2.setNome("Ronaldinho Gaucho");
+        at2.setEquipe("Aura");
         
         atletaRepository.saveOrUpdate(at2);
         
@@ -122,11 +124,17 @@ public class Program {
         
         Partida part1 = new Partida();
         part1.setQuantidadeSets(5);
+        part1.setEquipe1("AURA");
+        part1.setEquipe2("EGO");
+        part1.setVencedor("AURA");
         
         partidaRepository.saveOrUpdate(part1);
         
         Partida part2 = new Partida();
         part2.setQuantidadeSets(3);
+        part2.setEquipe1("AURA");
+        part2.setEquipe2("EGO");
+        part2.setVencedor("EGO");
         
         partidaRepository.saveOrUpdate(part2);
         
@@ -143,6 +151,9 @@ public class Program {
         sv.setNumeroSet(3);
         sv.setPontuacao1(22);
         sv.setPontuacao2(19);
+        sv.setEquipe1("AURA");
+        sv.setEquipe2("EGO");
+        sv.setVencedor("AURA");
         
         setVoleiRepository.saveOrUpdate(sv);
         
@@ -150,6 +161,9 @@ public class Program {
         sv2.setNumeroSet(5);
         sv2.setPontuacao1(5);
         sv2.setPontuacao2(10);
+        sv2.setEquipe1("AURA");
+        sv2.setEquipe2("EGO");
+        sv2.setVencedor("EGO");
         
         setVoleiRepository.saveOrUpdate(sv2);
         
@@ -161,18 +175,20 @@ public class Program {
         setVoleiRepository.findAll();
         // Tecnico
         Tecnico t1 = new Tecnico();
-        t1.setCpf("123456L");
+        t1.setCpf("16873291684");
         t1.setDate(LocalDate.of(1980, Month.JANUARY, 15));
         t1.setNome("Joao da Silva Josefa");
+        t1.setEquipe("EGO");
    
         TecnicoRepository tecnicoRepository = new TecnicoRepository();
         
         tecnicoRepository.saveOrUpdate(t1);
         
         Tecnico t2 = new Tecnico();
-        t2.setCpf("12345678L");
+        t2.setCpf("16386139666");
         t2.setDate(LocalDate.of(1988, Month.JANUARY, 17));
         t2.setNome("Joao Melao");
+        t2.setEquipe("AURA");
         
         tecnicoRepository.saveOrUpdate(t2);
         
