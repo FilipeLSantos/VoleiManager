@@ -41,7 +41,7 @@ public class TecnicoRepository
     public String getJpqlDeleteById() {
         return "DELETE FROM Tecnico t WHERE t.id = :id";
     }
-        public void moveToTrash(Tecnico tecnico) {
+    public void moveToTrash(Tecnico tecnico) {
         tecnico.setLixo(true);
         this.saveOrUpdate(tecnico);
     }
@@ -94,7 +94,7 @@ public class TecnicoRepository
             this.saveOrUpdate(aux); 
         }
     }
-       public void moveToTrash(Long partidaId) {
+    public void moveToTrash(Long partidaId) {
         Tecnico tecnicoParaMover = this.findById(partidaId);
         if (tecnicoParaMover != null) {
             tecnicoParaMover.setLixo(true);
