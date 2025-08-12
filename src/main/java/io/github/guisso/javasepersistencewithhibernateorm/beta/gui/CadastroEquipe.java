@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 rdpp
+ * Copyright (C) 2025 SamuelParanhos
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -26,7 +26,7 @@ import javax.swing.Timer;
 
 /**
  *
- * @author rdpp
+ * @author SamuelParanhos
  */
 public class CadastroEquipe extends javax.swing.JFrame {
 

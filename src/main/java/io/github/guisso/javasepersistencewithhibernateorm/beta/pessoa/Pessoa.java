@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 rdpp
+ * Copyright (C) 2025 SamuelParanhos
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -25,7 +25,7 @@ import java.time.Period;
 
 /**
  *
- * @author Samuel Paranhos
+ * @author SamuelParanhos
  */
 @MappedSuperclass
 public class Pessoa
