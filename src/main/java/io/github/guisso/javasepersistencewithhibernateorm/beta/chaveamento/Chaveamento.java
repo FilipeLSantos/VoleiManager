@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2025 SamuelParanhos
+ * Copyright (C) 2025 rdpp
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,38 +16,25 @@
  */
 package io.github.guisso.javasepersistencewithhibernateorm.beta.chaveamento;
 
-import io.github.guisso.javasepersistencewithhibernateorm.beta.repository.ProjectEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import java.io.Serializable;
+import java.util.Objects;
 
 /**
  *
- * @author SamuelParanhos
+ * @author rdpp
  */
-@Entity
-public class Chaveamento extends ProjectEntity implements Serializable {
+public class Chaveamento {
 
-    private static final long serialVersionUID = 1L;
-   
-    @Column(nullable = false)
     private String evento;
-    
-    @Column(nullable = false)
     private boolean lixo;
-    
-    @Column(nullable = false)
-    private String campeao;
+    private boolean campeao;
 
+    //<editor-fold defaultstate="collapsed" desc="Getters/Setters">
     public String getEvento() {
         return evento;
     }
 
-    public void setEvento(String Evento) {
-        this.evento = Evento;
+    public void setEvento(String evento) {
+        this.evento = evento;
     }
 
     public boolean isLixo() {
@@ -58,18 +45,50 @@ public class Chaveamento extends ProjectEntity implements Serializable {
         this.lixo = lixo;
     }
 
-    public String getCampeao() {
+    public boolean isCampeao() {
         return campeao;
     }
 
-    public void setCampeao(String campeao) {
+    public void setCampeao(boolean campeao) {
         this.campeao = campeao;
     }
-    
-    
+//</editor-fold>
+
+    //<editor-fold defaultstate="collapsed" desc="Hash">
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        hash = 37 * hash + Objects.hashCode(this.evento);
+        hash = 37 * hash + (this.lixo ? 1 : 0);
+        hash = 37 * hash + (this.campeao ? 1 : 0);
+        return hash;
+    }
 
     @Override
-    public String toString() {
-        return "Chaveamento do Evento: "  + evento + " Campeão: " + campeao;
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Chaveamento other = (Chaveamento) obj;
+        if (this.lixo != other.lixo) {
+            return false;
+        }
+        if (this.campeao != other.campeao) {
+            return false;
+        }
+        return Objects.equals(this.evento, other.evento);
     }
+
+//</editor-fold>
+    @Override
+    public String toString() {
+        return "Chaveamento{" + "evento=" + evento + ", lixo=" + lixo + ", campeao=" + campeao + '}';
+    }
+
 }
