@@ -28,15 +28,17 @@ import java.util.List;
 import java.util.Locale;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
+
 /**
  *
  * @author robert
  */
 public class CadastroTecnico extends javax.swing.JFrame {
-    
+
     private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(CadastroTecnico.class.getName());
     private final TecnicoRepository tecnicoRepository;
     private final DefaultListModel<Tecnico> modelTecnico;
+
     /**
      * Creates new form CadastroTecnico
      */
@@ -44,15 +46,15 @@ public class CadastroTecnico extends javax.swing.JFrame {
         tecnicoRepository = new TecnicoRepository();
         modelTecnico = new DefaultListModel<>();
         modelTecnico.addAll(tecnicoRepository.findAll());
-        
+
         initComponents();
-        
+
         lblAlerta.setVisible(false);
-        
+
         //DatePicker settings
-         DatePickerSettings settings
+        DatePickerSettings settings
                 = new DatePickerSettings(Locale.of("pt", "BR"));
-        
+
         // Date format
         settings.setFormatForDatesCommonEra(
                 DateTimeFormatter.ofPattern("dd/MM/yyyy"));
@@ -69,43 +71,61 @@ public class CadastroTecnico extends javax.swing.JFrame {
         settings.setFontValidDate(defaultFont);
         settings.setFontInvalidDate(defaultFont);
         settings.setFontVetoedDate(defaultFont);
-        
+
         // Applying settings
         dtpDataNascimento.setSettings(settings);
-        
+
         // Date range limits
         settings.setDateRangeLimits(LocalDate.MIN, LocalDate.now());
-        
+
         javax.swing.ButtonGroup radioGroup = new javax.swing.ButtonGroup();
         radioGroup.add(radNaoExcluidos);
         radioGroup.add(radExcluidos);
         radNaoExcluidos.setSelected(true);
-        
+
     }
-    
-    public void cadastrarTecnico()
-    {
+
+    public void cadastrarTecnico() {
         String nome = txtNome.getText();
         String CPF = txtCPF.getText();
         String equipe = txtEquipe.getText();
         LocalDate data = dtpDataNascimento.getDate();
-        
         Tecnico tecnico = new Tecnico();
-        
+
+        if (nome.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "O campo 'Nome' é obrigatório.\n");
+            return;
+        }
+        if (equipe.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "O campo 'Equipe' é obrigatório.\n");
+            return;
+        }
+
+        if (data == null) {
+            JOptionPane.showMessageDialog(this, "O campo 'Data de nascimento' é obrigatório.\n");
+            return;
+
+        }
+
+        if (!tecnico.validacao(CPF)) {
+            JOptionPane.showMessageDialog(this, "O campo 'CPF' é obrigatório.\n");
+            return;
+        }
+
         tecnico.setNome(nome);
         tecnico.setCpf(CPF);
         tecnico.setEquipe(equipe);
         tecnico.setDate(data);
-        
-        tecnicoRepository.saveOrUpdate(tecnico);   
+
+        tecnicoRepository.saveOrUpdate(tecnico);
+        clear();
     }
-    
-    public void clear()
-    {
-      txtNome.setText("");
-      txtCPF.setText("");
-      txtEquipe.setText("");
-      dtpDataNascimento.setText("");
+
+    public void clear() {
+        txtNome.setText("");
+        txtCPF.setText("");
+        txtEquipe.setText("");
+        dtpDataNascimento.setText("");
     }
 
     /**
@@ -361,86 +381,85 @@ public class CadastroTecnico extends javax.swing.JFrame {
     private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
         JOptionPane.showMessageDialog(this, "Tecnico cadastrado com sucesso!");
         cadastrarTecnico();
-        clear();
     }//GEN-LAST:event_btnCadastrarActionPerformed
 
     private void radNaoExcluidosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_radNaoExcluidosItemStateChanged
-     if(evt.getStateChange() == ItemEvent.SELECTED)
-        enableTrash(false);
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
+            enableTrash(false);
+        }
 
         modelTecnico.clear();
         modelTecnico.addAll(tecnicoRepository.loadFromDataBase());
     }//GEN-LAST:event_radNaoExcluidosItemStateChanged
 
     private void radExcluidosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_radExcluidosItemStateChanged
-           if(evt.getStateChange() == ItemEvent.SELECTED)
+        if (evt.getStateChange() == ItemEvent.SELECTED) {
             enableTrash(true);
-        
+        }
+
         modelTecnico.clear();
         modelTecnico.addAll(tecnicoRepository.loadFromTrash());
     }//GEN-LAST:event_radExcluidosItemStateChanged
 
     private void btnExcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirActionPerformed
-        if(lstTecnicos.getSelectedIndices().length == 0){
+        if (lstTecnicos.getSelectedIndices().length == 0) {
             showWarning("Selecione ao menos um atleta");
             return;
         }
-        if(lstTecnicos.getSelectedIndices().length == 1){
+        if (lstTecnicos.getSelectedIndices().length == 1) {
             Tecnico selected = lstTecnicos.getSelectedValue();
-            
-        tecnicoRepository.moveToTrash(selected);
-        modelTecnico.removeElement(selected);
-        }else{
-        
+
+            tecnicoRepository.moveToTrash(selected);
+            modelTecnico.removeElement(selected);
+        } else {
+
             List<Tecnico> selection = lstTecnicos.getSelectedValuesList();
-                
+
             tecnicoRepository.moveToTrash(selection);
-            for(Tecnico aux : selection)
-            {
+            for (Tecnico aux : selection) {
                 modelTecnico.removeElement(aux);
             }
         }
     }//GEN-LAST:event_btnExcluirActionPerformed
 
     private void btnExcluirLixeiraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExcluirLixeiraActionPerformed
-        if(lstTecnicos.getSelectedIndices().length == 0){
+        if (lstTecnicos.getSelectedIndices().length == 0) {
             showWarning("Selecione ao menos um atleta");
             return;
         }
-         if(lstTecnicos.getSelectedIndices().length == 1){
+        if (lstTecnicos.getSelectedIndices().length == 1) {
             Tecnico selected = lstTecnicos.getSelectedValue();
-            
-        tecnicoRepository.delete(selected);
-        modelTecnico.removeElement(selected);
-        }else{
-        
-            List<Tecnico> selection = lstTecnicos.getSelectedValuesList();         
-            
-            for(Tecnico aux : selection)
-            {
+
+            tecnicoRepository.delete(selected);
+            modelTecnico.removeElement(selected);
+        } else {
+
+            List<Tecnico> selection = lstTecnicos.getSelectedValuesList();
+
+            for (Tecnico aux : selection) {
                 tecnicoRepository.delete(aux);
                 modelTecnico.removeElement(aux);
             }
         }
-       
+
     }//GEN-LAST:event_btnExcluirLixeiraActionPerformed
 
     private void btnEsvaziarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEsvaziarActionPerformed
-       
-    List<Tecnico> selection = tecnicoRepository.loadFromTrash();
 
-    if (selection == null || selection.isEmpty()) {
-        return;
-    }
-    try {
-        for (Tecnico aux : selection) {
-            tecnicoRepository.delete(aux);
-        }  
-        modelTecnico.clear();
+        List<Tecnico> selection = tecnicoRepository.loadFromTrash();
 
-    } catch (Exception e) {
-        System.err.println("Erro ao deletar atletas. A operação foi revertida. Detalhes: " + e.getMessage());
-    }
+        if (selection == null || selection.isEmpty()) {
+            return;
+        }
+        try {
+            for (Tecnico aux : selection) {
+                tecnicoRepository.delete(aux);
+            }
+            modelTecnico.clear();
+
+        } catch (Exception e) {
+            System.err.println("Erro ao deletar atletas. A operação foi revertida. Detalhes: " + e.getMessage());
+        }
     }//GEN-LAST:event_btnEsvaziarActionPerformed
 
     private void btnRestaurarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRestaurarActionPerformed
@@ -468,27 +487,26 @@ public class CadastroTecnico extends javax.swing.JFrame {
 
         JOptionPane.showMessageDialog(this, "Tecnico(s) restaurada(s) com sucesso!");
     }//GEN-LAST:event_btnRestaurarActionPerformed
-     public void enableTrash(boolean status)
-    {
+    public void enableTrash(boolean status) {
         btnExcluir.setEnabled(!status);
         btnRestaurar.setEnabled(status);
         btnExcluirLixeira.setEnabled(status);
         btnEsvaziar.setEnabled(status);
     }
-     
-    public void showWarning(String warning){
+
+    public void showWarning(String warning) {
         lblAlerta.setText(warning);
         lblAlerta.setVisible(true);
-        
+
         Timer timer = new Timer(4000, (e) -> {
             lblAlerta.setVisible(false);
             ((Timer) e.getSource()).stop();
         });
-        
+
         timer.setRepeats(false);
         timer.start();
     }
-     
+
     /**
      * @param args the command line arguments
      */
