@@ -116,7 +116,7 @@ public class CadastroPartida extends javax.swing.JFrame {
         lblTitulo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Cadastrode Partidas");
+        setTitle("Cadastro de Partidas");
 
         lblEquipe1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         lblEquipe1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
